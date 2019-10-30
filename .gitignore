@@ -1,0 +1,9 @@
+/.vscode/
+/venv/
+/build/
+/dist/
+__pycache__/
+*.pyc
+*.swp
+*.sublime-workspace
+

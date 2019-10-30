@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container mb-4">
+    <div class="border-bottom  py-3">
+    </div>
+    </div>
+
+
+    <section class="space-bottom-2">
+    <div class="container">
+
+
+    <div class="card">
+    <div class="card-body px-0">
+    <div class="d-flex align-items-center px-3 mb-3">
+    <h2 class="h6 mb-0">Latest Transactions</h2>
+    <div class="ml-auto">
+    <a class="btn btn-sm btn-soft-secondary" href="/transactions">View All</a>
+    </div>
+    </div>
+
+    <div class="table-responsive mb-3">
+    <table class="table mb-0  table-striped">
+    <thead class="gradient_bg">
+    <tr class="small text-uppercase">
+    <th scope="col" title="Version Transaction ID" style="color:white">TX ID</th>
+    <th scope="col" title="UTC Time" style="color:white">Expiration Time</th>
+    <th scope="col" title="Transaction Type" style="color:white">Type</th>
+    <th scope="col" title="Sender Address" style="color:white">From</th>
+    <th scope="col" width="20" style="color:white"></th>
+    <th scope="col" title="Receiver Address" style="color:white">To</th>
+    <th scope="col" title="Transfer Amount" style="color:white">Amount</th>
+    <th scope="col" title="Transaction Fee" style="color:white">TX Fee</th>
+    </tr>
+    </thead>
+    <tbody>
+{% for tx in txs %}
+      <tr>
+      	<td><a href='./transactions/{{tx.version}}'>{{tx.version}}</a></td>
+      	<td class='text-nowrap'><span title='{{tx.raw_txn.expiration_time}}'>{{tx.raw_txn.expiration_time}}</span></td>
+      	<td class='font-size-1 text-muted' title='Mint Transaction'>mint</td><td><a href='/accounts/{{tx.raw_txn.sender}}' title='Minter&#10;({{tx.raw_txn.sender}})'>Minter</a></td>
+      	<td><span class='badge badge-warning text-uppercase w-100' title='Sent Transaction'>out</span></td>
+      	<td><a href='/accounts/{{tx.raw_txn.payload.Script.args[0].Address}}' title='{{tx.raw_txn.payload.Script.args[0].Address}}'>{{tx.raw_txn.payload.Script.args[0].Address}}</a></td>
+      	<td class='text-nowrap'>{{tx.raw_txn.payload.Script.args[1].U64/100000}} <span class='text-muted'>LIB</span></td>
+      	<td class='text-nowrap'>0 <span class='text-muted'>LIB</span></td>
+      </tr>
+{% endfor %}
+    </tbody>
+    </table>
+    </div>
+  </div>
+  </div>
+  </div>
+  </section>
+
+{{txs}}
+
+{% endblock %}
