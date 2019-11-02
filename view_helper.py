@@ -29,6 +29,7 @@ def transaction_format(tx):
             tx['receiver_text_class'] = 'text-primary'
     except Exception:
         tx['money'] = "0"
+        tx['no_receiver'] = True
     tx['human_time'] = get_human_time(tx['raw_txn']['expiration_time'])
     tx['time'] = get_time_str(tx['raw_txn']['expiration_time'])
     tx['code_name'] = get_tx_abbreviation_name(payload)
