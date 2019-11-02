@@ -19,7 +19,7 @@ def transaction_format(tx):
         tx['sender_text_class'] = 'text-primary'
     try:
         receiver = payload['Script']['args'][0]['Address']
-        money = payload['Script']['args'][1]['U64']/100000
+        money = payload['Script']['args'][1]['U64']/1000000
         tx['money'] = money
         tx['receiver'] = receiver
         tx['receiver_ab'] = get_address_abbrv_name(receiver)
@@ -34,6 +34,10 @@ def transaction_format(tx):
     tx['time'] = get_time_str(tx['raw_txn']['expiration_time'])
     tx['code_name'] = get_tx_abbreviation_name(payload, tx['version'])
     tx['success'] = (tx['transaction_info']['major_status'] == 4001)
+    if len(tx['events']) == 0:
+        tx['events_emit'] = 'No Events'
+    else:
+        tx['events_emit'] = f"{len(tx['events'])} Events"
 
 
 def get_tx_abbreviation_name(payload, version):

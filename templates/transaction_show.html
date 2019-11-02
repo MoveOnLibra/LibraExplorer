@@ -53,15 +53,19 @@
 
                 <tr>
                   <td style="width: 25%"><strong>Gas Used</strong></td>
-                  <td style="width: 75%">{{tx.transaction_info.gas_used}} Libra</td>
+                  <td style="width: 75%">{{tx.transaction_info.gas_used/1000000}} Libra</td>
                 </tr>
                 <tr>
                   <td style="width: 25%"><strong>Gas Unit Price</strong></td>
                   <td style="width: 75%">{{tx.raw_txn.gas_unit_price}}</td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Max Gas</strong></td>
+                  <td style="width: 25%"><strong>Max Gas Amount</strong></td>
                   <td style="width: 75%">{{tx.raw_txn.max_gas_amount}}</td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>Events Emit</strong></td>
+                  <td style="width: 75%">{{tx.events_emit}}</td>
                 </tr>
               </tbody>
             </table>
