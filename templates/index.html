@@ -27,7 +27,7 @@
     <th scope="col" title="UTC Time" style="color:white">Expiration Time</th>
     <th scope="col" title="Transaction Type" style="color:white">Type</th>
     <th scope="col" title="Sender Address" style="color:white">From</th>
-    <th scope="col" width="20" style="color:white"></th>
+    <th scope="col" width="20" style="color:white; text-align:center">---&gt;</th>
     <th scope="col" title="Receiver Address" style="color:white">To</th>
     <th scope="col" title="Transfer Amount" style="color:white">Amount</th>
     <th scope="col" title="Transaction Fee" style="color:white">TX Fee</th>
@@ -37,12 +37,17 @@
 {% for tx in txs %}
       <tr>
       	<td><a href='./transactions/{{tx.version}}'>{{tx.version}}</a></td>
-      	<td class='text-nowrap'><span title='{{tx.raw_txn.expiration_time}}'>{{tx.raw_txn.expiration_time}}</span></td>
-      	<td class='font-size-1 text-muted' title='Mint Transaction'>mint</td><td><a href='/accounts/{{tx.raw_txn.sender}}' title='Minter&#10;({{tx.raw_txn.sender}})'>Minter</a></td>
-      	<td><span class='badge badge-warning text-uppercase w-100' title='Sent Transaction'>out</span></td>
-      	<td><a href='/accounts/{{tx.raw_txn.payload.Script.args[0].Address}}' title='{{tx.raw_txn.payload.Script.args[0].Address}}'>{{tx.raw_txn.payload.Script.args[0].Address}}</a></td>
+      	<td class='text-nowrap'><span title='{{tx.time}}'>{{tx.human_time}}</span></td>
+      	<td class='font-size-1 text-muted'>{{tx.code_name}}</td>
+        <td><a class="{{tx.sender_text_class}}" href='/accounts/{{tx.sender}}' title='{{tx.sender}}'>{{tx.sender_ab}}</a></td>
+{% if tx.success %}
+        <td><small><span class='badge badge-success w-80' style="color:white">Success</span></small></td>
+{% else %}
+        <td><small><span class='badge badge-danger w-80' style="color:white">Failed</span></small></td>
+{% endif %}
+      	<td><a class="{{tx.receiver_text_class}}" href='/accounts/{{tx.receiver}}' title='{{tx.receiver}}'>{{tx.receiver_ab}}</a></td>
       	<td class='text-nowrap'>{{tx.raw_txn.payload.Script.args[1].U64/100000}} <span class='text-muted'>LIB</span></td>
-      	<td class='text-nowrap'>0 <span class='text-muted'>LIB</span></td>
+      	<td class='text-nowrap'>{{tx.transaction_info.gas_used}}<span class='text-muted'>LIB</span></td>
       </tr>
 {% endfor %}
     </tbody>
@@ -53,6 +58,5 @@
   </div>
   </section>
 
-{{txs}}
 
 {% endblock %}
