@@ -28,6 +28,12 @@ def index():
         transaction_format(tx)
     return render_template('index.html',txs=latest_txs)
 
+@app.route("/transactions")
+def transactions():
+    latest_txs = get_latest_txs()
+    for tx in latest_txs:
+        transaction_format(tx)
+    return render_template('transactions.html',txs=latest_txs)
 
 if __name__ == "__main__":
     app.run()

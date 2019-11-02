@@ -5,6 +5,11 @@ from datetime import datetime, timezone
 import pdb
 
 def transaction_format(tx):
+    payload = tx['raw_txn']['payload']
+    try:
+        payload['Script'] = payload.pop('Program')
+    except KeyError:
+        pass
     sender = tx['raw_txn']['sender']
     tx['sender'] = sender
     tx['sender_ab'] = get_address_abbrv_name(sender)
@@ -13,7 +18,9 @@ def transaction_format(tx):
     else:
         tx['sender_text_class'] = 'text-primary'
     try:
-        receiver = tx['raw_txn']['payload']['Script']['args'][0]['Address']
+        receiver = payload['Script']['args'][0]['Address']
+        money = payload['Script']['args'][1]['U64']/100000
+        tx['money'] = money
         tx['receiver'] = receiver
         tx['receiver_ab'] = get_address_abbrv_name(receiver)
         if tx['receiver_ab'] == "Libra Association":
@@ -21,11 +28,12 @@ def transaction_format(tx):
         else:
             tx['receiver_text_class'] = 'text-primary'
     except Exception:
-        pass
+        tx['money'] = "0"
     tx['human_time'] = get_human_time(tx['raw_txn']['expiration_time'])
     tx['time'] = get_time_str(tx['raw_txn']['expiration_time'])
-    tx['code_name'] = get_tx_abbreviation_name(tx['raw_txn']['payload'])
+    tx['code_name'] = get_tx_abbreviation_name(payload)
     tx['success'] = (tx['transaction_info']['major_status'] == 4001)
+
 
 def get_tx_abbreviation_name(payload):
     if list(payload)[0] != "Script":
