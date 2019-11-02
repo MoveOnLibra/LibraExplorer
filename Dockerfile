@@ -6,6 +6,7 @@ FROM python:3.7.5-slim
 RUN python3 -m pip install Flask
 RUN python3 -m pip install requests
 RUN python3 -m pip install libra-client
+RUN python3 -m pip install waitress
 
 #EXPOSE 5000
 

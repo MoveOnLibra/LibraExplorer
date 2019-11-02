@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<section class="space-bottom-2">
+<div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="center-heading">
+            <h2 class="section-title">Transaction <span class="text-info">{{tx.version}}</span></h2>
+          </div>
+        </div>
+      </div>
+
+            <table class="table table-striped" style="table-layout: fixed; width: 100%">
+              <tbody>
+                <tr>
+                  <td style="width: 25%"><strong>Status</strong></td>
+                  <td style="width: 75%">
+{% if tx.success %}
+                    <span class='badge badge-success w-80' style="color:white">Success</span>
+{% else %}
+                    <span class='badge badge-danger w-80' style="color:white">Failed</span>
+{% endif %}
+                  {{tx.transaction_info.major_status}}</td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>Receiver</strong></td>
+                  <td style="width: 75%"><a href="/accounts/{{tx.receiver}}"><span style="overflow-wrap: break-word;word-wrap: break-word;">{{tx.receiver}}</span></a></td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>Amount Transferred</strong></td>
+                  <td style="width: 75%">{{tx.money}} Libra</td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>Sender</strong></td>
+                  <td style="width: 75%"><a href="/accounts/{{tx.sender}}"><span style="overflow-wrap: break-word;word-wrap: break-word;">{{tx.sender}}</span></a></td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>Sequence Number</strong></td>
+                  <td style="width: 75%">{{tx.raw_txn.sequence_number}}</td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>Expiration Time</strong></td>
+                  <td style="width: 75%">{{tx.time}}</td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>Type</strong></td>
+                  <td style="width: 75%">{{tx.code_name}}</td>
+                </tr>
+
+                <tr>
+                  <td style="width: 25%"><strong>Gas Used</strong></td>
+                  <td style="width: 75%">{{tx.transaction_info.gas_used}} Libra</td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>Gas Unit Price</strong></td>
+                  <td style="width: 75%">{{tx.raw_txn.gas_unit_price}}</td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>Max Gas</strong></td>
+                  <td style="width: 75%">{{tx.raw_txn.max_gas_amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+      <div class="panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading" data-target="#Collapseone" data-toggle="collapse" data-parent="#accordion">
+          <a href="#.">
+          <button type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus"></span>
+            Show Raw Json
+          </button>
+          </a>
+        </div>
+
+        <div class="panel-collapse collapse in" id="Collapseone">
+        <div class="panel-body">
+        <pre>
+          {{tx.raw_json}}
+        </pre>
+        </div>
+        </div>
+      </div>
+      </div>
+
+</div>
+</section>
+
+<br/><br/>
+
+
+<style type="text/css">
+.glyphicon-plus:before{content:"\002b"}
+.glyphicon-plus-sign:before{content:"\e081"}
+.glyphicon-minus-sign:before{content:"\e082"}
+.glyphicon-minus:before{content:"\2212"}
+</style>
+
+<script>
+$(document).ready(function(){
+$('.collapse').on('shown.bs.collapse', function(){
+$(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+}).on('hidden.bs.collapse', function(){
+$(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+});
+});
+</script>
+
+
+
+{% endblock %}
