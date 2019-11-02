@@ -32,11 +32,13 @@ def transaction_format(tx):
         tx['no_receiver'] = True
     tx['human_time'] = get_human_time(tx['raw_txn']['expiration_time'])
     tx['time'] = get_time_str(tx['raw_txn']['expiration_time'])
-    tx['code_name'] = get_tx_abbreviation_name(payload)
+    tx['code_name'] = get_tx_abbreviation_name(payload, tx['version'])
     tx['success'] = (tx['transaction_info']['major_status'] == 4001)
 
 
-def get_tx_abbreviation_name(payload):
+def get_tx_abbreviation_name(payload, version):
+    if version == 0:
+        return "Genesis"
     if list(payload)[0] != "Script":
         return list(payload)[0]
     code = hex_to_int_list(payload['Script']['code'])
@@ -57,6 +59,8 @@ def get_address_abbrv_name(address):
         return address[0:8] + "..." + address[28:32]
 
 def get_human_time(unix_timestamp):
+    if unix_timestamp > 2**63:
+        return "N/A"
     diff = datetime.now().timestamp() - unix_timestamp
     if diff >= 0:
         suffix = "ago"
@@ -73,6 +77,8 @@ def get_human_time(unix_timestamp):
     return f"{diff // 24} day {diff % 24} hrs {suffix}"
 
 def get_time_str(unix_timestamp):
+    if unix_timestamp > 2**63:
+        return "N/A"
     utc_time = datetime.fromtimestamp(unix_timestamp, timezone.utc)
     local_time = utc_time.astimezone()
     return local_time.strftime("%Y-%m-%d %H:%M:%S %z (%Z)")
