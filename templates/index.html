@@ -20,8 +20,9 @@
     </div>
   </div>
 
-  <div class="table-responsive mb-3">
-    <table class="table mb-0  table-striped">
+
+  <div class="table-responsive mb-3 border box-shadow rounded">
+    <table class="table mb-0  table-striped table-hover">
     <thead class="gradient_bg">
     <tr class="small text-uppercase">
     <th scope="col" title="Version Transaction ID" style="color:white">TX ID</th>
@@ -47,13 +48,15 @@
         <td><small><span class='badge badge-danger w-80' style="color:white">Failed</span></small></td>
 {% endif %}
         <td><a class="{{tx.receiver_text_class}}" href='/accounts/{{tx.receiver}}' title='{{tx.receiver}}'>{{tx.receiver_ab}}</a></td>
-        <td class='text-nowrap'>{{tx.raw_txn.payload.Script.args[1].U64/100000}} <span class='text-muted'>LIB</span></td>
-        <td class='text-nowrap'>{{tx.transaction_info.gas_used}}<span class='text-muted'>LIB</span></td>
+        <td class='text-nowrap'>{{tx.money}} <span class='text-muted'>LIB</span></td>
+        <td class='text-nowrap'>{{tx.transaction_info.gas_used/1000000}}<span class='text-muted'>LIB</span></td>
       </tr>
 {% endfor %}
     </tbody>
+
     </table>
   </div>
+
 
 </div>
 </div>
