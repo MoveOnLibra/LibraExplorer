@@ -37,7 +37,9 @@
 
 
 <div class="d-flex justify-content-center mb-3">
-<button type="button" class="btn btn-outline-danger">Send 100 Libra coins to this account</button>
+<form action="/transactions/mint/{{acc.address}}" method="POST">
+<input class="btn btn-outline-danger" type="submit" value="Send 100 Libra coins to this account">
+</form>
 </div>
 
 
