@@ -4,6 +4,13 @@ from libra.bytecode import bytecodes
 from datetime import datetime, timezone
 import pdb
 
+def event_format(ev):
+    ev['account'] = ev['event_data_decode']['account']
+    ev['account_ab'] = get_address_abbrv_name(ev['account'])
+    money = ev['event_data_decode']['amount']
+    ev['money'] = money / 1000000
+
+
 def transaction_format(tx):
     payload = tx['raw_txn']['payload']
     try:
