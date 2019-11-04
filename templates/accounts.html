@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<section class="space-bottom-2">
+<div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="center-heading">
+            <h4 class="section-title">Special Accounts</h4>
+          </div>
+        </div>
+      </div>
+
+            <table class="table table-striped  border box-shadow rounded" style="table-layout: fixed; width: 100%">
+              <tbody>
+                <tr>
+                  <td style="width: 25%"><strong>core_code_address</strong></td>
+                  <td style="width: 75%">
+                    <a href="/accounts/{{core_code_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{core_code_address}}</span></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>association_address</strong></td>
+                  <td style="width: 75%">
+                    <a href="/accounts/{{association_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{association_address}}</span></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>transaction_fee_address</strong></td>
+                  <td style="width: 75%">
+                    <a href="/accounts/{{transaction_fee_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{transaction_fee_address}}</span></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 25%"><strong>validator_set_address</strong></td>
+                  <td style="width: 75%">
+                    <a href="/accounts/{{validator_set_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{validator_set_address}}</span></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+
+</div>
+</section>
+
+<br/><br/>
+
+
+{% endblock %}
