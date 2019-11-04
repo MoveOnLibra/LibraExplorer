@@ -168,5 +168,16 @@ def mint(address):
     post_mint(address)
     return redirect(f"/accounts/{address}")
 
+@app.route("/search")
+def search():
+    query = request.args.get('q', '')
+    if len(query)==64:
+        return redirect(f"/accounts/{query}")
+    try:
+        version = int(query)
+        return redirect(f"/transactions/{version}")
+    except Exception:
+        return redirect("/")
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000,debug=False)

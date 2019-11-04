@@ -35,6 +35,18 @@
 
 
 <main id="content" role="main">
+  <div class="container mb-4">
+  <div class="py-3">
+      <form class="input-group mb-2" action="/search" method="GET" autocomplete="off" spellcheck="false">
+      <input type="search" name="q" class="form-control" placeholder="Search by Address / Transaction ID (Version)" required="" autocomplete="off">
+      <div class="input-group-append">
+      <button class="btn btn-primary" type="submit" aria-label="search">Search
+      </button>
+      </div>
+      </form>
+  </div>
+  </div>
+
   {% block content %}{% endblock %}
 </main>
 
