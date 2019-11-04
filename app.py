@@ -74,6 +74,12 @@ app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
 latest_txs = None
+total = 1
+
+def update_total(new_total):
+    global total
+    total = new_total
+
 
 @app.route("/")
 def index():
@@ -81,6 +87,7 @@ def index():
     if latest_txs is None:
         pass
     latest_txs = get_latest_txs()
+    update_total(latest_txs[0]["version"])
     for tx in latest_txs:
         transaction_format(tx)
     return render_template('index.html',txs=latest_txs)
@@ -91,7 +98,8 @@ def transactions():
     txs = get_txs(start)
     for tx in txs:
         transaction_format(tx)
-    total = latest_txs[0]["version"]
+    if txs[-1]["version"] > total:
+        update_total(txs[-1]["version"])
     cur = txs[0]["version"]
     ctx={'first_class': '', 'last_class': ''}
     total_page = total//10
