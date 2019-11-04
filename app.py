@@ -91,7 +91,19 @@ def transactions():
     txs = get_txs(start)
     for tx in txs:
         transaction_format(tx)
-    return render_template('transactions.html',txs=txs)
+    total = latest_txs[0]["version"]
+    cur = txs[0]["version"]
+    ctx={'first_class': '', 'last_class': ''}
+    total_page = total//10
+    cur_page = cur//10
+    ctx['total'] = total
+    ctx['total_page'] = total_page
+    ctx['cur_page'] = cur_page
+    if cur_page == 0:
+        ctx['first_class'] = 'disabled'
+    if cur_page == total_page:
+        ctx['last_class'] = 'disabled'
+    return render_template('transactions.html',txs=txs, ctx=ctx)
 
 @app.route("/transactions/<int:id>")
 def transaction(id):
