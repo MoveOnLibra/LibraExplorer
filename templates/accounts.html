@@ -13,27 +13,33 @@
       </div>
 
             <table class="table table-striped  border box-shadow rounded" style="table-layout: fixed; width: 100%">
+              <thead class="gradient_bg">
+              <tr class="small text-uppercase">
+              <th scope="col" title="UTC Time" style="width: 25%; color:white">Name</th>
+              <th scope="col" title="Sender Address" style="width: 75%; color:white">Address</th>
+              </tr>
+              </thead>
               <tbody>
                 <tr>
-                  <td style="width: 25%"><strong>core_code_address</strong></td>
+                  <td style="width: 25%"><strong>Core Code</strong></td>
                   <td style="width: 75%">
                     <a href="/accounts/{{core_code_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{core_code_address}}</span></a>
                   </td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>association_address</strong></td>
+                  <td style="width: 25%"><strong>Libra Association</strong></td>
                   <td style="width: 75%">
                     <a href="/accounts/{{association_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{association_address}}</span></a>
                   </td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>transaction_fee_address</strong></td>
+                  <td style="width: 25%"><strong>Transaction Fee</strong></td>
                   <td style="width: 75%">
                     <a href="/accounts/{{transaction_fee_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{transaction_fee_address}}</span></a>
                   </td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>validator_set_address</strong></td>
+                  <td style="width: 25%"><strong>Validator Set</strong></td>
                   <td style="width: 75%">
                     <a href="/accounts/{{validator_set_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{validator_set_address}}</span></a>
                   </td>
