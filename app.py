@@ -62,6 +62,13 @@ def post_mint(address):
         return _('Error: the service failed.')
     return r
 
+def get_validators():
+    url = "http://localhost:8000/v1/libra/validators"
+    r = requests.get(url, headers=jwt_header())
+    if r.status_code != 200:
+        return _('Error: the service failed.')
+    data = json.loads(r.content.decode('utf-8-sig'))
+    return data
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
@@ -102,7 +109,8 @@ def transaction_json(id):
 
 @app.route("/accounts")
 def accounts():
-    return render_template('accounts.html',
+    validators = get_validators()
+    return render_template('accounts.html', validators=enumerate(validators),
         core_code_address='0000000000000000000000000000000000000000000000000000000000000000',
         association_address='000000000000000000000000000000000000000000000000000000000a550c18',
         transaction_fee_address='0000000000000000000000000000000000000000000000000000000000000fee',

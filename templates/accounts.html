@@ -42,6 +42,47 @@
             </table>
 
 
+
+
+
+
+<div class="card">
+<div class="card-body px-0">
+
+  <div class="d-flex align-items-center px-3 mb-3">
+    <h6 class="h6 align-center mb-0">Blockchain Validators</h6>
+  </div>
+
+  <div class="table-responsive mb-3 border box-shadow rounded">
+    <table class="table mb-0  table-striped table-hover">
+    <thead class="gradient_bg">
+    <tr class="small text-uppercase">
+    <th scope="col" title="UTC Time" style="color:white">No.</th>
+    <th scope="col" title="Sender Address" style="color:white">Address</th>
+    </tr>
+    </thead>
+    <tbody>
+{% for i, addr in validators %}
+      <tr>
+        <td class='text-nowrap'><span>{{i+1}}</span></td>
+        <td>
+          <a href="/accounts/{{addr}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{addr}}</span></a>
+        </td>
+      </tr>
+{% endfor %}
+    </tbody>
+
+    </table>
+  </div>
+
+</div>
+</div>
+
+
+
+
+
+
 </div>
 </section>
 
