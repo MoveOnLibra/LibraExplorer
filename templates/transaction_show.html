@@ -7,22 +7,23 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="center-heading">
-            <h2 class="section-title">Transaction <span class="text-info">{{tx.version}}</span></h2>
+            <h4 class="section-title">Transaction <span class="text-info">{{tx.version}}</span></h4>
           </div>
         </div>
       </div>
 
-            <table class="table table-striped" style="table-layout: fixed; width: 100%">
-              <tbody>
+      <div class="table-responsive mb-3 border box-shadow rounded">
+        <table class="table table-striped" style="table-layout: fixed; width: 100%">
+          <tbody>
                 <tr>
-                  <td style="width: 25%"><strong>Status</strong></td>
-                  <td style="width: 75%">
+                  <td style="width: 25%"><strong>Version</strong></td>
+                  <td style="width: 75%">{{tx.version}}
 {% if tx.success %}
                     <span class='badge badge-success w-80' style="color:white">Success</span>
 {% else %}
                     <span class='badge badge-danger w-80' style="color:white">Failed</span>
 {% endif %}
-                  {{tx.transaction_info.major_status}}</td>
+                  </td>
                 </tr>
 {% if not tx.no_receiver %}
                 <tr>
@@ -31,7 +32,7 @@
                 </tr>
                 <tr>
                   <td style="width: 25%"><strong>Amount Transferred</strong></td>
-                  <td style="width: 75%">{{tx.money}} Libra</td>
+                  <td style="width: 75%"><strong><span class="text-warning">{{tx.money}}</span></strong> <span class="text-muted">Libra</span></td>
                 </tr>
 {% endif %}
                 <tr>
@@ -67,9 +68,9 @@
                   <td style="width: 25%"><strong>Events Emit</strong></td>
                   <td style="width: 75%">{{tx.events_emit}}</td>
                 </tr>
-              </tbody>
-            </table>
-
+            </tbody>
+        </table>
+      </div>
 
       <div class="panel-group" id="accordion">
       <div class="panel panel-default">

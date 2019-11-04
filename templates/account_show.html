@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="center-heading">
-            <h2 class="section-title">Account Information</h2>
+            <h4 class="section-title">Account Information</h4>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
                 </tr>
                 <tr>
                   <td style="width: 25%"><strong>Balance</strong></td>
-                  <td style="width: 75%"><span class="text-warning">{{acc.Decoded_resource.balance/1000000}}</span> <span class="text-muted">Libra</span></td>
+                  <td style="width: 75%"><strong><span class="text-warning">{{acc.Decoded_resource.balance/1000000}}</span></strong> <span class="text-muted">Libra</span></td>
                 </tr>
 {% if acc.rotate_key %}
                 <tr>
@@ -47,7 +47,7 @@
 <div class="card-body px-0">
 
   <div class="d-flex align-items-center px-3 mb-3">
-    <h2 class="h6 align-center mb-0">Latest five deals paid me</h2>
+    <h6 class="h6 align-center mb-0">Latest five deals paid me</h6>
   </div>
 
   <div class="table-responsive mb-3 border box-shadow rounded">
@@ -64,7 +64,7 @@
 {% for ev in acc.events['received'] %}
       <tr>
         <td class='text-nowrap'><span>{{ev.event_seq_num}}</span></td>
-        <td><a href='./transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
+        <td><a href='../transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
         <td class='text-nowrap'>{{ev.money}} <span class='text-muted'>LIB</span></td>
         <td><a class="text-info" href='/accounts/{{ev.account}}' title='{{ev.account}}'>{{ev.account}}</a></td>
       </tr>
@@ -83,7 +83,7 @@
 <div class="card-body px-0">
 
   <div class="d-flex align-items-center px-3 mb-3">
-    <h2 class="h6 mb-0">Latest five deals paid by me</h2>
+    <h6 class="h6 mb-0">Latest five deals paid by me</h6>
   </div>
 
   <div class="table-responsive mb-3 border box-shadow rounded">
@@ -100,7 +100,7 @@
 {% for ev in acc.events['sent'] %}
       <tr>
         <td class='text-nowrap'><span>{{ev.event_seq_num}}</span></td>
-        <td><a href='./transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
+        <td><a href='../transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
         <td class='text-nowrap'>{{ev.money}} <span class='text-muted'>LIB</span></td>
         <td><a class="text-info" href='/accounts/{{ev.account}}' title='{{ev.account}}'>{{ev.account}}</a></td>
       </tr>
