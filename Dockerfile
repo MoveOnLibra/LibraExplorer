@@ -10,5 +10,4 @@ RUN python3 -m pip install waitress
 
 #EXPOSE 5000
 
-CMD ["python", "/srv/app.py"]
-#ENTRYPOINT ["python3" "/srv/test.py"]
+CMD ["python", "/app/app.py"]
