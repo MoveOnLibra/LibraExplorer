@@ -33,6 +33,7 @@ def move_on_libra_api(url, params={}, get_method=True):
         r = requests.post(host+url, params=params, headers=jwt_header())
     if r.status_code != 200:
         return _('Error: the service failed.')
+    update_total(int(r.headers["latest_version"])+1)
     data = json.loads(r.content.decode('utf-8-sig'))
     return data
 
@@ -77,7 +78,6 @@ def get_metadata():
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
-latest_txs = None
 total = 1
 
 def update_total(new_total):
@@ -87,11 +87,7 @@ def update_total(new_total):
 
 @app.route("/")
 def index():
-    global latest_txs
-    if latest_txs is None:
-        pass
     latest_txs = get_latest_txs()
-    update_total(latest_txs[0]["version"])
     for tx in latest_txs:
         transaction_format(tx)
     meta = get_metadata()
@@ -104,8 +100,6 @@ def transactions():
     txs = get_txs(start)
     for tx in txs:
         transaction_format(tx)
-    if txs[-1]["version"] > total:
-        update_total(txs[-1]["version"])
     cur = txs[0]["version"]
     ctx={'first_class': '', 'last_class': ''}
     total_page = total//10
