@@ -70,6 +70,15 @@ def get_validators():
     data = json.loads(r.content.decode('utf-8-sig'))
     return data
 
+def get_metadata():
+    url = "http://localhost:8000/v1/libra/about"
+    r = requests.get(url, headers=jwt_header())
+    if r.status_code != 200:
+        return _('Error: the service failed.')
+    data = json.loads(r.content.decode('utf-8-sig'))
+    return data
+
+
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
@@ -90,7 +99,9 @@ def index():
     update_total(latest_txs[0]["version"])
     for tx in latest_txs:
         transaction_format(tx)
-    return render_template('index.html',txs=latest_txs)
+    meta = get_metadata()
+    format_metadata(meta)
+    return render_template('index.html',txs=latest_txs, meta=meta)
 
 @app.route("/transactions")
 def transactions():

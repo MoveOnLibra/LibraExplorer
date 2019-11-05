@@ -3,59 +3,110 @@
 
 
 <section class="space-bottom-2">
-<div class="container">
-<div class="card">
-<div class="card-body px-0">
+  <div class="container">
+
+    <div class="row justify-content-around">
+
+      <div class="card">
+        <h6 class="card-header text-uppercase">Libra TestNet</h6>
+        <div class="card-body">
+          <h5 class="small text-uppercase font-weight-medium text-secondary mb-0">Address</h5>
+          <p class="card-text text-warning font-weight-bold">{{meta.host}}</p>
+          <h2 class="small text-uppercase font-weight-medium text-secondary mb-0">Port</h2>
+          <p class="card-text text-warning font-weight-bold">{{meta.port}}</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h6 class="card-header text-uppercase">Network Time</h6>
+        <div class="card-body">
+          <h2 class="small text-uppercase font-weight-medium text-secondary mb-0">Started Time</h2>
+          <p class="card-text text-info font-weight-bold">{{meta.start_time_str}}</p>
+          <h2 class="small text-uppercase font-weight-medium text-secondary mb-0">Latest Time</h2>
+          <p class="card-text text-info font-weight-bold">{{meta.latest_time_str}}</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h6 class="card-header text-uppercase">Statistics</h6>
+        <div class="card-body">
+          <h5 class="small text-uppercase font-weight-medium text-secondary mb-0">TOTAL TRANSACTIONS</h5>
+          <p class="card-text text-warning font-weight-bold">{{meta.total_transactions}}</p>
+          <h2 class="small text-uppercase font-weight-medium text-secondary mb-0">Validator Count</h2>
+          <p class="card-text text-warning font-weight-bold">{{meta.validators_count}}</p>
+        </div>
+      </div>
+
+    </div>
+
+<br/>
 
 
-  <div class="d-flex align-items-center px-3 mb-3">
-    <h2 class="h6 mb-0">Latest Transactions</h2>
-    <div class="ml-auto">
-    <a class="btn btn-sm btn-soft-secondary" href="/transactions">View All</a>
+
+
+
+
+
+
+
+
+
+
+    <div class="card">
+      <div class="card-body px-0">
+
+
+        <div class="d-flex align-items-center px-3 mb-3">
+          <h2 class="h6 mb-0">Latest Transactions</h2>
+          <div class="ml-auto">
+            <a class="btn btn-sm btn-soft-secondary" href="/transactions">View All</a>
+          </div>
+        </div>
+
+
+        <div class="table-responsive mb-3 border box-shadow rounded">
+          <table class="table mb-0  table-striped table-hover">
+            <thead class="gradient_bg">
+              <tr class="small text-uppercase">
+                <th scope="col" title="Version Transaction ID" style="color:white">TX ID</th>
+                <th scope="col" title="UTC Time" style="color:white">Expiration Time</th>
+                <th scope="col" title="Transaction Type" style="color:white">Type</th>
+                <th scope="col" title="Sender Address" style="color:white">Sender</th>
+                <th scope="col" width="20" style="color:white; text-align:center">---&gt;</th>
+                <th scope="col" title="Receiver Address" style="color:white">Receiver</th>
+                <th scope="col" title="Transfer Amount" style="color:white">Amount</th>
+                <th scope="col" title="Transaction Fee" style="color:white">TX Fee</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for tx in txs %}
+              <tr>
+                <td><a href='./transactions/{{tx.version}}'>{{tx.version}}</a></td>
+                <td class='text-nowrap'><span title='{{tx.time}}'>{{tx.human_time}}</span></td>
+                <td class='font-size-1 text-muted'>{{tx.code_name}}</td>
+                <td><a class="{{tx.sender_text_class}}" href='/accounts/{{tx.sender}}'
+                    title='{{tx.sender}}'>{{tx.sender_ab}}</a></td>
+                {% if tx.success %}
+                <td><small><span class='badge badge-success w-80' style="color:white">Success</span></small></td>
+                {% else %}
+                <td><small><span class='badge badge-danger w-80' style="color:white">&nbsp; Failed&nbsp;</span></small>
+                </td>
+                {% endif %}
+                <td><a class="{{tx.receiver_text_class}}" href='/accounts/{{tx.receiver}}'
+                    title='{{tx.receiver}}'>{{tx.receiver_ab}}</a></td>
+                <td class='text-nowrap'>{{tx.money}} <span class='text-muted'>LIB</span></td>
+                <td class='text-nowrap'>{{tx.transaction_info.gas_used/1000000}}<span class='text-muted'>LIB</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+
+          </table>
+        </div>
+
+
+      </div>
     </div>
   </div>
-
-
-  <div class="table-responsive mb-3 border box-shadow rounded">
-    <table class="table mb-0  table-striped table-hover">
-    <thead class="gradient_bg">
-    <tr class="small text-uppercase">
-    <th scope="col" title="Version Transaction ID" style="color:white">TX ID</th>
-    <th scope="col" title="UTC Time" style="color:white">Expiration Time</th>
-    <th scope="col" title="Transaction Type" style="color:white">Type</th>
-    <th scope="col" title="Sender Address" style="color:white">Sender</th>
-    <th scope="col" width="20" style="color:white; text-align:center">---&gt;</th>
-    <th scope="col" title="Receiver Address" style="color:white">Receiver</th>
-    <th scope="col" title="Transfer Amount" style="color:white">Amount</th>
-    <th scope="col" title="Transaction Fee" style="color:white">TX Fee</th>
-    </tr>
-    </thead>
-    <tbody>
-{% for tx in txs %}
-      <tr>
-        <td><a href='./transactions/{{tx.version}}'>{{tx.version}}</a></td>
-        <td class='text-nowrap'><span title='{{tx.time}}'>{{tx.human_time}}</span></td>
-        <td class='font-size-1 text-muted'>{{tx.code_name}}</td>
-        <td><a class="{{tx.sender_text_class}}" href='/accounts/{{tx.sender}}' title='{{tx.sender}}'>{{tx.sender_ab}}</a></td>
-{% if tx.success %}
-        <td><small><span class='badge badge-success w-80' style="color:white">Success</span></small></td>
-{% else %}
-        <td><small><span class='badge badge-danger w-80' style="color:white">&nbsp; Failed&nbsp;</span></small></td>
-{% endif %}
-        <td><a class="{{tx.receiver_text_class}}" href='/accounts/{{tx.receiver}}' title='{{tx.receiver}}'>{{tx.receiver_ab}}</a></td>
-        <td class='text-nowrap'>{{tx.money}} <span class='text-muted'>LIB</span></td>
-        <td class='text-nowrap'>{{tx.transaction_info.gas_used/1000000}}<span class='text-muted'>LIB</span></td>
-      </tr>
-{% endfor %}
-    </tbody>
-
-    </table>
-  </div>
-
-
-</div>
-</div>
-</div>
 </section>
 
 

@@ -98,4 +98,7 @@ def get_time_str(unix_timestamp):
     return local_time.strftime("%Y-%m-%d %H:%M:%S %z (%Z)")
 
 
+def format_metadata(meta):
+    meta['start_time_str'] = get_time_str(meta['start_time'])
+    meta['latest_time_str'] = get_time_str(meta['latest_time'])
 
