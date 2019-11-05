@@ -1,82 +1,77 @@
 from flask import Flask, flash, redirect, render_template, request, session, abort
 from flask import jsonify
 import json
+import os
 import requests
 from view_helper import *
 import pdb
 
+def is_development():
+    try:
+        return os.environ["FLASK_ENV"] == "development"
+    except Exception:
+        return False
+
 def jwt_header():
-    appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoiZHgxeHl4MnhpIiwiaWF0IjoxNTcyMjUzNTk2LCJleHAiOjE2MDM3ODk1OTZ9.v377ejEaI0oq3KLkT0c8Z3TfF_eTe9LP41RqTcoWyU_fnw2LMhg2ykb3JgoQzJ-1P-qfzHnrgNTHn2PTOs6Bpg"
+    if is_development():
+        appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoiZHgxeHl4MnhpIiwiaWF0IjoxNTcyMjUzNTk2LCJleHAiOjE2MDM3ODk1OTZ9.v377ejEaI0oq3KLkT0c8Z3TfF_eTe9LP41RqTcoWyU_fnw2LMhg2ykb3JgoQzJ-1P-qfzHnrgNTHn2PTOs6Bpg"
+    else:
+        appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoidHgxeHl4MXh1IiwiaWF0IjoxNTcyOTI0NzQxLCJleHAiOjE2MDQ0NjA3NDF9.9s54kZCDZRfi3TjrH2PRJJVK3uKj00hwiLqGNq3qad1GykbN5dtq1YsmU6OcMuncco5NtfVi2Ny2EAQStPodvg"
     return {"Authorization": f"Bearer {appkey}"}
 
-def get_txs(start, limit=10):
-    url = "http://localhost:8000/v1/transactions"
-    params = {"limit": limit, "start_version": start}
-    r = requests.get(url, params=params, headers=jwt_header())
+def api_host():
+    if is_development():
+        return "http://localhost:8000"
+    else:
+        return "http://api.MoveOnLibra.com"
+
+def move_on_libra_api(url, params={}, get_method=True):
+    host = api_host()
+    if get_method:
+        r = requests.get(host+url, params=params, headers=jwt_header())
+    else:
+        r = requests.post(host+url, params=params, headers=jwt_header())
     if r.status_code != 200:
         return _('Error: the service failed.')
     data = json.loads(r.content.decode('utf-8-sig'))
     return data
+
+def get_txs(start, limit=10):
+    url = "/v1/transactions"
+    params = {"limit": limit, "start_version": start}
+    return move_on_libra_api(url, params)
 
 def get_latest_txs():
-    url = "http://localhost:8000/v1/transactions/latest"
+    url = "/v1/transactions/latest"
     params = {"limit": 10}
-    r = requests.get(url, params=params, headers=jwt_header())
-    if r.status_code != 200:
-        return _('Error: the service failed.')
-    data = json.loads(r.content.decode('utf-8-sig'))
-    return data
+    return move_on_libra_api(url, params)
 
 def get_transaction(id):
-    url = "http://localhost:8000/v1/transactions/"+str(id)
-    r = requests.get(url, headers=jwt_header())
-    if r.status_code != 200:
-        return _('Error: the service failed.')
-    data = json.loads(r.content.decode('utf-8-sig'))
-    return data
+    url = "/v1/transactions/"+str(id)
+    return move_on_libra_api(url)
 
 
 def get_account(address):
-    url = "http://localhost:8000/v1/accounts/"+address
-    r = requests.get(url, headers=jwt_header())
-    if r.status_code != 200:
-        return _('Error: the service failed.')
-    data = json.loads(r.content.decode('utf-8-sig'))
-    return data
+    url = "/v1/accounts/"+address
+    return move_on_libra_api(url)
 
 def get_account_latest_events(address):
-    url = "http://localhost:8000/v1/accounts/events/latest/"+address
+    url = "/v1/accounts/events/latest/"+address
     params = {"limit": 5}
-    r = requests.get(url, params=params, headers=jwt_header())
-    if r.status_code != 200:
-        return _('Error: the service failed.')
-    data = json.loads(r.content.decode('utf-8-sig'))
-    return data
+    return move_on_libra_api(url, params)
 
 def post_mint(address):
-    url = "http://localhost:8000/v1/transactions/mint"
+    url = "/v1/transactions/mint"
     params = {"number_of_micro_libra": 100000000, "receiver_account_address": address}
-    r = requests.post(url, params=params, headers=jwt_header())
-    #pdb.set_trace()
-    if r.status_code != 200:
-        return _('Error: the service failed.')
-    return r
+    return move_on_libra_api(url, params, get_method=False)
 
 def get_validators():
-    url = "http://localhost:8000/v1/libra/validators"
-    r = requests.get(url, headers=jwt_header())
-    if r.status_code != 200:
-        return _('Error: the service failed.')
-    data = json.loads(r.content.decode('utf-8-sig'))
-    return data
+    url = "/v1/libra/validators"
+    return move_on_libra_api(url)
 
 def get_metadata():
-    url = "http://localhost:8000/v1/libra/about"
-    r = requests.get(url, headers=jwt_header())
-    if r.status_code != 200:
-        return _('Error: the service failed.')
-    data = json.loads(r.content.decode('utf-8-sig'))
-    return data
+    url = "/v1/libra/about"
+    return move_on_libra_api(url)
 
 
 app = Flask(__name__)
