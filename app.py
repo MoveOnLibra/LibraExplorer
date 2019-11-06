@@ -13,13 +13,17 @@ def is_development():
     except Exception:
         return False
 
-def gen_api_header(is_dev, host):
-    api_header = {}
+def is_anonymous_network(is_dev, host):
     if is_dev:
         suffix = ".localhost:5000"
     else:
         suffix = ".explorer.moveonlibra.com"
-    if host.endswith(suffix):
+    return (host.endswith(suffix), suffix)
+
+def gen_api_header(is_dev, host):
+    api_header = {}
+    anonymous_network, suffix = is_anonymous_network(is_dev, host)
+    if anonymous_network:
         endlen = -len(suffix)
         api_header["RealSwarm"] = host[0:endlen]
     if is_dev:
@@ -185,7 +189,10 @@ def account_json(address):
 
 @app.route("/transactions/mint/<string:address>", methods=['POST'])
 def mint(address):
-    post_mint(address)
+    if is_anonymous_network(is_development(), request.host.lower()):
+        flash("Anonymous network can't mint coins.".upper())
+    else:
+        post_mint(address)
     return redirect(f"/accounts/{address}")
 
 @app.route("/search")

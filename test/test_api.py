@@ -10,10 +10,30 @@ def test_mol_api():
     host = "http://apitest.MoveOnLibra.com"
     url = "/v1/libra/about"
     params = {}
+    headers = app.gen_api_header(False, "explorer.moveonlibra.com")
+    assert len(headers.items()) == 1
+    response = requests.get(host+url, params=params, headers=headers)
+    assert response.status_code == 200
+    assert response.headers["API-Server"] == "MoveOnLibra-API"
+    assert response.headers['Access-Control-Allow-Origin'] == "*"
+    assert response.headers["libra_network"] == "testnet"
+    assert int(response.headers["latest_version"]) >= 0
+    data = json.loads(response.content.decode('utf-8-sig'))
+    assert data['network_name'] == "Libra TESTNET"
+    assert data["host"] == "ac.testnet.libra.org"
+    assert data["port"] == 8000
+    assert data["core_code_address"] == "0"*64
+    assert data["start_time"] <= data["latest_time"]
+    assert data["total_transactions"] >= 1
+
+
+def test_mol_api_proxy():
+    host = "http://apitest.MoveOnLibra.com"
+    url = "/v1/libra/about"
+    params = {}
     headers = app.gen_api_header(False, "47.254.29.109-36765.explorer.moveonlibra.com")
     assert headers["RealSwarm"] == "47.254.29.109-36765"
     response = requests.get(host+url, params=params, headers=headers)
-    pdb.set_trace()
     assert response.status_code == 200
     assert response.headers["API-Server"] == "MoveOnLibra-API"
     assert response.headers['Access-Control-Allow-Origin'] == "*"
