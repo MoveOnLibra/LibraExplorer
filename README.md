@@ -26,7 +26,7 @@ and the host and port are "47.254.29.109" and "36765" respectively. So you can b
 
 http://47.254.29.109-36765.explorer.moveonlibra.com/
 
-We will support more formal method to support third-party Libra network. Currently, you cann't mint coin and commit transactions on these third-party Libra network explorer.
+We will add more formal method to support third-party Libra network. Currently, you cann't mint coin and commit transactions on these third-party Libra network explorer.
 
 ## Feedback is welcome.
 
