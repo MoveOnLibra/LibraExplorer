@@ -13,21 +13,25 @@ def is_development():
     except Exception:
         return False
 
-def jwt_header():
+def gen_api_header(is_dev, host):
     api_header = {}
-    if is_development():
+    if is_dev:
         suffix = ".localhost:5000"
     else:
         suffix = ".explorer.moveonlibra.com"
-    if request.host.lower().endswith(suffix):
+    if host.endswith(suffix):
         endlen = -len(suffix)
-        api_header["real_swarm"] = request.host[0:endlen]
-    if is_development():
+        api_header["RealSwarm"] = host[0:endlen]
+    if is_dev:
         appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoiZHgxeHl4MnhpIiwiaWF0IjoxNTcyMjUzNTk2LCJleHAiOjE2MDM3ODk1OTZ9.v377ejEaI0oq3KLkT0c8Z3TfF_eTe9LP41RqTcoWyU_fnw2LMhg2ykb3JgoQzJ-1P-qfzHnrgNTHn2PTOs6Bpg"
     else:
         appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoidHgxeHl4MXh1IiwiaWF0IjoxNTcyOTI0NzQxLCJleHAiOjE2MDQ0NjA3NDF9.2yh_gbH266nWHQ9E_fghs7vVoFHT7a1Z6Zi-NEYt7VTmzK8GPG7BzrBkJ3HATCoVFawss_tLMqqHRUtsGVkJSQ"
     api_header["Authorization"] = f"Bearer {appkey}"
     return api_header
+
+def jwt_header():
+    return gen_api_header(is_development(), request.host.lower())
+
 
 def api_host():
     if is_development():

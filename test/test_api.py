@@ -1,0 +1,28 @@
+import os
+import requests, json
+import pytest
+import pdb
+
+import app
+
+
+def test_mol_api():
+    host = "http://apitest.MoveOnLibra.com"
+    url = "/v1/libra/about"
+    params = {}
+    headers = app.gen_api_header(False, "47.254.29.109-36765.explorer.moveonlibra.com")
+    assert headers["RealSwarm"] == "47.254.29.109-36765"
+    response = requests.get(host+url, params=params, headers=headers)
+    pdb.set_trace()
+    assert response.status_code == 200
+    assert response.headers["API-Server"] == "MoveOnLibra-API"
+    assert response.headers['Access-Control-Allow-Origin'] == "*"
+    assert response.headers["libra_network"] == "47.254.29.109-36765"
+    assert int(response.headers["latest_version"]) >= 0
+    data = json.loads(response.content.decode('utf-8-sig'))
+    assert data['network_name'] == "Anonymous network"
+    assert data["host"] == "47.254.29.109"
+    assert data["port"] == 36765
+    assert data["core_code_address"] == "0"*64
+    assert data["start_time"] <= data["latest_time"]
+    assert data["total_transactions"] >= 1
