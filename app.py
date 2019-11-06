@@ -24,7 +24,7 @@ def api_host():
     if is_development():
         return "http://localhost:8000"
     else:
-        return "http://api.MoveOnLibra.com"
+        return "http://apitest.MoveOnLibra.com"
 
 def move_on_libra_api(url, params={}, get_method=True):
     host = api_host()
