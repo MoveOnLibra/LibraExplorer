@@ -13,16 +13,20 @@ def is_development():
     except Exception:
         return False
 
-def is_anonymous_network(is_dev, host):
+def is_anonymous_network(is_dev, host, pack_suffix=False):
     if is_dev:
         suffix = ".localhost:5000"
     else:
         suffix = ".explorer.moveonlibra.com"
-    return (host.endswith(suffix), suffix)
+    is_anonymous = host.endswith(suffix)
+    if pack_suffix:
+        return (is_anonymous, suffix)
+    else:
+        return is_anonymous
 
 def gen_api_header(is_dev, host):
     api_header = {}
-    anonymous_network, suffix = is_anonymous_network(is_dev, host)
+    anonymous_network, suffix = is_anonymous_network(is_dev, host, True)
     if anonymous_network:
         endlen = -len(suffix)
         api_header["RealSwarm"] = host[0:endlen]
