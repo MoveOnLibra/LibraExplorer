@@ -1,5 +1,6 @@
 from flask import Flask, flash, redirect, render_template, request, session, abort
 from flask import jsonify
+import werkzeug
 import json
 import os
 import requests
@@ -27,12 +28,17 @@ def api_host():
 
 def move_on_libra_api(url, params={}, get_method=True):
     host = api_host()
-    if get_method:
-        r = requests.get(host+url, params=params, headers=jwt_header())
-    else:
-        r = requests.post(host+url, params=params, headers=jwt_header())
-    if r.status_code != 200:
-        return _('Error: the service failed.')
+    try:
+        if get_method:
+            r = requests.get(host+url, params=params, headers=jwt_header())
+        else:
+            r = requests.post(host+url, params=params, headers=jwt_header())
+        if r.status_code != 200:
+            flash(f"Can't finish your request:\nAPI server return a non 200 response:{r.status_code}")
+            abort(500)
+    except Exception as err:
+        flash(f"Can't finish your request:\n{err}")
+        abort(500)
     update_total(int(r.headers["latest_version"])+1)
     data = json.loads(r.content.decode('utf-8-sig'))
     return data
@@ -76,6 +82,7 @@ def get_metadata():
 
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/@MoveOnLibra'
 app.config['JSON_SORT_KEYS'] = False
 
 total = 1
@@ -177,7 +184,12 @@ def search():
         version = int(query)
         return redirect(f"/transactions/{version}")
     except Exception:
+        flash(f"Can't finish your search rquest, maybe the query string '{query}' is malformed.")
         return redirect("/")
+
+@app.errorhandler(werkzeug.exceptions.InternalServerError)
+def handle_bad_request(e):
+    return render_template('error.html'), 500
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000,debug=False)

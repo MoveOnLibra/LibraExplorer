@@ -36,6 +36,17 @@
 
 <main id="content" role="main">
   <div class="container mb-4">
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="row justify-content-around">
+      {% for message in messages %}
+        <pre class="text-danger">{{ message }}</pre>
+      {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
   <div class="py-3">
       <form class="input-group mb-2" action="/search" method="GET" autocomplete="off" spellcheck="false">
       <input type="search" name="q" class="form-control" placeholder="Search by Address / Transaction ID (Version)" required="" autocomplete="off">
