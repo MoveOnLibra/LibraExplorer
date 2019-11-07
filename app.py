@@ -211,8 +211,12 @@ def search():
         flash(f"Can't finish your search rquest, maybe the query string '{query}' is malformed.")
         return redirect("/")
 
-@app.errorhandler(werkzeug.exceptions.InternalServerError)
-def handle_bad_request(e):
+@app.route('/heartbeat/<int:id>')
+def heartbeat(id):
+    return jsonify(id)
+
+@app.errorhandler(werkzeug.exceptions.HTTPException)
+def handle_exception(e):
     return render_template('error.html'), 500
 
 if __name__ == "__main__":
