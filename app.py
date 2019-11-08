@@ -60,7 +60,7 @@ def move_on_libra_api(url, params={}, get_method=True):
     if r.status_code != 200:
         flash(f"Can't finish your request:\nAPI server return a non 200 response:{r.status_code}\n{r.text}")
         abort(500)
-    update_total(int(r.headers["latest_version"])+1)
+    update_total(int(r.headers["Latest-Version"])+1)
     data = json.loads(r.content.decode('utf-8-sig'))
     return data
 

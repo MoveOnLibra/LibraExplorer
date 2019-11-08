@@ -17,7 +17,7 @@ def test_mol_api():
     assert response.headers["API-Server"] == "MoveOnLibra-API"
     assert response.headers['Access-Control-Allow-Origin'] == "*"
     assert response.headers["libra_network"] == "testnet"
-    assert int(response.headers["latest_version"]) >= 0
+    assert int(response.headers["Latest-Version"]) >= 0
     data = json.loads(response.content.decode('utf-8-sig'))
     assert data['network_name'] == "Libra TESTNET"
     assert data["host"] == "ac.testnet.libra.org"
@@ -38,7 +38,7 @@ def test_mol_api_proxy():
     assert response.headers["API-Server"] == "MoveOnLibra-API"
     assert response.headers['Access-Control-Allow-Origin'] == "*"
     assert response.headers["libra_network"] == "47.254.29.109-36765"
-    assert int(response.headers["latest_version"]) >= 0
+    assert int(response.headers["Latest-Version"]) >= 0
     data = json.loads(response.content.decode('utf-8-sig'))
     assert data['network_name'] == "Anonymous network"
     assert data["host"] == "47.254.29.109"
