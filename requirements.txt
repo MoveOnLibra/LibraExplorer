@@ -64,7 +64,7 @@ Twisted==19.7.0
 tzlocal==2.0.0
 ufw==0.36
 unattended-upgrades==0.1
-urllib3==1.22
+urllib3==1.24.2
 wcwidth==0.1.7
 zipp==0.6.0
 zope.interface==4.3.2
