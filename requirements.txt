@@ -14,7 +14,7 @@ configobj==5.0.6
 constantly==15.1.0
 cryptography==2.1.4
 distro-info===0.18ubuntu0.18.04.1
-httpie==0.9.8
+httpie==1.0.3
 httpie-api-auth==0.3.1
 httpie-jwt-auth==0.3.0
 httplib2==0.9.2
