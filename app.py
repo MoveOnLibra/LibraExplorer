@@ -49,11 +49,18 @@ def api_host():
 
 def move_on_libra_api(url, params={}, get_method=True):
     host = api_host()
-    try:
+    def do_api():
         if get_method:
             r = requests.get(host+url, params=params, headers=jwt_header())
         else:
             r = requests.post(host+url, params=params, headers=jwt_header())
+        return r
+    #
+    try:
+        r = do_api()
+        if r.status_code == 500:
+            print("retry on 500")
+            r = do_api()
     except Exception as err:
         flash(f"Can't finish your request:\n{err}")
         abort(500)
