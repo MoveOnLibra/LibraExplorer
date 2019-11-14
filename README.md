@@ -23,9 +23,9 @@ for example, There is a libra-swarm network started by run:
  ```sh
  cargo run -p libra-swarm
  ```
-and the host and port are "47.254.29.109" and "36765" respectively. So you can brower the blockchain data on this network by open this url:
+and the host and port are "47.254.29.109" and "33333" respectively. So you can brower the blockchain data on this network by open this url:
 
-http://47.254.29.109-36765.explorer.moveonlibra.com/
+http://47.254.29.109-33333.explorer.moveonlibra.com/
 
 We will add more formal method to support third-party Libra network. Currently, you cann't mint coin and commit transactions on these third-party Libra network explorer.
 
