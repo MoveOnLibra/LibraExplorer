@@ -91,7 +91,7 @@ def get_account(address):
     return move_on_libra_api(url)
 
 def get_account_latest_events(address):
-    url = "/v1/address/events/latest/"+address
+    url = "/v1/events/latest/"+address
     params = {"limit": 5}
     return move_on_libra_api(url, params)
 
