@@ -20,17 +20,17 @@
                 </tr>
                 <tr>
                   <td style="width: 25%"><strong>Balance</strong></td>
-                  <td style="width: 75%"><strong><span class="text-warning">{{acc.Decoded_resource.balance/1000000}}</span></strong> <span class="text-muted">Libra</span></td>
+                  <td style="width: 75%"><strong><span class="text-warning">{{acc.decoded_account_resource.balance/1000000}}</span></strong> <span class="text-muted">Libra</span></td>
                 </tr>
 {% if acc.rotate_key %}
                 <tr>
                   <td style="width: 25%"><strong>Rotate Key</strong></td>
-                  <td style="width: 75%"><span style="overflow-wrap: break-word;word-wrap: break-word;">{{acc.Decoded_resource.authentication_key}}</span></td>
+                  <td style="width: 75%"><span style="overflow-wrap: break-word;word-wrap: break-word;">{{acc.decoded_account_resource.authentication_key}}</span></td>
                 </tr>
 {% endif %}
                 <tr>
                   <td style="width: 25%"><strong>Sequence number</strong></td>
-                  <td style="width: 75%">{{acc.Decoded_resource.sequence_number}}</td>
+                  <td style="width: 75%">{{acc.decoded_account_resource.sequence_number}}</td>
                 </tr>
               </tbody>
             </table>
