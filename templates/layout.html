@@ -101,24 +101,10 @@
 </footer>
 
 <script type="text/javascript">
-  var txs;
-  function get_transactions(){
-    jQuery.ajax({
-      url: ""
-    })
-    .done(function( data ) {
-      if ( console && console.log ) {
-        console.log( "Sample of data:", data );
-      }
-      txs = data;
-    });
-  }
-
   $(document).ready(function(){
     if ( console && console.log ) {
         console.log( "document ready." );
       }
-    //get_transactions();
   });
 </script>
 

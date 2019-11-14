@@ -87,11 +87,11 @@ def get_transaction(id):
 
 
 def get_account(address):
-    url = "/v1/accounts/"+address
+    url = "/v1/address/"+address
     return move_on_libra_api(url)
 
 def get_account_latest_events(address):
-    url = "/v1/accounts/events/latest/"+address
+    url = "/v1/address/events/latest/"+address
     params = {"limit": 5}
     return move_on_libra_api(url, params)
 
