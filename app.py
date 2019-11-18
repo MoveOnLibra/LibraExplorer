@@ -31,7 +31,7 @@ def gen_api_header(is_dev, host):
         endlen = -len(suffix)
         api_header["RealSwarm"] = host[0:endlen]
     if is_dev:
-        appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoiZHgxeHl4MnhpIiwiaWF0IjoxNTcyMjUzNTk2LCJleHAiOjE2MDM3ODk1OTZ9.v377ejEaI0oq3KLkT0c8Z3TfF_eTe9LP41RqTcoWyU_fnw2LMhg2ykb3JgoQzJ-1P-qfzHnrgNTHn2PTOs6Bpg"
+        appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoidHgxeHR4M3hzIiwiaWF0IjoxNTc0MDcwMDc5LCJleHAiOjE4ODk0MzAwNzl9.BtS492nhSMK9zjEsFhIhsruGh2W9g8lSqAc_FXhFkY7R44-2MS2d8mOkqUDQXJGqOvD4mRTRXb0eEy4bhDgCbA"
     else:
         appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoidHgxeHl4MXh1IiwiaWF0IjoxNTcyOTI0NzQxLCJleHAiOjE2MDQ0NjA3NDF9.2yh_gbH266nWHQ9E_fghs7vVoFHT7a1Z6Zi-NEYt7VTmzK8GPG7BzrBkJ3HATCoVFawss_tLMqqHRUtsGVkJSQ"
     api_header["Authorization"] = f"Bearer {appkey}"
@@ -64,6 +64,8 @@ def move_on_libra_api(url, params={}, get_method=True):
     except Exception as err:
         flash(f"Can't finish your request:\n{err}")
         abort(500)
+    if r.status_code == 404:
+        return None
     if r.status_code != 200:
         flash(f"Can't finish your request:\nAPI server return a non 200 response:{r.status_code}\n{r.text}")
         abort(500)
@@ -151,6 +153,9 @@ def transactions():
 @app.route("/transactions/<int:id>")
 def transaction(id):
     tx = get_transaction(id)
+    if tx is None:
+        flash(f"Transaction Not Found(404): {id}")
+        return redirect("/")
     raw_json = json.dumps(tx, indent=2)
     transaction_format(tx)
     tx['raw_json'] = raw_json
@@ -176,6 +181,9 @@ def accounts():
 @app.route("/accounts/<string:address>")
 def account(address):
     acc = get_account(address)
+    if acc is None:
+        flash(f"Address Not Found(404): {address}")
+        return render_template('account_404.html',address=address)
     raw_json = json.dumps(acc, indent=2)
     try:
         events = get_account_latest_events(address)
