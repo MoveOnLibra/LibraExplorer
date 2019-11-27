@@ -13,7 +13,11 @@ def is_development():
     except Exception:
         return False
 
+def is_devnet(host):
+    return host.lower().startswith("devnet.")
+
 def is_anonymous_network(is_dev, host, pack_suffix=False):
+    host = host.lower()
     if is_dev:
         suffix = ".localhost:5000"
     else:
@@ -31,9 +35,15 @@ def gen_api_header(is_dev, host):
         endlen = -len(suffix)
         api_header["RealSwarm"] = host[0:endlen]
     if is_dev:
-        appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoidHgxeHR4M3hzIiwiaWF0IjoxNTc0MDcwMDc5LCJleHAiOjE4ODk0MzAwNzl9.BtS492nhSMK9zjEsFhIhsruGh2W9g8lSqAc_FXhFkY7R44-2MS2d8mOkqUDQXJGqOvD4mRTRXb0eEy4bhDgCbA"
+        if is_devnet(host):
+            appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoiZHgxeHR4M3h1IiwiaWF0IjoxNTc0MTQyMjgwLCJleHAiOjE4ODk1MDIyODB9.wvODMtecFuYne92tmy5khn2NFd_D4RFILg0ws1LGXrdTjX-2JU58WiWdA1FK6pf5ylXb8LUjXR3JO5hDs561Bw"
+        else:
+            appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoidHgxeHR4M3hzIiwiaWF0IjoxNTc0MDcwMDc5LCJleHAiOjE4ODk0MzAwNzl9.BtS492nhSMK9zjEsFhIhsruGh2W9g8lSqAc_FXhFkY7R44-2MS2d8mOkqUDQXJGqOvD4mRTRXb0eEy4bhDgCbA"
     else:
-        appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoidHgxeHl4MXh1IiwiaWF0IjoxNTcyOTI0NzQxLCJleHAiOjE2MDQ0NjA3NDF9.2yh_gbH266nWHQ9E_fghs7vVoFHT7a1Z6Zi-NEYt7VTmzK8GPG7BzrBkJ3HATCoVFawss_tLMqqHRUtsGVkJSQ"
+        if is_devnet(host):
+            appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoiZHgxeHR4M3h1IiwiaWF0IjoxNTc0MDgwNjQ4LCJleHAiOjE4ODk0NDA2NDh9.X5Jpo8fkOpC2H7uUjRShcVozph7APs3cGs3W9YmLwEfSMk7X0sEcGFLW-6P4EBujOsrP-b158xD_-LdNdpYKvg"
+        else:
+            appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoidHgxeHl4MXh1IiwiaWF0IjoxNTcyOTI0NzQxLCJleHAiOjE2MDQ0NjA3NDF9.2yh_gbH266nWHQ9E_fghs7vVoFHT7a1Z6Zi-NEYt7VTmzK8GPG7BzrBkJ3HATCoVFawss_tLMqqHRUtsGVkJSQ"
     api_header["Authorization"] = f"Bearer {appkey}"
     return api_header
 
@@ -73,14 +83,14 @@ def move_on_libra_api(url, params={}, get_method=True):
     data = json.loads(r.content.decode('utf-8-sig'))
     return data
 
-def get_txs(start, limit=10):
+def get_txs(start, limit=20):
     url = "/v1/transactions"
     params = {"limit": limit, "start_version": start}
     return move_on_libra_api(url, params)
 
-def get_latest_txs():
+def get_latest_txs(limit=10):
     url = "/v1/transactions/latest"
-    params = {"limit": 10}
+    params = {"limit": limit}
     return move_on_libra_api(url, params)
 
 def get_transaction(id):
@@ -124,7 +134,7 @@ def update_total(new_total):
 
 @app.route("/")
 def index():
-    latest_txs = get_latest_txs()
+    latest_txs = get_latest_txs(20)
     for tx in latest_txs:
         transaction_format(tx)
     meta = get_metadata()
@@ -134,16 +144,18 @@ def index():
 @app.route("/transactions")
 def transactions():
     start = request.args.get('start', '0')
-    txs = get_txs(start)
+    limit = 20
+    txs = get_txs(start, limit=limit)
     for tx in txs:
         transaction_format(tx)
     cur = txs[0]["version"]
     ctx={'first_class': '', 'last_class': ''}
-    total_page = total//10
-    cur_page = cur//10
+    total_page = total//limit
+    cur_page = cur//limit
     ctx['total'] = total
     ctx['total_page'] = total_page
     ctx['cur_page'] = cur_page
+    ctx['limit'] = limit
     if cur_page == 0:
         ctx['first_class'] = 'disabled'
     if cur_page == total_page:
@@ -208,7 +220,7 @@ def account_json(address):
 
 @app.route("/transactions/mint/<string:address>", methods=['POST'])
 def mint(address):
-    if is_anonymous_network(is_development(), request.host.lower()):
+    if not is_devnet(request.host) and is_anonymous_network(is_development(), request.host):
         flash("Anonymous network can't mint coins.".upper())
     else:
         post_mint(address)

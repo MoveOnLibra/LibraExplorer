@@ -18,13 +18,13 @@
           <li class="page-item {{ctx.first_class}}">
             <a class="page-link" href="/transactions?start=0" tabindex="-1">First</a>
           </li>
-          <li class="page-item {{ctx.first_class}}"><a class="page-link" href="/transactions?start={{(ctx.cur_page-1)*10}}">prev</a></li>
+          <li class="page-item {{ctx.first_class}}"><a class="page-link" href="/transactions?start={{(ctx.cur_page-1)*ctx.limit}}">prev</a></li>
           <li class="page-item active">
             <a class="page-link" href="#">{{ctx.cur_page}} <span class="sr-only">(current)</span></a>
           </li>
-          <li class="page-item {{ctx.last_class}}"><a class="page-link" href="/transactions?start={{(ctx.cur_page+1)*10}}">next</a></li>
+          <li class="page-item {{ctx.last_class}}"><a class="page-link" href="/transactions?start={{(ctx.cur_page+1)*ctx.limit}}">next</a></li>
           <li class="page-item {{ctx.last_class}}">
-            <a class="page-link" href="/transactions?start={{ctx.total_page*10}}">Last</a>
+            <a class="page-link" href="/transactions?start={{ctx.total_page*ctx.limit}}">Last</a>
           </li>
         </ul>
       </nav>
