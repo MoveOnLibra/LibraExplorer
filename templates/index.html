@@ -67,7 +67,7 @@
                 <th scope="col" title="Transaction Fee" style="color:white">TX Fee</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="txs_body">
               {% for tx in txs %}
               <tr>
                 <td><a href='./transactions/{{tx.version}}'>{{tx.version}}</a></td>
@@ -92,11 +92,38 @@
           </table>
         </div>
 
+{% if meta.latest_start > 0 %}
+        <div class="d-flex align-items-center px-3 mb-3">
+          <div class="mx-auto" id="loadMore">
+            <a class="btn btn-outline-info" href="#." onclick="load_latest()">Load More Transactions ...</a>
+            <img src="/static/loading.gif" id="loading" style="display:none"/>
+          </div>
+        </div>
+{% endif %}
+
 
       </div>
     </div>
   </div>
 </section>
 
+<script type="text/javascript">
+  latest_start = {{meta.latest_start}};
+  function load_latest() {
+    $("#loading").show();
+    start = latest_start - 20;
+    jQuery.ajax({
+      url: "/latest_txs?start="+start
+    })
+      .done(function (data) {
+        $("#loading").hide();
+        $("#txs_body").append(data);
+        latest_start -= 20
+        if(latest_start <=0 ){
+          $("#loadMore").hide();
+        }
+      });
+  }
+</script>
 
 {% endblock %}

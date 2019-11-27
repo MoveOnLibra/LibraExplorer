@@ -1,4 +1,4 @@
-from flask import Flask, flash, redirect, render_template, request, session, abort
+from flask import Flask, flash, redirect, render_template, render_template_string, request, session, abort
 from flask import jsonify
 import werkzeug
 import json
@@ -139,7 +139,24 @@ def index():
         transaction_format(tx)
     meta = get_metadata()
     format_metadata(meta)
+    meta['latest_start'] = latest_txs[-1]['version']
     return render_template('index.html',txs=latest_txs, meta=meta)
+
+@app.route("/latest_txs")
+def load_latest_txs():
+    limit = 20
+    start = request.args.get('start', '0')
+    start = int(start)
+    if start + limit <=0:
+        return render_template_string("")
+    if start < 0:
+        limit = limit + start
+        start = 0
+    txs = get_txs(start, limit=limit)
+    for tx in txs:
+        transaction_format(tx)
+    txs.reverse()
+    return render_template('latest_txs.html',txs=txs)
 
 @app.route("/transactions")
 def transactions():
