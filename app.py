@@ -188,8 +188,13 @@ def transaction(id):
     raw_json = json.dumps(tx, indent=2)
     transaction_format(tx)
     tx['raw_json'] = raw_json
-    #TODO: 404
-    return render_template('transaction_show.html',tx=tx)
+    ctx={'first_class': '', 'last_class': ''}
+    ctx['total'] = total
+    if id <= 0:
+        ctx['first_class'] = 'disabled'
+    if id >= total-1:
+        ctx['last_class'] = 'disabled'
+    return render_template('transaction_show.html',tx=tx, ctx=ctx)
 
 @app.route("/transactions/<int:id>.json")
 def transaction_json(id):

@@ -12,6 +12,36 @@
         </div>
       </div>
 
+
+
+    <div class="d-md-flex justify-content-between align-items-center px-0 mb-2 mr-0">
+      <div class="ml-auto">
+        <nav aria-label="...">
+          <ul class="pagination  mb-0">
+            <li class="page-item {{ctx.first_class}}">
+              <a class="page-link" href="/transactions/0" tabindex="-1">First</a>
+            </li>
+            <li class="page-item {{ctx.first_class}}"><a class="page-link" href="/transactions/{{tx.version-1}}">prev</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#.">{{tx.version}} <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="page-item {{ctx.last_class}}"><a class="page-link" href="/transactions/{{tx.version+1}}">next</a></li>
+            <li class="page-item {{ctx.last_class}}">
+              <a class="page-link" href="/transactions/{{ctx.total-1}}">Last</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
       <div class="table-responsive mb-3 border box-shadow rounded">
         <table class="table table-striped" style="table-layout: fixed; width: 100%">
           <tbody>
