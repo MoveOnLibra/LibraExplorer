@@ -8,7 +8,7 @@
                 {% if tx.success %}
                 <td><small><span class='badge badge-success w-80' style="color:white">Success</span></small></td>
                 {% else %}
-                <td><small><span class='badge badge-danger w-80' style="color:white">&nbsp; Failed&nbsp;</span></small>
+                <td><small><span title='{{tx.error_message}}' class='badge badge-danger w-80' style="color:white">&nbsp; Failed&nbsp;</span></small>
                 </td>
                 {% endif %}
                 <td><a class="{{tx.receiver_text_class}}" href='/accounts/{{tx.receiver}}'

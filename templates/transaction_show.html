@@ -17,11 +17,16 @@
           <tbody>
                 <tr>
                   <td style="width: 25%"><strong>Version</strong></td>
-                  <td style="width: 75%">{{tx.version}}
+                  <td style="width: 75%"><span class="align-middle">{{tx.version}}</span>
 {% if tx.success %}
                     <span class='badge badge-success w-80' style="color:white">Success</span>
 {% else %}
-                    <span class='badge badge-danger w-80' style="color:white">Failed</span>
+                    <span class='align-middle badge badge-danger w-80' style="color:white">Failed</span>
+                  </td>
+                <tr>
+                  <td style="width: 25%"><strong>Error Code & Reason</strong></td>
+                  <td style="width: 75%"><span class="align-middle">
+                    <span class='align-middle text-danger'><strong>{{tx.transaction_info.major_status}},  {{tx.error_message}}</strong></span>
 {% endif %}
                   </td>
                 </tr>

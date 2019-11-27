@@ -49,22 +49,7 @@
     </tr>
     </thead>
     <tbody>
-{% for tx in txs %}
-      <tr>
-        <td><a href='./transactions/{{tx.version}}'>{{tx.version}}</a></td>
-        <td class='text-nowrap'><span title='{{tx.time}}'>{{tx.human_time}}</span></td>
-        <td class='font-size-1 text-muted'>{{tx.code_name}}</td>
-        <td><a class="{{tx.sender_text_class}}" href='/accounts/{{tx.sender}}' title='{{tx.sender}}'>{{tx.sender_ab}}</a></td>
-{% if tx.success %}
-        <td><small><span class='badge badge-success w-80' style="color:white">Success</span></small></td>
-{% else %}
-        <td><small><span class='badge badge-danger w-80' style="color:white">&nbsp; Failed&nbsp;</span></small></td>
-{% endif %}
-        <td><a class="{{tx.receiver_text_class}}" href='/accounts/{{tx.receiver}}' title='{{tx.receiver}}'>{{tx.receiver_ab}}</a></td>
-        <td class='text-nowrap'>{{tx.money}} <span class='text-muted'>LIB</span></td>
-        <td class='text-nowrap'>{{tx.transaction_info.gas_used/1000000}}<span class='text-muted'>LIB</span></td>
-      </tr>
-{% endfor %}
+      {% include '_txs.html' %}
     </tbody>
 
     </table>

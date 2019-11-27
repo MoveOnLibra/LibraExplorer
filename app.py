@@ -156,7 +156,7 @@ def load_latest_txs():
     for tx in txs:
         transaction_format(tx)
     txs.reverse()
-    return render_template('latest_txs.html',txs=txs)
+    return render_template('_txs.html',txs=txs)
 
 @app.route("/transactions")
 def transactions():
