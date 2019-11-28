@@ -7,7 +7,7 @@ There are several Libra explorers there already. Why write another Libra Explore
 
 On the other hand, `MOL LibraExplorer` fetch data from original Libra blockchain in realtime and return data to you. So, the data is more accurate and fresher. You can access the Libra blockchain data by visiting following website:
 
-[explorer.moveonlibra.com](http://explorer.moveonlibra.com/) which is power by this opensource project.
+[explorer.moveonlibra.com](https://explorer.moveonlibra.com/) which is power by this opensource project.
 
 It's fast and accurate.
 
