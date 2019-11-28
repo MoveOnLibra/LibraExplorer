@@ -31,6 +31,9 @@
         <a class="p-2 text-dark" href="/transactions">Transactions</a>
         <a class="p-2 text-dark" href="/accounts">Accounts</a>
       </nav>
+      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#networkModal">
+        Select Network
+      </button>
     </div>
 
 
@@ -62,9 +65,103 @@
 </main>
 
 
+<!-- Modal -->
+<div class="modal fade" id="networkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select Libra Network</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Current Network:</p>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="">{{network}}</span>
+          </div>
+          <input type="text" class="form-control col-md-6" value="{{network_address}}" readonly="readonly">
+          <input type="text" class="form-control col-md-3" value="{{network_port}}" readonly="readonly">
+        </div>
+        <hr/>
+        <p>Change Network:</p>
+{% if network != "Testnet" %}
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+            <input type="radio" aria-label="Testnet" name="network" value="Testnet">
+            </div>
+          </div>
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="">Testnet</span>
+          </div>
+          <input type="text" class="form-control col-md-6" value="ac.testnet.libra.org" readonly="readonly">
+          <input type="text" class="form-control col-md-3" value="8000" readonly="readonly">
+        </div>
+        <br/>
+{% endif %}
+{% if network != "Devnet" %}
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+            <input type="radio" aria-label="Devnet" name="network" value="Devnet">
+            </div>
+          </div>
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="">Devnet</span>
+          </div>
+          <input type="text" class="form-control col-md-6" value="apitest.moveonLibra.com" readonly="readonly">
+          <input type="text" class="form-control col-md-3" value="33333" readonly="readonly">
+        </div>
+        <br/>
+{% endif %}
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+            <input type="radio" aria-label="Other"  name="network" value="Other">
+            </div>
+          </div>
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="">&nbsp;Other&nbsp;</span>
+          </div>
+          <input id="network_ip" type="text" class="form-control col-md-6" placeholder="Hostname/IP address">
+          <input id="network_port" type="number" class="form-control col-md-3" placeholder="AC port">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="changeNetwork()">Change Network</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-
+<script type="text/javascript">
+  function changeNetwork(){
+    var network = $('input[name=network]:checked').val();
+    if(network){
+      if(network == "Testnet"){
+        window.location = "//explorer.moveonLibra.com"
+      }else if(network == "Devnet"){
+        window.location = "//devnet.explorer.moveonLibra.com"
+      }else if(network == "Other"){
+        var network_ip = $('#network_ip').val();
+        var network_port = $('#network_port').val();
+        if(network_ip && network_port){
+          var url = "http://"+network_ip+"-"+network_port+".explorer.moveonLibra.com"
+          //alert("You are leave this site to another website: "+url);
+          window.location = url;
+        }else{
+          alert("Please input network address and port for other network.")
+        }
+      }else{
+        console.log("Unknown network"+network);
+      }
+      //$('#networkModal').modal('hide');
+    }
+  }
+</script>
 
 <style>
     footer .footer-bottom.slim {

@@ -16,9 +16,9 @@ def is_development():
 def is_devnet(host):
     return host.lower().startswith("devnet.")
 
-def is_anonymous_network(is_dev, host, pack_suffix=False):
+def is_prefix_network(is_development, host, pack_suffix=False):
     host = host.lower()
-    if is_dev:
+    if is_development:
         suffix = ".localhost:5000"
     else:
         suffix = ".explorer.moveonlibra.com"
@@ -28,13 +28,23 @@ def is_anonymous_network(is_dev, host, pack_suffix=False):
     else:
         return is_anonymous
 
-def gen_api_header(is_dev, host):
-    api_header = {}
-    anonymous_network, suffix = is_anonymous_network(is_dev, host, True)
+def is_anonymous_network(is_development, host):
+    return is_prefix_network(is_development, host) and not is_devnet(host)
+
+def get_network_prefix(is_development, host):
+    anonymous_network, suffix = is_prefix_network(is_development, host, True)
     if anonymous_network:
         endlen = -len(suffix)
-        api_header["RealSwarm"] = host[0:endlen]
-    if is_dev:
+        return host[0:endlen]
+    else:
+        raise f"{host} is not a anonymous network."
+
+def gen_api_header(is_development, host):
+    api_header = {}
+    anonymous_network = is_prefix_network(is_development, host)
+    if is_prefix_network(is_development, host):
+        api_header["RealSwarm"] = get_network_prefix(is_development, host)
+    if is_development:
         if is_devnet(host):
             appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoiZHgxeHR4M3h1IiwiaWF0IjoxNTc0MTQyMjgwLCJleHAiOjE4ODk1MDIyODB9.wvODMtecFuYne92tmy5khn2NFd_D4RFILg0ws1LGXrdTjX-2JU58WiWdA1FK6pf5ylXb8LUjXR3JO5hDs561Bw"
         else:
@@ -142,6 +152,10 @@ def index():
     meta['latest_start'] = latest_txs[-1]['version']
     return render_template('index.html',txs=latest_txs, meta=meta)
 
+@app.route("/test")
+def test():
+    return render_template('test.html')
+
 @app.route("/latest_txs")
 def load_latest_txs():
     limit = 20
@@ -242,7 +256,7 @@ def account_json(address):
 
 @app.route("/transactions/mint/<string:address>", methods=['POST'])
 def mint(address):
-    if not is_devnet(request.host) and is_anonymous_network(is_development(), request.host):
+    if is_anonymous_network(is_development(), request.host):
         flash("Anonymous network can't mint coins.".upper())
     else:
         post_mint(address)
@@ -267,6 +281,32 @@ def heartbeat(id):
 @app.errorhandler(werkzeug.exceptions.HTTPException)
 def handle_exception(e):
     return render_template('error.html'), 500
+
+@app.context_processor
+def inject_network():
+    if is_devnet(request.host):
+        network = "Devnet"
+        network_address = "apitest.moveonLibra.com"
+        network_port = "33333"
+    elif is_anonymous_network(is_development(), request.host):
+        network = "Anonymous"
+        prefix = get_network_prefix(is_development(), request.host)
+        network_address, network_port = prefix.split("-")
+    else:
+        network = "Testnet"
+        network_address = "ac.testnet.libra.org"
+        network_port = "8000"
+    return dict(network=network, network_address=network_address, network_port=network_port)
+
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    #print("teardown_appcontext")
+    pass
+
+@app.teardown_request
+def show_teardown(exception):
+    #print('teardown_request')
+    pass
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000,debug=False)
