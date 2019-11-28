@@ -17,7 +17,7 @@ It's fast and accurate.
 
 "MOL LibraExplorer" support three  types of libra blockchain network:
 
-* **Testnet**, comprised of test validator nodes running Libra Core, the software which maintains the Libra cryptocurrency.
+* **Testnet**, official libra blockchain network for test, operated by Libra Association.
 
 * **Devnet**, a specail version of testnet maintained by MoveOnLibra instead of Libra Association, support publish and execute custom move modules and scripts.
 
