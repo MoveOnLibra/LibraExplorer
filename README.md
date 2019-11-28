@@ -11,23 +11,32 @@ On the other hand, `MOL LibraExplorer` fetch data from original Libra blockchain
 
 It's fast and accurate.
 
+## What's new
 
-## Support Third-party Libra Network
-"MOL LibraExplorer" can support any third-party Libra network as long as the host and port of those network is publicly accessible. The easiest way to browser a third-party libra network is prefix the host and port to "explorer.moveonlibra.com" with following syntax:
+### Libra Network Select(2019-11-28)
 
- ```plaintext
- http://<host>-<port>.explorer.moveonlibra.com/
- ```
-for example, There is a libra-swarm network started by run:
+"MOL LibraExplorer" support three  types of libra blockchain network:
 
- ```sh
- cargo run -p libra-swarm
- ```
-and the host and port are "47.254.29.109" and "33333" respectively. So you can brower the blockchain data on this network by open this url:
+* **Testnet**, comprised of test validator nodes running Libra Core, the software which maintains the Libra cryptocurrency.
 
-http://47.254.29.109-33333.explorer.moveonlibra.com/
+* **Devnet**, a specail version of testnet maintained by MoveOnLibra instead of Libra Association, support publish and execute custom move modules and scripts.
 
-We will add more formal method to support third-party Libra network. Currently, you cann't mint coin and commit transactions on these third-party Libra network explorer.
+* **Anonymous**, any third-party Libra network as long as the host and port of those network is publicly accessible.
+
+![Select Network](docs/select_network.png "Select Libra Network")
+
+The `Select Network` feature let's you select one of supported networks to explore.
+
+### Show Error Message For Failed Transactions(2019-11-28)
+
+Show Error Message In the Transaction List Page:
+![Select Network](docs/error_title.png "Error Message")
+
+Show Error Code and Error Message In the Single Transaction Show Page:
+![Select Network](docs/error_code.png "Error Code and Message")
+
+
+
 
 ## Feedback is welcome.
 
