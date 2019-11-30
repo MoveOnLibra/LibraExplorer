@@ -143,8 +143,13 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    # import pdb
-    # pdb.set_trace()
+    try:
+        lang, _ = request.accept_languages[0]
+        if 'zh' in lang.lower():
+            if 'tw' in lang.lower() or 'hk' in lang.lower():
+                return 'zh_Hant'
+    except:
+        pass
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
