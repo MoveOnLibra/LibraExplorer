@@ -1,6 +1,8 @@
 from flask import Flask, flash, redirect, render_template, render_template_string, request, session, abort
 from flask import jsonify
 import werkzeug
+from flask_babel import Babel
+from flask_babel import _
 import json
 import os
 import requests
@@ -134,6 +136,16 @@ def get_metadata():
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/@MoveOnLibra'
 app.config['JSON_SORT_KEYS'] = False
+app.config['LANGUAGES'] = ['en', 'zh', 'zh_Hant']
+
+babel = Babel(app)
+
+@babel.localeselector
+def get_locale():
+    # import pdb
+    # pdb.set_trace()
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
 
 total = 1
 
@@ -197,7 +209,7 @@ def transactions():
 def transaction(id):
     tx = get_transaction(id)
     if tx is None:
-        flash(f"Transaction Not Found(404): {id}")
+        flash(_('Transaction Not Found(404): %(id)', id=id))
         return redirect("/")
     raw_json = json.dumps(tx, indent=2)
     transaction_format(tx)
