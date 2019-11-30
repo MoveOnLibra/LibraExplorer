@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-11-30 15:01+0800\n"
+"POT-Creation-Date: 2019-11-30 17:44+0800\n"
 "PO-Revision-Date: 2019-11-30 15:02+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant\n"
@@ -18,19 +18,177 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: app.py:213
+#: app.py:212
 msgid "Transaction Not Found(404): %(id)"
 msgstr ""
 
-#: templates/layout.html:30
+#: templates/_txs_pager.html:3
+msgid "Tocal"
+msgstr ""
+
+#: templates/_txs_pager.html:8
+msgid "First"
+msgstr ""
+
+#: templates/_txs_pager.html:10
+msgid "prev"
+msgstr ""
+
+#: templates/_txs_pager.html:14
+msgid "next"
+msgstr ""
+
+#: templates/_txs_pager.html:16
+msgid "Last"
+msgstr ""
+
+#: templates/account_show.html:10
+msgid "Account Information"
+msgstr ""
+
+#: templates/account_show.html:18 templates/index.html:13
+msgid "Address"
+msgstr ""
+
+#: templates/account_show.html:22
+msgid "Balance"
+msgstr ""
+
+#: templates/account_show.html:27
+msgid "Rotate Key"
+msgstr ""
+
+#: templates/account_show.html:32
+msgid "Sequence number"
+msgstr ""
+
+#: templates/account_show.html:50
+msgid "Latest five deals paid me"
+msgstr ""
+
+#: templates/account_show.html:57 templates/account_show.html:93
+msgid "Seq No"
+msgstr ""
+
+#: templates/account_show.html:58 templates/account_show.html:94
+#: templates/index.html:60
+msgid "TX ID"
+msgstr ""
+
+#: templates/account_show.html:59 templates/account_show.html:95
+#: templates/index.html:66
+msgid "Amount"
+msgstr ""
+
+#: templates/account_show.html:60 templates/index.html:63
+msgid "Sender"
+msgstr ""
+
+#: templates/account_show.html:86
+msgid "Latest five deals paid by me"
+msgstr ""
+
+#: templates/account_show.html:96 templates/index.html:65
+msgid "Receiver"
+msgstr ""
+
+#: templates/account_show.html:125
+msgid "Show Raw Json"
+msgstr ""
+
+#: templates/index.html:15
+msgid "Port"
+msgstr ""
+
+#: templates/index.html:21
+msgid "Network Time"
+msgstr ""
+
+#: templates/index.html:23
+msgid "Started Time"
+msgstr ""
+
+#: templates/index.html:25
+msgid "Latest Time"
+msgstr ""
+
+#: templates/index.html:31
+msgid "Statistics"
+msgstr ""
+
+#: templates/index.html:33
+msgid "TOTAL TRANSACTIONS"
+msgstr ""
+
+#: templates/index.html:35
+msgid "Validator Count"
+msgstr ""
+
+#: templates/index.html:49
+msgid "Latest Transactions"
+msgstr ""
+
+#: templates/index.html:51
+msgid "View All"
+msgstr ""
+
+#: templates/index.html:61
+msgid "Expiration Time"
+msgstr ""
+
+#: templates/index.html:62
+msgid "Type"
+msgstr ""
+
+#: templates/index.html:67
+msgid "TX Fee"
+msgstr ""
+
+#: templates/index.html:80
+msgid "Load More Transactions"
+msgstr ""
+
+#: templates/layout.html:29
 msgid "Home"
 msgstr "主页"
 
-#: templates/layout.html:31
+#: templates/layout.html:30
 msgid "Transactions"
 msgstr "交易"
 
-#: templates/layout.html:32
+#: templates/layout.html:31
 msgid "Accounts"
 msgstr "账户"
+
+#: templates/layout.html:32
+msgid "Source"
+msgstr ""
+
+#: templates/layout.html:35
+msgid "Select Network"
+msgstr ""
+
+#: templates/layout.html:57
+msgid "Search"
+msgstr ""
+
+#: templates/layout.html:73
+msgid "Select Libra Network"
+msgstr ""
+
+#: templates/layout.html:79
+msgid "Current Network"
+msgstr ""
+
+#: templates/layout.html:88 templates/layout.html:134
+msgid "Change Network"
+msgstr ""
+
+#: templates/layout.html:126
+msgid "Other"
+msgstr ""
+
+#: templates/layout.html:133
+msgid "Cacel"
+msgstr ""
 

@@ -1,19 +1,19 @@
 
   <div class="d-md-flex justify-content-between align-items-center px-0 mb-2 mr-0">
-    <h5 class="h6 mb-0"><span class='text-muted'> Tocal: {{ctx.total}}</span></h5>
+    <h5 class="h6 mb-0"><span class='text-muted'> {{ _('Tocal') }}: {{ctx.total}}</span></h5>
     <div class="ml-auto">
       <nav aria-label="...">
         <ul class="pagination  mb-0">
           <li class="page-item {{ctx.first_class}}">
-            <a class="page-link" href="/transactions?start=0" tabindex="-1">First</a>
+            <a class="page-link" href="/transactions?start=0" tabindex="-1">{{ _('First') }}</a>
           </li>
-          <li class="page-item {{ctx.first_class}}"><a class="page-link" href="/transactions?start={{(ctx.cur_page-1)*ctx.limit}}">prev</a></li>
+          <li class="page-item {{ctx.first_class}}"><a class="page-link" href="/transactions?start={{(ctx.cur_page-1)*ctx.limit}}">{{ _('prev') }}</a></li>
           <li class="page-item active">
             <a class="page-link" href="#.">Page{{ctx.cur_page}} <span class="sr-only">(current)</span></a>
           </li>
-          <li class="page-item {{ctx.last_class}}"><a class="page-link" href="/transactions?start={{(ctx.cur_page+1)*ctx.limit}}">next</a></li>
+          <li class="page-item {{ctx.last_class}}"><a class="page-link" href="/transactions?start={{(ctx.cur_page+1)*ctx.limit}}">{{ _('next') }}</a></li>
           <li class="page-item {{ctx.last_class}}">
-            <a class="page-link" href="/transactions?start={{ctx.total_page*ctx.limit}}">Last</a>
+            <a class="page-link" href="/transactions?start={{ctx.total_page*ctx.limit}}">{{ _('Last') }}</a>
           </li>
         </ul>
       </nav>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-11-30 15:01+0800\n"
+"POT-Creation-Date: 2019-11-30 17:44+0800\n"
 "PO-Revision-Date: 2019-11-30 16:47+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -18,19 +18,177 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: app.py:213
+#: app.py:212
 msgid "Transaction Not Found(404): %(id)"
-msgstr ""
+msgstr "交易不存在(404): %(id)"
 
-#: templates/layout.html:30
+#: templates/_txs_pager.html:3
+msgid "Tocal"
+msgstr "总数"
+
+#: templates/_txs_pager.html:8
+msgid "First"
+msgstr "首页"
+
+#: templates/_txs_pager.html:10
+msgid "prev"
+msgstr "上一页"
+
+#: templates/_txs_pager.html:14
+msgid "next"
+msgstr "下一页"
+
+#: templates/_txs_pager.html:16
+msgid "Last"
+msgstr "未页"
+
+#: templates/account_show.html:10
+msgid "Account Information"
+msgstr "账户信息"
+
+#: templates/account_show.html:18 templates/index.html:13
+msgid "Address"
+msgstr "地址"
+
+#: templates/account_show.html:22
+msgid "Balance"
+msgstr "余额"
+
+#: templates/account_show.html:27
+msgid "Rotate Key"
+msgstr "变更Key"
+
+#: templates/account_show.html:32
+msgid "Sequence number"
+msgstr "序列号"
+
+#: templates/account_show.html:50
+msgid "Latest five deals paid me"
+msgstr "最新五笔支付给我的交易"
+
+#: templates/account_show.html:57 templates/account_show.html:93
+msgid "Seq No"
+msgstr "序号"
+
+#: templates/account_show.html:58 templates/account_show.html:94
+#: templates/index.html:60
+msgid "TX ID"
+msgstr "交易ID"
+
+#: templates/account_show.html:59 templates/account_show.html:95
+#: templates/index.html:66
+msgid "Amount"
+msgstr "金额"
+
+#: templates/account_show.html:60 templates/index.html:63
+msgid "Sender"
+msgstr "发送者"
+
+#: templates/account_show.html:86
+msgid "Latest five deals paid by me"
+msgstr "最新五笔我支付的交易"
+
+#: templates/account_show.html:96 templates/index.html:65
+msgid "Receiver"
+msgstr "接收者"
+
+#: templates/account_show.html:125
+msgid "Show Raw Json"
+msgstr "查看原始Json"
+
+#: templates/index.html:15
+msgid "Port"
+msgstr "端口"
+
+#: templates/index.html:21
+msgid "Network Time"
+msgstr "网络时间"
+
+#: templates/index.html:23
+msgid "Started Time"
+msgstr "启动时间"
+
+#: templates/index.html:25
+msgid "Latest Time"
+msgstr "最新时间"
+
+#: templates/index.html:31
+msgid "Statistics"
+msgstr "统计"
+
+#: templates/index.html:33
+msgid "TOTAL TRANSACTIONS"
+msgstr "总交易数"
+
+#: templates/index.html:35
+msgid "Validator Count"
+msgstr "验证者数"
+
+#: templates/index.html:49
+msgid "Latest Transactions"
+msgstr "最新的交易"
+
+#: templates/index.html:51
+msgid "View All"
+msgstr "查看全部"
+
+#: templates/index.html:61
+msgid "Expiration Time"
+msgstr "过期时间"
+
+#: templates/index.html:62
+msgid "Type"
+msgstr "类型"
+
+#: templates/index.html:67
+msgid "TX Fee"
+msgstr "交易费"
+
+#: templates/index.html:80
+msgid "Load More Transactions"
+msgstr "加载更多交易"
+
+#: templates/layout.html:29
 msgid "Home"
 msgstr "主页"
 
-#: templates/layout.html:31
+#: templates/layout.html:30
 msgid "Transactions"
 msgstr "交易"
 
-#: templates/layout.html:32
+#: templates/layout.html:31
 msgid "Accounts"
 msgstr "账户"
+
+#: templates/layout.html:32
+msgid "Source"
+msgstr "源代码"
+
+#: templates/layout.html:35
+msgid "Select Network"
+msgstr "选择网络"
+
+#: templates/layout.html:57
+msgid "Search"
+msgstr "搜索"
+
+#: templates/layout.html:73
+msgid "Select Libra Network"
+msgstr "选择Libra网络"
+
+#: templates/layout.html:79
+msgid "Current Network"
+msgstr "当前网络"
+
+#: templates/layout.html:88 templates/layout.html:134
+msgid "Change Network"
+msgstr "切换网络"
+
+#: templates/layout.html:126
+msgid "Other"
+msgstr "其它"
+
+#: templates/layout.html:133
+msgid "Cacel"
+msgstr "取消"
 
