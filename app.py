@@ -137,12 +137,14 @@ def get_metadata():
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/@MoveOnLibra'
 app.config['JSON_SORT_KEYS'] = False
-app.config['LANGUAGES'] = ['en', 'zh', 'zh_Hant']
+app.config['LANGUAGES'] = ['en', 'zh', 'zh_Hant', 'ar', 'da', 'de', 'el', 'es', 'fa', 'fr', 'ga', 'it', 'ja', 'ko', 'nl', 'pt', 'ru', 'sr', 'sv', 'th', 'tr']
 
 babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
+    # print(request.accept_languages)
+    # print(request.accept_languages.best_match(app.config['LANGUAGES']))
     try:
         lang, _ = request.accept_languages[0]
         if 'zh' in lang.lower():
