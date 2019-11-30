@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="center-heading">
-            <h4 class="section-title">Special Accounts</h4>
+            <h4 class="section-title">{{ _('Special Accounts') }}</h4>
           </div>
         </div>
       </div>
@@ -15,31 +15,31 @@
             <table class="table table-striped  border box-shadow rounded" style="table-layout: fixed; width: 100%">
               <thead class="gradient_bg">
               <tr class="small text-uppercase">
-              <th scope="col" title="Name" style="width: 25%; color:white">Name</th>
-              <th scope="col" title="Address" style="width: 75%; color:white">Address</th>
+              <th scope="col" title="Name" style="width: 25%; color:white">{{ _('Name') }}</th>
+              <th scope="col" title="Address" style="width: 75%; color:white">{{ _('Address') }}</th>
               </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 25%"><strong>Core Code</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Core Code') }}</strong></td>
                   <td style="width: 75%">
                     <a href="/accounts/{{core_code_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{core_code_address}}</span></a>
                   </td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Libra Association</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Libra Association') }}</strong></td>
                   <td style="width: 75%">
                     <a href="/accounts/{{association_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{association_address}}</span></a>
                   </td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Transaction Fee</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Transaction Fee') }}</strong></td>
                   <td style="width: 75%">
                     <a href="/accounts/{{transaction_fee_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{transaction_fee_address}}</span></a>
                   </td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Validator Set</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Validator Set') }}</strong></td>
                   <td style="width: 75%">
                     <a href="/accounts/{{validator_set_address}}"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{validator_set_address}}</span></a>
                   </td>
@@ -56,15 +56,15 @@
 <div class="card-body px-0">
 
   <div class="d-flex align-items-center px-3 mb-3">
-    <h6 class="h6 align-center mb-0">Blockchain Validators</h6>
+    <h6 class="h6 align-center mb-0">{{ _('Blockchain Validators') }}</h6>
   </div>
 
   <div class="table-responsive mb-3 border box-shadow rounded">
     <table class="table mb-0  table-striped table-hover">
     <thead class="gradient_bg">
     <tr class="small text-uppercase">
-    <th scope="col" title="Number" style="color:white">No.</th>
-    <th scope="col" title="Address" style="color:white">Address</th>
+    <th scope="col" title="Number" style="color:white">{{ _('No.') }}</th>
+    <th scope="col" title="Address" style="color:white">{{ _('Address') }}</th>
     </tr>
     </thead>
     <tbody>

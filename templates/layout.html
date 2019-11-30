@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Libra Blockchain Explorer, support libra testnet and any other libra-swarm">
-    <title>Libra Explorer powered by MoveOnLibra</title>
+    <title>{{ _('Libra Explorer') }} {{ _('powered by') }} MoveOnLibra</title>
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
     <script
       src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"
@@ -52,7 +52,7 @@
 
   <div class="py-3">
       <form class="input-group mb-2" action="/search" method="GET" autocomplete="off" spellcheck="false">
-      <input type="search" name="q" class="form-control" placeholder="Search by Address / Transaction ID (Version)" required="" autocomplete="off">
+      <input type="search" name="q" class="form-control" placeholder="{{ _('Search by Address / Transaction ID (Version)') }}" required="" autocomplete="off">
       <div class="input-group-append">
       <button class="btn btn-primary" type="submit" aria-label="search">{{ _('Search') }}
       </button>
@@ -125,8 +125,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="">&nbsp;{{ _('Other') }}&nbsp;</span>
           </div>
-          <input id="network_ip" type="text" class="form-control col-md-6" placeholder="Hostname/IP address">
-          <input id="network_port" type="number" class="form-control col-md-3" placeholder="AC port">
+          <input id="network_ip" type="text" class="form-control col-md-6" placeholder="{{ _('Hostname/IP address') }}">
+          <input id="network_port" type="number" class="form-control col-md-3" placeholder="{{ _('AC port') }}">
         </div>
       </div>
       <div class="modal-footer">
@@ -190,7 +190,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <p class="copyright" style="color: white">2019 © Developed and hosted by <a href="https://www.MoveOnLibra.com" style="color: white"><strong>Move On Libra</strong></a></p>
+            <p class="copyright" style="color: white">2019 © {{ _('Developed and hosted by') }} <a href="https://www.MoveOnLibra.com" style="color: white"><strong>Move On Libra</strong></a></p>
           </div>
         </div>
       </div>

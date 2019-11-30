@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="center-heading">
-            <h4 class="section-title">Account Information</h4>
+            <h4 class="section-title">{{ _('Account Information') }}</h4>
           </div>
         </div>
       </div>
@@ -15,12 +15,12 @@
             <table class="table table-striped  border box-shadow rounded" style="table-layout: fixed; width: 100%">
               <tbody>
                 <tr>
-                  <td style="width: 25%"><strong>Address</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Address') }}</strong></td>
                   <td style="width: 75%"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{address}}</span></td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Not Found</strong></td>
-                  <td style="width: 75%"><span class="text-warning" style="overflow-wrap: break-word;word-wrap: break-word;">This address doesn't exists on Libra blockchain.</span></td>
+                  <td style="width: 25%"><strong>{{ _('Not Found') }}</strong></td>
+                  <td style="width: 75%"><span class="text-warning" style="overflow-wrap: break-word;word-wrap: break-word;">{{ _('This address does not exists on Libra blockchain.') }}</span></td>
                 </tr>
               </tbody>
             </table>
@@ -28,7 +28,7 @@
 
 <div class="d-flex justify-content-center mb-3">
 <form action="/transactions/mint/{{address}}" method="POST">
-<input class="btn btn-outline-danger" type="submit" value="Create account for this address">
+<input class="btn btn-outline-danger" type="submit" value="{{ _('Create account for this address') }}">
 </form>
 </div>
 
@@ -37,17 +37,17 @@
 <div class="card-body px-0">
 
   <div class="d-flex align-items-center px-3 mb-3">
-    <h6 class="h6 align-center mb-0">Latest five deals paid me</h6>
+    <h6 class="h6 align-center mb-0">{{ _('Latest five deals paid me') }}</h6>
   </div>
 
   <div class="table-responsive mb-3 border box-shadow rounded">
     <table class="table mb-0  table-striped table-hover">
     <thead class="gradient_bg">
     <tr class="small text-uppercase">
-    <th scope="col" title="UTC Time" style="color:white">Seq No</th>
-    <th scope="col" title="Version Transaction ID" style="color:white">TX ID</th>
-    <th scope="col" title="Transfer Amount" style="color:white">Amount</th>
-    <th scope="col" title="Sender Address" style="color:white">Sender</th>
+    <th scope="col" title="UTC Time" style="color:white">{{ _('Seq No') }}</th>
+    <th scope="col" title="Version Transaction ID" style="color:white">{{ _('TX ID') }}</th>
+    <th scope="col" title="Transfer Amount" style="color:white">{{ _('Amount') }}</th>
+    <th scope="col" title="Sender Address" style="color:white">{{ _('Sender') }}</th>
     </tr>
     </thead>
     </table>
@@ -62,17 +62,17 @@
 <div class="card-body px-0">
 
   <div class="d-flex align-items-center px-3 mb-3">
-    <h6 class="h6 mb-0">Latest five deals paid by me</h6>
+    <h6 class="h6 mb-0">{{ _('Latest five deals paid by me') }}</h6>
   </div>
 
   <div class="table-responsive mb-3 border box-shadow rounded">
     <table class="table mb-0  table-striped table-hover">
     <thead class="gradient_bg">
     <tr class="small text-uppercase">
-    <th scope="col" title="UTC Time" style="color:white">Seq No</th>
-    <th scope="col" title="Version Transaction ID" style="color:white">TX ID</th>
-    <th scope="col" title="Transfer Amount" style="color:white">Amount</th>
-    <th scope="col" title="Sender Address" style="color:white">Receiver</th>
+    <th scope="col" title="UTC Time" style="color:white">{{ _('Seq No') }}</th>
+    <th scope="col" title="Version Transaction ID" style="color:white">{{ _('TX ID') }}</th>
+    <th scope="col" title="Transfer Amount" style="color:white">{{ _('Amount') }}</th>
+    <th scope="col" title="Sender Address" style="color:white">{{ _('Receiver') }}</th>
     </tr>
     </thead>
 

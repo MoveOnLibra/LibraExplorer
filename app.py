@@ -46,7 +46,7 @@ def gen_api_header(is_development, host):
     anonymous_network = is_prefix_network(is_development, host)
     if is_prefix_network(is_development, host):
         api_header["RealSwarm"] = get_network_prefix(is_development, host)
-    if is_development:
+    if False and is_development:
         if is_devnet(host):
             appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoiZHgxeHR4M3h1IiwiaWF0IjoxNTc0MTQyMjgwLCJleHAiOjE4ODk1MDIyODB9.wvODMtecFuYne92tmy5khn2NFd_D4RFILg0ws1LGXrdTjX-2JU58WiWdA1FK6pf5ylXb8LUjXR3JO5hDs561Bw"
         else:
@@ -65,6 +65,7 @@ def jwt_header():
 
 def api_host():
     if is_development():
+        return "http://apitest.MoveOnLibra.com"
         return "http://localhost:8000"
     else:
         return "http://apitest.MoveOnLibra.com"
@@ -84,12 +85,12 @@ def move_on_libra_api(url, params={}, get_method=True):
             print("retry on 500")
             r = do_api()
     except Exception as err:
-        flash(f"Can't finish your request:\n{err}")
+        flash(_("Can't finish your request:") + f"\n{err}")
         abort(500)
     if r.status_code == 404:
         return None
     if r.status_code != 200:
-        flash(f"Can't finish your request:\nAPI server return a non 200 response:{r.status_code}\n{r.text}")
+        flash(_("Can't finish your request:") + _(" API server return an error response: ") + f"{r.status_code}\n{r.text}")
         abort(500)
     update_total(int(r.headers["Latest-Version"])+1)
     data = json.loads(r.content.decode('utf-8-sig'))
@@ -209,7 +210,7 @@ def transactions():
 def transaction(id):
     tx = get_transaction(id)
     if tx is None:
-        flash(_('Transaction Not Found(404): %(id)', id=id))
+        flash(_('Transaction Not Found: %(id)s', id=id))
         return redirect("/")
     raw_json = json.dumps(tx, indent=2)
     transaction_format(tx)
@@ -242,7 +243,7 @@ def accounts():
 def account(address):
     acc = get_account(address)
     if acc is None:
-        flash(f"Address Not Found(404): {address}")
+        flash(_('Address Not Found: %(address)s', address=address))
         return render_template('account_404.html',address=address)
     raw_json = json.dumps(acc, indent=2)
     try:
@@ -269,7 +270,7 @@ def account_json(address):
 @app.route("/transactions/mint/<string:address>", methods=['POST'])
 def mint(address):
     if is_anonymous_network(is_development(), request.host):
-        flash("Anonymous network can't mint coins.".upper())
+        flash(_('Anonymous network can not mint coins.'))
     else:
         post_mint(address)
     return redirect(f"/accounts/{address}")
@@ -283,7 +284,7 @@ def search():
         version = int(query)
         return redirect(f"/transactions/{version}")
     except Exception:
-        flash(f"Can't finish your search rquest, maybe the query string '{query}' is malformed.")
+        flash(_("Can't finish your search rquest") + _(", maybe the query string %(query)s is malformed.", query=query))
         return redirect("/")
 
 @app.route('/heartbeat/<int:id>')

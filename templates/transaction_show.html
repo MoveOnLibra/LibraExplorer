@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="center-heading">
-            <h4 class="section-title">Transaction <span class="text-info">{{tx.version}}</span></h4>
+            <h4 class="section-title">{{ _('Transaction') }} <span class="text-info">{{tx.version}}</span></h4>
           </div>
         </div>
       </div>
@@ -19,15 +19,15 @@
         <nav aria-label="...">
           <ul class="pagination  mb-0">
             <li class="page-item {{ctx.first_class}}">
-              <a class="page-link" href="/transactions/0" tabindex="-1">First</a>
+              <a class="page-link" href="/transactions/0" tabindex="-1">{{ _('First') }}</a>
             </li>
-            <li class="page-item {{ctx.first_class}}"><a class="page-link" href="/transactions/{{tx.version-1}}">prev</a></li>
+            <li class="page-item {{ctx.first_class}}"><a class="page-link" href="/transactions/{{tx.version-1}}">{{ _('prev') }}</a></li>
             <li class="page-item active">
               <a class="page-link" href="#.">{{tx.version}} <span class="sr-only">(current)</span></a>
             </li>
-            <li class="page-item {{ctx.last_class}}"><a class="page-link" href="/transactions/{{tx.version+1}}">next</a></li>
+            <li class="page-item {{ctx.last_class}}"><a class="page-link" href="/transactions/{{tx.version+1}}">{{ _('next') }}</a></li>
             <li class="page-item {{ctx.last_class}}">
-              <a class="page-link" href="/transactions/{{ctx.total-1}}">Last</a>
+              <a class="page-link" href="/transactions/{{ctx.total-1}}">{{ _('Last') }}</a>
             </li>
           </ul>
         </nav>
@@ -46,15 +46,15 @@
         <table class="table table-striped" style="table-layout: fixed; width: 100%">
           <tbody>
                 <tr>
-                  <td style="width: 25%"><strong>Version</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Version') }}</strong></td>
                   <td style="width: 75%"><span class="align-middle">{{tx.version}}</span>
 {% if tx.success %}
-                    <span class='badge badge-success w-80' style="color:white">Success</span>
+                    <span class='badge badge-success w-80' style="color:white">{{ _('Success') }}</span>
 {% else %}
-                    <span class='align-middle badge badge-danger w-80' style="color:white">Failed</span>
+                    <span class='align-middle badge badge-danger w-80' style="color:white">{{ _('Failed') }}</span>
                   </td>
                 <tr>
-                  <td style="width: 25%"><strong>Error Code & Reason</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Error Code') }} & {{ _('Reason') }}</strong></td>
                   <td style="width: 75%"><span class="align-middle">
                     <span class='align-middle text-danger'><strong>{{tx.transaction_info.major_status}},  {{tx.error_message}}</strong></span>
 {% endif %}
@@ -62,45 +62,45 @@
                 </tr>
 {% if not tx.no_receiver %}
                 <tr>
-                  <td style="width: 25%"><strong>Receiver</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Receiver') }}</strong></td>
                   <td style="width: 75%"><a href="/accounts/{{tx.receiver}}"><span style="overflow-wrap: break-word;word-wrap: break-word;">{{tx.receiver}}</span></a></td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Amount Send</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Amount Send') }}</strong></td>
                   <td style="width: 75%"><strong><span class="text-warning">{{tx.money}}</span></strong> <span class="text-muted">Libra</span></td>
                 </tr>
 {% endif %}
                 <tr>
-                  <td style="width: 25%"><strong>Sender</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Sender') }}</strong></td>
                   <td style="width: 75%"><a href="/accounts/{{tx.sender}}"><span style="overflow-wrap: break-word;word-wrap: break-word;">{{tx.sender}}</span></a></td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Sequence Number</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Sequence Number') }}</strong></td>
                   <td style="width: 75%">{{tx.raw_txn.sequence_number}}</td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Expiration Time</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Expiration Time') }}</strong></td>
                   <td style="width: 75%">{{tx.time}}</td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Transaction Type</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Transaction Type') }}</strong></td>
                   <td style="width: 75%">{{tx.code_name}}</td>
                 </tr>
 
                 <tr>
-                  <td style="width: 25%"><strong>Gas Used</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Gas Used') }}</strong></td>
                   <td style="width: 75%">{{tx.transaction_info.gas_used/1000000}} Libra</td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Gas Unit Price</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Gas Unit Price') }}</strong></td>
                   <td style="width: 75%">{{tx.raw_txn.gas_unit_price}}</td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Max Gas Amount</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Max Gas Amount') }}</strong></td>
                   <td style="width: 75%">{{tx.raw_txn.max_gas_amount}}</td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>Events Emit</strong></td>
+                  <td style="width: 25%"><strong>{{ _('Events Emit') }}</strong></td>
                   <td style="width: 75%">{{tx.events_emit}}</td>
                 </tr>
             </tbody>
@@ -113,7 +113,7 @@
           <a href="#.">
           <button type="button" class="btn btn-primary">
             <span class="glyphicon glyphicon-plus"></span>
-            Show Raw Json
+            {{ _('Show Raw Json') }}
           </button>
           </a>
         </div>
