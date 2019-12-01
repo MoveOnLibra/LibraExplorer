@@ -29,12 +29,12 @@ msgstr "API サーバーがエラーレスポンスを返しています。"
 #: app.py:213
 #, python-format
 msgid "Transaction Not Found: %(id)s"
-msgstr "トランザクションが見つかりません。:"
+msgstr "トランザクションが見つかりません。: %(id)"
 
 #: app.py:246
 #, python-format
 msgid "Address Not Found: %(address)s"
-msgstr "アドレスが見つかりません。:"
+msgstr "アドレスが見つかりません。:%(address)"
 
 #: app.py:273
 msgid "Anonymous network can not mint coins."
@@ -47,7 +47,7 @@ msgstr "サーチリクエストを完了できません。"
 #: app.py:287
 #, python-format
 msgid ", maybe the query string %(query)s is malformed."
-msgstr "クエリーのフォーマットが正しくありません。"
+msgstr "クエリー%(query)のフォーマットが正しくありません。"
 
 #: templates/_tx_head.html:4 templates/account_404.html:48
 #: templates/account_404.html:73 templates/account_show.html:58
