@@ -80,7 +80,7 @@
                 </tr>
                 <tr>
                   <td style="width: 25%"><strong>{{ _('Expiration Time') }}</strong></td>
-                  <td style="width: 75%">{{tx.time}}</td>
+                  <td style="width: 75%"><span id="time">{{tx.time}}</span></td>
                 </tr>
                 <tr>
                   <td style="width: 25%"><strong>{{ _('Transaction Type') }}</strong></td>
@@ -155,4 +155,19 @@ $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClas
 });
 });
 </script>
+
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"
+      crossorigin="anonymous"></script>
+      
+
+<script>
+  //moment.locale("cn")
+  $(document).ready(function(){
+    var time = moment("{{tx.time}}").format('YYYY-MM-DD, HH:mm:ss');
+    $('#time').html(time);
+  });
+  
+</script>
+
 {% endblock %}

@@ -95,7 +95,7 @@ def get_time_str(unix_timestamp):
         return "N/A"
     utc_time = datetime.fromtimestamp(unix_timestamp, timezone.utc)
     local_time = utc_time.astimezone()
-    return local_time.strftime("%Y-%m-%d %H:%M:%S %z (%Z)")
+    return local_time.strftime("%Y-%m-%d %H:%M:%S%z")
 
 
 def format_metadata(meta):

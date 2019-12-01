@@ -21,9 +21,9 @@
         <h6 class="card-header text-uppercase">{{ _('Network Time') }}</h6>
         <div class="card-body">
           <h2 class="small text-uppercase font-weight-medium text-secondary mb-0">{{ _('Started Time') }}</h2>
-          <p class="card-text text-info font-weight-bold">{{meta.start_time_str}}</p>
+          <p class="card-text text-info font-weight-bold"><span id="start_time">{{meta.start_time_str}}</span></p>
           <h2 class="small text-uppercase font-weight-medium text-secondary mb-0">{{ _('Latest Time') }}</h2>
-          <p class="card-text text-info font-weight-bold">{{meta.latest_time_str}}</p>
+          <p class="card-text text-info font-weight-bold"><span id="latest_time">{{meta.latest_time_str}}</span></p>
         </div>
       </div>
 
@@ -99,5 +99,21 @@
         }
       });
   }
+</script>
+
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"
+      crossorigin="anonymous"></script>
+      
+
+<script>
+  //moment.locale("cn")
+  $(document).ready(function(){
+    var start_time = moment("{{meta.start_time_str}}").format('YYYY-MM-DD, HH:mm:ss');
+    $('#start_time').html(start_time);
+    var latest_time = moment("{{meta.latest_time_str}}").format('YYYY-MM-DD, HH:mm:ss');
+    $('#latest_time').html(latest_time);
+  });
+  
 </script>
 {% endblock %}
