@@ -40,6 +40,12 @@ All language translation file is located at the `translations` directory. For ex
 translations/ja/LC_MESSAGES/messages.po
 ```
 
+You should create a new branch to make the change:
+```text
+$ git branch ja_support
+$ git checkout ja_support
+```
+
 when you finish the translation, run following command to compile the translation file:
 
 ```sh
@@ -48,8 +54,16 @@ $ pybabel compile -d translations -l ja
 
 Now, use your favorite browser open the url  [http://localhost:5000](http://localhost:5000) to see your excellent work.
 
+If you have completed the translation work, you can submit a pull request to merge your work to the original code base.
+
+
 
 ## What's new
+
+### Add Chinese language support(2019-12-01)
+
+We now support both simplified chinese and tranditional chinese language.
+
 
 ### Libra Network Select(2019-11-28)
 
