@@ -34,7 +34,7 @@ msgstr "交易不存在: %(id)s"
 #: app.py:246
 #, python-format
 msgid "Address Not Found: %(address)s"
-msgstr "地址不存在: %(address)s"
+msgstr "地不存在: %(address)s"
 
 #: app.py:273
 msgid "Anonymous network can not mint coins."
@@ -287,7 +287,7 @@ msgid "AC port"
 msgstr "AC端口"
 
 #: templates/layout.html:133
-msgid "Cacel"
+msgid "Cancel"
 msgstr "取消"
 
 #: templates/layout.html:193
