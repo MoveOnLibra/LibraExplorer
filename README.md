@@ -11,6 +11,44 @@ On the other hand, `MOL LibraExplorer` fetch data from original Libra blockchain
 
 It's fast and accurate.
 
+## Installation
+
+Require python 3.6 or above installed. Firstly, download the source code:
+
+```sh
+$ git clone https://github.com/MoveOnLibra/LibraExplorer.git
+```
+
+Then, install required pip libraries:
+
+```sh
+$ cd LibraExplorer
+$ python3 -m pip install -r requirements.txt
+```
+
+Finally, start the `MOL explorer` at **http://localhost:5000** by run:
+
+```sh
+$ ./start_debug.sh
+```
+
+## How to support a new language
+
+All language translation file is located at the `translations` directory. For example, if you want add japanese language support for this project. You need translate the file:
+
+```text
+translations/ja/LC_MESSAGES/messages.po
+```
+
+when you finish the translation, run following command to compile the translation file:
+
+```sh
+$ pybabel compile -d translations -l ja
+```
+
+Now, use your favorite browser open the url  [http://localhost:5000](http://localhost:5000) to see your excellent work.
+
+
 ## What's new
 
 ### Libra Network Select(2019-11-28)
