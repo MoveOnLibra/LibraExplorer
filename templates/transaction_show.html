@@ -141,6 +141,11 @@
 .glyphicon-minus:before{content:"\2212"}
 </style>
 
+
+{% endblock %}
+
+
+{% block js_content %}
 <script>
 $(document).ready(function(){
 $('.collapse').on('shown.bs.collapse', function(){
@@ -150,7 +155,4 @@ $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClas
 });
 });
 </script>
-
-
-
 {% endblock %}

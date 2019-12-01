@@ -88,23 +88,5 @@
 <br/><br/>
 
 
-<style type="text/css">
-.glyphicon-plus:before{content:"\002b"}
-.glyphicon-plus-sign:before{content:"\e081"}
-.glyphicon-minus-sign:before{content:"\e082"}
-.glyphicon-minus:before{content:"\2212"}
-</style>
-
-<script>
-$(document).ready(function(){
-$('.collapse').on('shown.bs.collapse', function(){
-$(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
-}).on('hidden.bs.collapse', function(){
-$(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
-});
-});
-</script>
-
-
-
 {% endblock %}
+

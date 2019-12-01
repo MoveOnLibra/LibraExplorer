@@ -78,6 +78,10 @@
   </div>
 </section>
 
+{% endblock %}
+
+
+{% block js_content %}
 <script type="text/javascript">
   latest_start = {{meta.latest_start}};
   function load_latest() {
@@ -96,5 +100,4 @@
       });
   }
 </script>
-
 {% endblock %}
