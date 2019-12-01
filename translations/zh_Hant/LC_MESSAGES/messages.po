@@ -131,7 +131,7 @@ msgid "Failed"
 msgstr "失敗"
 
 #: templates/_txs_pager.html
-msgid "Tocal"
+msgid "Total"
 msgstr "總數"
 
 #: templates/_txs_pager.html templates/transaction_show.html

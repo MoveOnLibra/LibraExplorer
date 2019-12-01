@@ -131,7 +131,7 @@ msgid "Failed"
 msgstr ""
 
 #: templates/_txs_pager.html
-msgid "Tocal"
+msgid "Total"
 msgstr ""
 
 #: templates/_txs_pager.html templates/transaction_show.html

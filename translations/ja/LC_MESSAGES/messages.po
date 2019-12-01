@@ -131,7 +131,7 @@ msgid "Failed"
 msgstr "失敗"
 
 #: templates/_txs_pager.html
-msgid "Tocal"
+msgid "Total"
 msgstr ""
 
 #: templates/_txs_pager.html templates/transaction_show.html
@@ -152,7 +152,7 @@ msgstr "最後"
 
 #: templates/account_404.html templates/account_show.html
 msgid "Account Information"
-msgstr "アカウント情報"
+msgstr "アウント情報"
 
 #: templates/account_404.html templates/account_show.html
 #: templates/accounts.html templates/index.html
@@ -337,7 +337,7 @@ msgstr "によって開発、ホスティングされています。"
 
 #: templates/transaction_show.html
 msgid "Transaction"
-msgstr "トランザクション"
+msgstr "トランザション"
 
 #: templates/transaction_show.html
 msgid "Version"

@@ -48,7 +48,7 @@ msgstr "转账"
 
 #: view_helper.py
 msgid "new account"
-msgstr "建新账户"
+msgstr "建新账"
 
 #: view_helper.py
 msgid "rotate key"
@@ -131,7 +131,7 @@ msgid "Failed"
 msgstr "失败"
 
 #: templates/_txs_pager.html
-msgid "Tocal"
+msgid "Total"
 msgstr "总数"
 
 #: templates/_txs_pager.html templates/transaction_show.html
