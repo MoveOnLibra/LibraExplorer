@@ -29,6 +29,18 @@
       <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#networkModal">
         {{ _('Select Network') }}
       </button>
+      <div class="dropdown" style="margin-left: 5px">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{lang_names[session["lang"]]}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {% for lang, name in lang_names.items() %}
+          {% if lang != session["lang"] %}
+          <a class="dropdown-item" href="/locale?lang={{lang}}">{{name}}</a>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
     </div>
 
 

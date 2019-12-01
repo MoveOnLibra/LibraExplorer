@@ -137,22 +137,32 @@ def get_metadata():
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/@MoveOnLibra'
 app.config['JSON_SORT_KEYS'] = False
-app.config['LANGUAGES'] = ['en', 'zh', 'zh_Hant', 'ar', 'da', 'de', 'el', 'es', 'fa', 'fr', 'ga', 'it', 'ja', 'ko', 'nl', 'pt', 'ru', 'sr', 'sv', 'th', 'tr']
+app.config['LANGUAGES'] = ['en', 'zh', 'zh_Hant', 'ja']#'ar', 'da', 'de', 'el', 'es', 'fa', 'fr', 'ga', 'it', 'ko', 'nl', 'pt', 'ru', 'sr', 'sv', 'th', 'tr']
+
+lang_names = {
+    "en" : "English",
+    "zh" : "简体中文",
+    "zh_Hant" : "繁体中文",
+    "ja" : "日本語",    
+}
 
 babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    # print(request.accept_languages)
-    # print(request.accept_languages.best_match(app.config['LANGUAGES']))
+    if "lang" in session:
+        return session["lang"]
     try:
         lang, _ = request.accept_languages[0]
         if 'zh' in lang.lower():
             if 'tw' in lang.lower() or 'hk' in lang.lower():
+                session["lang"] = 'zh_Hant'
                 return 'zh_Hant'
     except:
         pass
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    lang = request.accept_languages.best_match(app.config['LANGUAGES'])
+    session["lang"] = lang
+    return lang
 
 
 total = 1
@@ -171,6 +181,19 @@ def index():
     format_metadata(meta)
     meta['latest_start'] = latest_txs[-1]['version']
     return render_template('index.html',txs=latest_txs, meta=meta)
+
+@app.route("/locale")
+def change_locale():
+    lang = request.args.get('lang', 'en')
+    if not lang in app.config['LANGUAGES']:
+        flash(_('Language not support: %(lang)s', lang=lang))
+    else:
+        session["lang"] = lang
+    if 'Referer' in request.headers:
+        last = request.headers['Referer']
+        if "explorer.moveonlibra.com" in last.lower():
+            return redirect(last)
+    return redirect("/test")
 
 @app.route("/test")
 def test():
@@ -316,7 +339,7 @@ def inject_network():
         network = "Testnet"
         network_address = "ac.testnet.libra.org"
         network_port = "8000"
-    return dict(network=network, network_address=network_address, network_port=network_port)
+    return dict(lang_names=lang_names, network=network, network_address=network_address, network_port=network_port)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
