@@ -193,7 +193,7 @@ def change_locale():
         last = request.headers['Referer']
         if "explorer.moveonlibra.com" in last.lower():
             return redirect(last)
-    return redirect("/test")
+    return redirect("/")
 
 @app.route("/test")
 def test():

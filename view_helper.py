@@ -2,6 +2,7 @@ import libra
 from canoser import hex_to_int_list
 from libra.bytecode import bytecodes
 from datetime import datetime, timezone
+from flask_babel import _
 import pdb
 
 def event_format(ev):
@@ -52,47 +53,47 @@ def transaction_format(tx):
 
 def get_tx_abbreviation_name(payload, version):
     if version == 0:
-        return "Genesis"
+        return _("Genesis")
     if list(payload)[0] != "Script":
         return list(payload)[0]
     code = hex_to_int_list(payload['Script']['code'])
     if code == bytecodes["mint"]:
-        return "mint"
+        return _("mint")
     if code == bytecodes["peer_to_peer_transfer"]:
-        return "p2p"
+        return _("p2p")
     if code == bytecodes["create_account"]:
-        return "new account"
+        return _("new account")
     if code == bytecodes["rotate_authentication_key"]:
-        return "rotate key"
-    return "script"
+        return _("rotate key")
+    return _("script")
 
 def get_address_abbrv_name(address):
     if address == libra.account_config.AccountConfig.association_address():
-        return "Libra Association"
+        return _("Libra Association")
     else:
         return address[0:8] + "..." + address[60:64]
 
 def get_human_time(unix_timestamp):
     if unix_timestamp > 2**63:
-        return "N/A"
+        return _("N/A")
     diff = datetime.now().timestamp() - unix_timestamp
     if diff >= 0:
-        suffix = "ago"
+        suffix = _("ago")
     else:
-        suffix = "later"
+        suffix = _("later")
     diff = int(abs(diff)) // 60
     if diff == 0:
-        return "just now"
+        return _("just now")
     if diff < 60:
-        return f"{diff} mins {suffix}"
+        return f"{diff}" + _(' mins ') + f"{suffix}"
     if diff < 60*24:
-        return f"{diff//60} hrs {diff%60} mins {suffix}"
+        return f"{diff//60}" + _(' hours ') + f"{diff%60}" + _(' mins ') + f"{suffix}"
     diff = diff // 60
-    return f"{diff // 24} day {diff % 24} hrs {suffix}"
+    return f"{diff // 24}" + _(' day ') + f"{diff % 24}" + _(' hours ') + f"{suffix}"
 
 def get_time_str(unix_timestamp):
     if unix_timestamp > 2**63:
-        return "N/A"
+        return _("N/A")
     utc_time = datetime.fromtimestamp(unix_timestamp, timezone.utc)
     local_time = utc_time.astimezone()
     return local_time.strftime("%Y-%m-%d %H:%M:%S%z")
