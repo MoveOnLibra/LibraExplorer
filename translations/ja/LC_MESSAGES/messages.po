@@ -7,19 +7,16 @@ msgid " API server return an error response: "
 msgstr "API サーバーがエラーレスポンスを返しています。"
 
 #: app.py
-#, python-format
-msgid "Language not support: %(lang)s"
-msgstr "言語がサポートされていません。: %(lang)s"
+msgid "Language not support:"
+msgstr "言語がサポートされていません:"
 
 #: app.py
-#, python-format
-msgid "Transaction Not Found: %(id)s"
-msgstr "トランザクションが見つかりません。: %(id)s"
+msgid "Transaction Not Found:"
+msgstr "トランザクションが見つかりません:"
 
 #: app.py
-#, python-format
-msgid "Address Not Found: %(address)s"
-msgstr "アドレスが見つかりません。:%(address)s"
+msgid "Address Not Found:"
+msgstr "アドレスが見つかりません:"
 
 #: app.py
 msgid "Anonymous network can not mint coins."
@@ -29,11 +26,7 @@ msgstr "コインを造幣できません。"
 msgid "Can't finish your search rquest"
 msgstr "サーチリクエストを完了できません。"
 
-#: app.py
-#, python-format
-msgid ", maybe the query string %(query)s is malformed."
-msgstr "クエリー%(query)のフォーマットが正しくありません。"
-
+#: view_helper.py
 msgid "Genesis"
 msgstr "始まり"
 
@@ -51,7 +44,7 @@ msgstr "新しいアカウント"
 
 #: view_helper.py
 msgid "rotate key"
-msgstr "キーをローテーションする。"
+msgstr "キーをローテーションする"
 
 #: view_helper.py
 msgid "script"
@@ -180,7 +173,7 @@ msgstr "Seq No"
 
 #: templates/account_404.html templates/account_show.html
 msgid "Latest five deals paid by me"
-msgstr "支払った最新の５件"
+msgstr "支払た最新の５件"
 
 #: templates/account_show.html
 msgid "Balance"
@@ -377,7 +370,4 @@ msgstr "最大のガスの額"
 #: templates/transaction_show.html
 msgid "Events Emit"
 msgstr "発生するイベント"
-
-#~ msgid "Total"
-#~ msgstr "全て"
 

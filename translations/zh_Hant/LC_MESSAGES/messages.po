@@ -7,19 +7,16 @@ msgid " API server return an error response: "
 msgstr "API服務器返回錯誤響應: "
 
 #: app.py
-#, python-format
-msgid "Language not support: %(lang)s"
-msgstr "語言不支持: %(lang)s"
+msgid "Language not support:"
+msgstr "語言不支持:"
 
 #: app.py
-#, python-format
-msgid "Transaction Not Found: %(id)s"
-msgstr "交易不存在: %(id)s"
+msgid "Transaction Not Found:"
+msgstr "交易不存在:"
 
 #: app.py
-#, python-format
-msgid "Address Not Found: %(address)s"
-msgstr "地不存在: %(address)s"
+msgid "Address Not Found:"
+msgstr "地址不存在:"
 
 #: app.py
 msgid "Anonymous network can not mint coins."
@@ -28,11 +25,6 @@ msgstr "匿名網絡不支持挖礦"
 #: app.py
 msgid "Can't finish your search rquest"
 msgstr "不能完成妳的搜索請求"
-
-#: app.py
-#, python-format
-msgid ", maybe the query string %(query)s is malformed."
-msgstr ", 也許搜索字符串 %(query)s 的格式不正確."
 
 #: view_helper.py
 msgid "Genesis"
@@ -378,3 +370,4 @@ msgstr "最大Gas數量"
 #: templates/transaction_show.html
 msgid "Events Emit"
 msgstr "發送的事件"
+

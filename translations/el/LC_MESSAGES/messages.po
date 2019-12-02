@@ -7,18 +7,15 @@ msgid " API server return an error response: "
 msgstr ""
 
 #: app.py
-#, python-format
-msgid "Language not support: %(lang)s"
+msgid "Language not support:"
 msgstr ""
 
 #: app.py
-#, python-format
-msgid "Transaction Not Found: %(id)s"
+msgid "Transaction Not Found:"
 msgstr ""
 
 #: app.py
-#, python-format
-msgid "Address Not Found: %(address)s"
+msgid "Address Not Found:"
 msgstr ""
 
 #: app.py
@@ -27,11 +24,6 @@ msgstr ""
 
 #: app.py
 msgid "Can't finish your search rquest"
-msgstr ""
-
-#: app.py
-#, python-format
-msgid ", maybe the query string %(query)s is malformed."
 msgstr ""
 
 #: view_helper.py

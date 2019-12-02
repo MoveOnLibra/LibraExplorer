@@ -186,7 +186,7 @@ def index():
 def change_locale():
     lang = request.args.get('lang', 'en')
     if not lang in app.config['LANGUAGES']:
-        flash(_('Language not support: %(lang)s', lang=lang))
+        flash(_('Language not support:') + f" {lang}")
     else:
         session["lang"] = lang
     if 'Referer' in request.headers:
@@ -240,7 +240,7 @@ def transactions():
 def transaction(id):
     tx = get_transaction(id)
     if tx is None:
-        flash(_('Transaction Not Found: %(id)s', id=id))
+        flash(_('Transaction Not Found:') + f" {id}")
         return redirect("/")
     raw_json = json.dumps(tx, indent=2)
     transaction_format(tx)
@@ -273,7 +273,7 @@ def accounts():
 def account(address):
     acc = get_account(address)
     if acc is None:
-        flash(_('Address Not Found: %(address)s', address=address))
+        flash(_('Address Not Found:') + f" {address}")
         return render_template('account_404.html',address=address)
     raw_json = json.dumps(acc, indent=2)
     try:
@@ -314,7 +314,7 @@ def search():
         version = int(query)
         return redirect(f"/transactions/{version}")
     except Exception:
-        flash(_("Can't finish your search rquest") + _(", maybe the query string %(query)s is malformed.", query=query))
+        flash(_("Can't finish your search rquest") +  f": '{query}'")
         return redirect("/")
 
 @app.route('/heartbeat/<int:id>')
