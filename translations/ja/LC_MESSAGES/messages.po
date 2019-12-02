@@ -9,7 +9,7 @@ msgstr "API サーバーがエラーレスポンスを返しています。"
 #: app.py
 #, python-format
 msgid "Language not support: %(lang)s"
-msgstr "言語がサポートされていません。:%(lang)"
+msgstr "言語がサポートされていません。: %(lang)"
 
 #: app.py
 #, python-format
