@@ -1,6 +1,6 @@
 # MOL LibraExplorer  [![Build Status](https://travis-ci.org/MoveOnLibra/LibraExplorer.svg?branch=master)](https://travis-ci.org/MoveOnLibra/LibraExplorer) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-An Explorer for the Libra Blockchain Netwrok powered by `MoveOnLibra` OpenAPI. The `MoveOnLibra` is an OpenAPI platform which make write Libra wallet and smart contract program easier.
+An Explorer for the Libra Blockchain Netwrok powered by `MoveOnLibra` OpenAPI. 
 
 ## A Realtime Libra Blockchain Explorer
 There are several Libra explorers there already. Why write another Libra Explorer? Because all other explorers there are not realtime. They pull data from Libra blockchian and save it to their own private database. When you access their explorer website, they search data from private database and return data to you.
@@ -40,16 +40,18 @@ All language translation file is located at the `translations` directory. For ex
 translations/ja/LC_MESSAGES/messages.po
 ```
 
-You should create a new branch to make the change:
+You should fork this project and create a new branch to make the change:
 ```text
 $ git branch ja_support
 $ git checkout ja_support
 ```
 
-when you finish the translation, run following command to compile the translation file:
+when you finish the translation, you can commit your work add make a pull request.
+
+If you want to see the result in localhost, run following command to compile the translation file:
 
 ```sh
-$ pybabel compile -d translations -l ja
+$ pybabel compile -f -d translations -l ja
 ```
 
 Now, use your favorite browser open the url  [http://localhost:5000](http://localhost:5000) to see your excellent work.
@@ -60,9 +62,9 @@ If you have completed the translation work, you can submit a pull request to mer
 
 ## What's new
 
-### Add Chinese language support(2019-12-01)
+### Add Chinese and Japanese language support(2019-12-01)
 
-We now support both simplified chinese and tranditional chinese language.
+We now support both simplified chinese / tranditional chinese and japanese languages.
 
 
 ### Libra Network Select(2019-11-28)

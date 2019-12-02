@@ -9,17 +9,17 @@ msgstr "API サーバーがエラーレスポンスを返しています。"
 #: app.py
 #, python-format
 msgid "Language not support: %(lang)s"
-msgstr ""
+msgstr "言語がサポートされていません。: %(lang)s"
 
 #: app.py
 #, python-format
 msgid "Transaction Not Found: %(id)s"
-msgstr "トランザクションが見つかりません。: %(id)"
+msgstr "トランザクションが見つかりません。: %(id)s"
 
 #: app.py
 #, python-format
 msgid "Address Not Found: %(address)s"
-msgstr "アドレスが見つかりません。:%(address)"
+msgstr "アドレスが見つかりません。:%(address)s"
 
 #: app.py
 msgid "Anonymous network can not mint coins."
@@ -34,29 +34,28 @@ msgstr "サーチリクエストを完了できません。"
 msgid ", maybe the query string %(query)s is malformed."
 msgstr "クエリー%(query)のフォーマットが正しくありません。"
 
-#: view_helper.py
 msgid "Genesis"
-msgstr ""
+msgstr "始まり"
 
 #: view_helper.py
 msgid "mint"
-msgstr ""
+msgstr "造幣"
 
 #: view_helper.py
 msgid "p2p"
-msgstr ""
+msgstr "ピアツーピア"
 
 #: view_helper.py
 msgid "new account"
-msgstr ""
+msgstr "新しいアカウント"
 
 #: view_helper.py
 msgid "rotate key"
-msgstr ""
+msgstr "キーをローテーションする。"
 
 #: view_helper.py
 msgid "script"
-msgstr ""
+msgstr "スクリプト"
 
 #: templates/accounts.html view_helper.py
 msgid "Libra Association"
@@ -64,31 +63,31 @@ msgstr "リブラアソシエーション"
 
 #: view_helper.py
 msgid "N/A"
-msgstr ""
+msgstr "なし"
 
 #: view_helper.py
 msgid "ago"
-msgstr ""
+msgstr "以前"
 
 #: view_helper.py
 msgid "later"
-msgstr ""
+msgstr "後"
 
 #: view_helper.py
 msgid "just now"
-msgstr ""
+msgstr "今"
 
 #: view_helper.py
 msgid " mins "
-msgstr ""
+msgstr "分"
 
 #: view_helper.py
 msgid " hours "
-msgstr ""
+msgstr "時"
 
 #: view_helper.py
 msgid " day "
-msgstr ""
+msgstr "日"
 
 #: templates/_tx_head.html templates/account_404.html
 #: templates/account_show.html
@@ -132,7 +131,7 @@ msgstr "失敗"
 
 #: templates/_txs_pager.html
 msgid "Total"
-msgstr ""
+msgstr "合計"
 
 #: templates/_txs_pager.html templates/transaction_show.html
 msgid "First"
