@@ -74,9 +74,9 @@ def move_on_libra_api(url, params={}, get_method=True):
     host = api_host()
     def do_api():
         if get_method:
-            r = requests.get(host+url, params=params, headers=jwt_header())
+            r = requests.get(host+url, params=params, headers=jwt_header(), timeout=10)
         else:
-            r = requests.post(host+url, params=params, headers=jwt_header())
+            r = requests.post(host+url, params=params, headers=jwt_header(), timeout=10)
         return r
     #
     try:
