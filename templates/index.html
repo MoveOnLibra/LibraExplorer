@@ -86,14 +86,15 @@
   latest_start = {{meta.latest_start}};
   function load_latest() {
     $("#loading").show();
-    start = latest_start - 100;
+    var limit = 50
+    start = latest_start - limit;
     jQuery.ajax({
-      url: "/latest_txs?start="+start + "&limit=100"
+      url: "/latest_txs?start="+start + "&limit="+ limit
     })
       .done(function (data) {
         $("#loading").hide();
         $("#txs_body").append(data);
-        latest_start -= 100
+        latest_start -= limit
         if(latest_start <=0 ){
           $("#loadMore").hide();
         }
