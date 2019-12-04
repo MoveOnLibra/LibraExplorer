@@ -201,7 +201,10 @@ def test():
 
 @app.route("/latest_txs")
 def load_latest_txs():
-    limit = 20
+    limit = request.args.get('limit', '20')
+    limit = int(limit)
+    if limit > 100 or limit < 1:
+        limit = 100
     start = request.args.get('start', '0')
     start = int(start)
     if start + limit <=0:
