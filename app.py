@@ -15,26 +15,39 @@ def is_development():
     except Exception:
         return False
 
-def is_devnet(host):
-    return host.lower().startswith("devnet.")
-
-def is_prefix_network(is_development, host, pack_suffix=False):
-    host = host.lower()
-    if is_development:
+def get_host_suffix():
+    if is_development():
         suffix = ".localhost:5000"
     else:
         suffix = ".explorer.moveonlibra.com"
-    is_anonymous = host.endswith(suffix)
+    return suffix
+
+def lang_prefix_host():
+    suffix = get_host_suffix()
+    for lang in app.config['LANGUAGES']:
+        if request.host.lower() == f"{lang.lower()}{suffix}":
+            return lang
+    return None
+
+def is_devnet(host):
+    return host.lower().startswith("devnet.")
+
+def is_prefix_network(host, pack_suffix=False):
+    if lang_prefix_host() is not None:
+        return False
+    host = host.lower()
+    suffix = get_host_suffix()
+    has_prefix = host.endswith(suffix)
     if pack_suffix:
-        return (is_anonymous, suffix)
+        return (has_prefix, suffix)
     else:
-        return is_anonymous
+        return has_prefix
 
-def is_anonymous_network(is_development, host):
-    return is_prefix_network(is_development, host) and not is_devnet(host)
+def is_anonymous_network(host):
+    return is_prefix_network(host) and not is_devnet(host)
 
-def get_network_prefix(is_development, host):
-    anonymous_network, suffix = is_prefix_network(is_development, host, True)
+def get_network_prefix(host):
+    anonymous_network, suffix = is_prefix_network(host, True)
     if anonymous_network:
         endlen = -len(suffix)
         return host[0:endlen]
@@ -43,9 +56,8 @@ def get_network_prefix(is_development, host):
 
 def gen_api_header(is_development, host):
     api_header = {}
-    anonymous_network = is_prefix_network(is_development, host)
-    if is_prefix_network(is_development, host):
-        api_header["RealSwarm"] = get_network_prefix(is_development, host)
+    if is_prefix_network(host):
+        api_header["RealSwarm"] = get_network_prefix(host)
     if False and is_development:
         if is_devnet(host):
             appkey = "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjoiZHgxeHR4M3h1IiwiaWF0IjoxNTc0MTQyMjgwLCJleHAiOjE4ODk1MDIyODB9.wvODMtecFuYne92tmy5khn2NFd_D4RFILg0ws1LGXrdTjX-2JU58WiWdA1FK6pf5ylXb8LUjXR3JO5hDs561Bw"
@@ -150,18 +162,23 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    if "lang" in session:
+    if "lang" in session and session["lang"] in app.config['LANGUAGES']:
         return session["lang"]
+    lang = lang_prefix_host()
+    if lang is not None:
+        return lang
     try:
         lang, _ = request.accept_languages[0]
         if 'zh' in lang.lower():
             if 'tw' in lang.lower() or 'hk' in lang.lower():
-                session["lang"] = 'zh_Hant'
                 return 'zh_Hant'
+            else:
+                return 'zh'
     except:
         pass
     lang = request.accept_languages.best_match(app.config['LANGUAGES'])
-    session["lang"] = lang
+    if lang is None:
+        lang = 'en'
     return lang
 
 
@@ -302,7 +319,7 @@ def account_json(address):
 
 @app.route("/transactions/mint/<string:address>", methods=['POST'])
 def mint(address):
-    if is_anonymous_network(is_development(), request.host):
+    if is_anonymous_network(request.host):
         flash(_('Anonymous network can not mint coins.'))
     else:
         post_mint(address)
@@ -334,15 +351,26 @@ def inject_network():
         network = "Devnet"
         network_address = "apitest.moveonLibra.com"
         network_port = "33333"
-    elif is_anonymous_network(is_development(), request.host):
+    elif is_anonymous_network(request.host):
         network = "Anonymous"
-        prefix = get_network_prefix(is_development(), request.host)
+        prefix = get_network_prefix(request.host)
         network_address, network_port = prefix.split("-")
     else:
         network = "Testnet"
         network_address = "ac.testnet.libra.org"
         network_port = "8000"
-    return dict(lang_names=lang_names, network=network, network_address=network_address, network_port=network_port)
+    return dict(network=network, network_address=network_address, network_port=network_port)
+
+@app.context_processor
+def inject_locale():
+    lang = get_locale()
+    if is_prefix_network(request.host):
+        lang_in_host = False
+        base_url = None
+    else:
+        base_url = get_host_suffix() + request.full_path
+        lang_in_host = True
+    return dict(lang=lang, lang_names=lang_names, lang_in_host=lang_in_host, base_url=base_url)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

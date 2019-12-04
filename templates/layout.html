@@ -31,12 +31,16 @@
       </button>
       <div class="dropdown" style="margin-left: 5px">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{lang_names[session["lang"]]}}
+          {{lang_names[lang]}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          {% for lang, name in lang_names.items() %}
-          {% if lang != session["lang"] %}
-          <a class="dropdown-item" href="/locale?lang={{lang}}">{{name}}</a>
+          {% for lg, name in lang_names.items() %}
+          {% if lg != lang %}
+            {% if lang_in_host %}
+              <a class="dropdown-item" href="//{{lg}}{{base_url}}">{{name}}</a>
+            {% else %}
+              <a class="dropdown-item" href="/locale?lang={{lg}}">{{name}}</a>
+            {% endif %}
           {% endif %}
           {% endfor %}
         </div>
