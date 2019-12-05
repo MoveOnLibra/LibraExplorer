@@ -22,10 +22,10 @@ def get_host_suffix():
         suffix = ".explorer.moveonlibra.com"
     return suffix
 
-def lang_prefix_host():
+def lang_prefix_host(host):
     suffix = get_host_suffix()
     for lang in app.config['LANGUAGES']:
-        if request.host.lower() == f"{lang.lower()}{suffix}":
+        if host.lower() == f"{lang.lower()}{suffix}":
             return lang
     return None
 
@@ -33,7 +33,7 @@ def is_devnet(host):
     return host.lower().startswith("devnet.")
 
 def is_prefix_network(host, pack_suffix=False):
-    if lang_prefix_host() is not None:
+    if lang_prefix_host(host) is not None:
         return False
     host = host.lower()
     suffix = get_host_suffix()
@@ -164,7 +164,7 @@ babel = Babel(app)
 def get_locale():
     if "lang" in session and session["lang"] in app.config['LANGUAGES']:
         return session["lang"]
-    lang = lang_prefix_host()
+    lang = lang_prefix_host(request.host)
     if lang is not None:
         return lang
     try:
