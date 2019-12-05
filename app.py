@@ -372,6 +372,12 @@ def inject_locale():
         lang_in_host = True
     return dict(lang=lang, lang_names=lang_names, lang_in_host=lang_in_host, base_url=base_url)
 
+@app.before_request
+def redirect_en_host():
+    if request.host.lower() == "en" + get_host_suffix():
+        if 'en' == get_locale():
+            return redirect("//explorer.moveonLibra.com", code=301)
+
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     #print("teardown_appcontext")
