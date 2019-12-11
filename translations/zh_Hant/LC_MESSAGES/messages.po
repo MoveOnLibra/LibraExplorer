@@ -27,12 +27,16 @@ msgid "Can't finish your search rquest"
 msgstr "不能完成妳的搜索請求"
 
 #: view_helper.py
+msgid "BlockMetadata"
+msgstr "塊元數據"
+
+#: view_helper.py
 msgid "Genesis"
 msgstr "創世區塊"
 
 #: view_helper.py
 msgid "mint"
-msgstr "挖礦"
+msgstr "造幣"
 
 #: view_helper.py
 msgid "p2p"
@@ -348,12 +352,12 @@ msgid "Amount Send"
 msgstr "發送的金額"
 
 #: templates/transaction_show.html
-msgid "Sequence Number"
-msgstr "序列號"
-
-#: templates/transaction_show.html
 msgid "Transaction Type"
 msgstr "交易類型"
+
+#: templates/transaction_show.html
+msgid "Sequence Number"
+msgstr "序列號"
 
 #: templates/transaction_show.html
 msgid "Gas Used"

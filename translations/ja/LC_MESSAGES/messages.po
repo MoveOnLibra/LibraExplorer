@@ -27,6 +27,10 @@ msgid "Can't finish your search rquest"
 msgstr "サーチリクエストを完了できません。"
 
 #: view_helper.py
+msgid "BlockMetadata"
+msgstr ""
+
+#: view_helper.py
 msgid "Genesis"
 msgstr "始まり"
 
@@ -348,12 +352,12 @@ msgid "Amount Send"
 msgstr "送信する額"
 
 #: templates/transaction_show.html
-msgid "Sequence Number"
-msgstr "連番"
-
-#: templates/transaction_show.html
 msgid "Transaction Type"
 msgstr "トランザクションタイプ"
+
+#: templates/transaction_show.html
+msgid "Sequence Number"
+msgstr "連番"
 
 #: templates/transaction_show.html
 msgid "Gas Used"

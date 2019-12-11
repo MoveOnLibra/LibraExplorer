@@ -27,6 +27,10 @@ msgid "Can't finish your search rquest"
 msgstr ""
 
 #: view_helper.py
+msgid "BlockMetadata"
+msgstr ""
+
+#: view_helper.py
 msgid "Genesis"
 msgstr ""
 
@@ -348,11 +352,11 @@ msgid "Amount Send"
 msgstr ""
 
 #: templates/transaction_show.html
-msgid "Sequence Number"
+msgid "Transaction Type"
 msgstr ""
 
 #: templates/transaction_show.html
-msgid "Transaction Type"
+msgid "Sequence Number"
 msgstr ""
 
 #: templates/transaction_show.html
