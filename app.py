@@ -160,13 +160,7 @@ lang_names = {
 
 babel = Babel(app)
 
-@babel.localeselector
-def get_locale():
-    if "lang" in session and session["lang"] in app.config['LANGUAGES']:
-        return session["lang"]
-    lang = lang_prefix_host(request.host)
-    if lang is not None:
-        return lang
+def auto_detect_lang():
     try:
         lang, _ = request.accept_languages[0]
         if 'zh' in lang.lower():
@@ -180,6 +174,16 @@ def get_locale():
     if lang is None:
         lang = 'en'
     return lang
+
+
+@babel.localeselector
+def get_locale():
+    if "lang" in session and session["lang"] in app.config['LANGUAGES']:
+        return session["lang"]
+    lang = lang_prefix_host(request.host)
+    if lang is not None:
+        return lang
+    return auto_detect_lang()
 
 
 total = 1
@@ -375,7 +379,7 @@ def inject_locale():
 @app.before_request
 def redirect_en_host():
     if request.host.lower() == "en" + get_host_suffix():
-        if 'en' == get_locale():
+        if 'en' == auto_detect_lang():
             return redirect("//explorer.moveonLibra.com", code=301)
 
 @app.teardown_appcontext
