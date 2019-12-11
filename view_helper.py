@@ -13,6 +13,18 @@ def event_format(ev):
 
 
 def transaction_format(tx):
+    if 'proposer' in tx:
+        sender = tx['proposer']
+        tx['sender'] = sender
+        tx['sender_ab'] = get_address_abbrv_name(sender)
+        tx['money'] = "0"
+        tx['no_receiver'] = True
+        tx['human_time'] = get_human_time(tx['timestamp_usec'] // 1000_000)
+        tx['time'] = get_time_str(tx['timestamp_usec'] // 1000_000)
+        tx['code_name'] = _('BlockMetadata')
+        tx['success'] = (tx['transaction_info']['major_status'] == 4001)
+        tx['events_emit'] = 'No Events'
+        return
     payload = tx['raw_txn']['payload']
     try:
         payload['Script'] = payload.pop('Program')

@@ -75,10 +75,6 @@
                   <td style="width: 75%"><a href="/accounts/{{tx.sender}}"><span style="overflow-wrap: break-word;word-wrap: break-word;">{{tx.sender}}</span></a></td>
                 </tr>
                 <tr>
-                  <td style="width: 25%"><strong>{{ _('Sequence Number') }}</strong></td>
-                  <td style="width: 75%">{{tx.raw_txn.sequence_number}}</td>
-                </tr>
-                <tr>
                   <td style="width: 25%"><strong>{{ _('Expiration Time') }}</strong></td>
                   <td style="width: 75%"><span id="time">{{tx.time}}</span></td>
                 </tr>
@@ -86,7 +82,11 @@
                   <td style="width: 25%"><strong>{{ _('Transaction Type') }}</strong></td>
                   <td style="width: 75%">{{tx.code_name}}</td>
                 </tr>
-
+{% if 'raw_txn' in tx %}
+                <tr>
+                  <td style="width: 25%"><strong>{{ _('Sequence Number') }}</strong></td>
+                  <td style="width: 75%">{{tx.raw_txn.sequence_number}}</td>
+                </tr>
                 <tr>
                   <td style="width: 25%"><strong>{{ _('Gas Used') }}</strong></td>
                   <td style="width: 75%">{{tx.transaction_info.gas_used/1000000}} Libra</td>
@@ -99,6 +99,7 @@
                   <td style="width: 25%"><strong>{{ _('Max Gas Amount') }}</strong></td>
                   <td style="width: 75%">{{tx.raw_txn.max_gas_amount}}</td>
                 </tr>
+{% endif %}
                 <tr>
                   <td style="width: 25%"><strong>{{ _('Events Emit') }}</strong></td>
                   <td style="width: 75%">{{tx.events_emit}}</td>
