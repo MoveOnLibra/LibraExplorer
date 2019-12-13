@@ -1,4 +1,4 @@
-from flask import Flask, flash, redirect, render_template, render_template_string, request, session, abort
+from flask import Flask, flash, redirect, render_template, render_template_string, request, session, abort, send_from_directory
 from flask import jsonify
 import werkzeug
 from flask_babel import Babel
@@ -391,6 +391,11 @@ def shutdown_session(exception=None):
 def show_teardown(exception):
     #print('teardown_request')
     pass
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/jpeg')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000,debug=False)
