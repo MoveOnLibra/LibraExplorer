@@ -155,7 +155,7 @@ lang_names = {
     "en" : "English",
     "zh" : "简体中文",
     "zh_Hant" : "繁体中文",
-    "ja" : "日本語",    
+    "ja" : "日本語",
 }
 
 babel = Babel(app)
@@ -334,6 +334,11 @@ def search():
     query = request.args.get('q', '')
     if len(query)==64:
         return redirect(f"/accounts/{query}")
+    if len(query)==66:
+        if (query[0]=="'" and query[-1]=="'") or (query[0]=='"' and query[-1]=='"'):
+            return redirect(f"/accounts/{query[1:-1]}")
+        if query[0:2] == '0x':
+            return redirect(f"/accounts/{query[2:]}")
     try:
         version = int(query)
         return redirect(f"/transactions/{version}")
