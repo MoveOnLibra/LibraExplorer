@@ -67,7 +67,7 @@
         <div class="d-flex align-items-center px-3 mb-3">
           <div class="mx-auto" id="loadMore">
             <a class="btn btn-outline-info" href="#." onclick="load_latest()">{{ _('Load More Transactions') }} ...</a>
-            <img src="/static/loading.gif" id="loading" style="display:none"/>
+            <img src="//www.moveonlibra.com/images/loading.gif" id="loading" style="display:none"/>
           </div>
         </div>
 {% endif %}
@@ -105,7 +105,7 @@
   <script
       src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"
       crossorigin="anonymous"></script>
-      
+
 
 <script>
   //moment.locale("cn")
@@ -115,6 +115,6 @@
     var latest_time = moment("{{meta.latest_time_str}}").format('YYYY-MM-DD, HH:mm:ss');
     $('#latest_time').html(latest_time);
   });
-  
+
 </script>
 {% endblock %}
