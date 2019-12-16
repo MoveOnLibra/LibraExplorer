@@ -1,166 +1,222 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <section class="space-bottom-2">
-<div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="center-heading">
-            <h4 class="section-title">{{ _('Account Information') }}</h4>
-          </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="d-flex justify-content-center align-items-center">
+          <h4 class="section-title">{{ _('Account Information') }}</h4>
+          <button type="button" id="target" class="btn btn-lg btn-icon" data-toggle="modal"
+            data-target="#qrcodeModal" title="View Address QR Code">
+            <i class="fa fa-qrcode"></i>
+          </button>
         </div>
       </div>
+    </div>
 
-            <table class="table table-striped  border box-shadow rounded" style="table-layout: fixed; width: 100%">
-              <tbody>
-                <tr>
-                  <td style="width: 25%"><strong>{{ _('Address') }}</strong></td>
-                  <td style="width: 75%"><span class="text-info" style="overflow-wrap: break-word;word-wrap: break-word;">{{acc.address}}</span></td>
-                </tr>
-                <tr>
-                  <td style="width: 25%"><strong>{{ _('Balance') }}</strong></td>
-                  <td style="width: 75%"><strong><span class="text-warning">{{acc.decoded_account_resource.balance/1000000}}</span></strong> <span class="text-muted">Libra</span></td>
-                </tr>
-{% if acc.rotate_key %}
-                <tr>
-                  <td style="width: 25%"><strong>{{ _('Rotate Key') }}</strong></td>
-                  <td style="width: 75%"><span style="overflow-wrap: break-word;word-wrap: break-word;">{{acc.decoded_account_resource.authentication_key}}</span></td>
-                </tr>
-{% endif %}
-                <tr>
-                  <td style="width: 25%"><strong>{{ _('Sequence number') }}</strong></td>
-                  <td style="width: 75%">{{acc.decoded_account_resource.sequence_number}}</td>
-                </tr>
-              </tbody>
-            </table>
-
-
-<div class="d-flex justify-content-center mb-3">
-<form action="/transactions/mint/{{acc.address}}" method="POST">
-<input class="btn btn-outline-danger" type="submit" value="Send 100 Libra coins to this account">
-</form>
-</div>
-
-
-<div class="card mb-4">
-<div class="card-body px-0">
-
-  <div class="d-flex align-items-center px-3 mb-3">
-    <h6 class="h6 align-center mb-0">{{ _('Latest five deals paid me') }}</h6>
-  </div>
-
-  <div class="table-responsive mb-3 border box-shadow rounded">
-    <table class="table mb-0  table-striped table-hover">
-    <thead class="gradient_bg">
-    <tr class="small text-uppercase">
-    <th scope="col" title="UTC Time" style="color:white">{{ _('Seq No') }}</th>
-    <th scope="col" title="Version Transaction ID" style="color:white">{{ _('TX ID') }}</th>
-    <th scope="col" title="Transfer Amount" style="color:white">{{ _('Amount') }}</th>
-    <th scope="col" title="Sender Address" style="color:white">{{ _('Sender') }}</th>
-    </tr>
-    </thead>
-    <tbody>
-{% for ev in acc.events['received'] %}
-      <tr>
-        <td class='text-nowrap'><span>{{ev.event_seq_num}}</span></td>
-        <td><a href='../transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
-        <td class='text-nowrap'>{{ev.money}} <span class='text-muted'>LIB</span></td>
-        <td><a class="text-info" href='/accounts/{{ev.account}}' title='{{ev.account}}'>{{ev.account}}</a></td>
-      </tr>
-{% endfor %}
-    </tbody>
-
+    <table class="table table-striped  border box-shadow rounded" style="table-layout: fixed; width: 100%">
+      <tbody>
+        <tr>
+          <td style="width: 25%"><strong>{{ _('Address') }}</strong></td>
+          <td style="width: 75%"><span class="text-info"
+              style="overflow-wrap: break-word;word-wrap: break-word;">{{acc.address}}</span></td>
+        </tr>
+        <tr>
+          <td style="width: 25%"><strong>{{ _('Balance') }}</strong></td>
+          <td style="width: 75%"><strong><span
+                class="text-warning">{{acc.decoded_account_resource.balance/1000000}}</span></strong> <span
+              class="text-muted">Libra</span></td>
+        </tr>
+        {% if acc.rotate_key %}
+        <tr>
+          <td style="width: 25%"><strong>{{ _('Rotate Key') }}</strong></td>
+          <td style="width: 75%"><span
+              style="overflow-wrap: break-word;word-wrap: break-word;">{{acc.decoded_account_resource.authentication_key}}</span>
+          </td>
+        </tr>
+        {% endif %}
+        <tr>
+          <td style="width: 25%"><strong>{{ _('Sequence number') }}</strong></td>
+          <td style="width: 75%">{{acc.decoded_account_resource.sequence_number}}</td>
+        </tr>
+      </tbody>
     </table>
-  </div>
-
-</div>
-</div>
 
 
-
-<div class="card">
-<div class="card-body px-0">
-
-  <div class="d-flex align-items-center px-3 mb-3">
-    <h6 class="h6 mb-0">{{ _('Latest five deals paid by me') }}</h6>
-  </div>
-
-  <div class="table-responsive mb-3 border box-shadow rounded">
-    <table class="table mb-0  table-striped table-hover">
-    <thead class="gradient_bg">
-    <tr class="small text-uppercase">
-    <th scope="col" title="UTC Time" style="color:white">{{ _('Seq No') }}</th>
-    <th scope="col" title="Version Transaction ID" style="color:white">{{ _('TX ID') }}</th>
-    <th scope="col" title="Transfer Amount" style="color:white">{{ _('Amount') }}</th>
-    <th scope="col" title="Sender Address" style="color:white">{{ _('Receiver') }}</th>
-    </tr>
-    </thead>
-    <tbody>
-{% for ev in acc.events['sent'] %}
-      <tr>
-        <td class='text-nowrap'><span>{{ev.event_seq_num}}</span></td>
-        <td><a href='../transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
-        <td class='text-nowrap'>{{ev.money}} <span class='text-muted'>LIB</span></td>
-        <td><a class="text-info" href='/accounts/{{ev.account}}' title='{{ev.account}}'>{{ev.account}}</a></td>
-      </tr>
-{% endfor %}
-    </tbody>
-
-    </table>
-  </div>
-
-</div>
-</div>
+    <div class="d-flex justify-content-center mb-3">
+      <form action="/transactions/mint/{{acc.address}}" method="POST">
+        <input class="btn btn-outline-danger" type="submit" value="Send 100 Libra coins to this account">
+      </form>
+    </div>
 
 
-<br/>
+    <div class="card mb-4">
+      <div class="card-body px-0">
 
-      <div class="panel-group" id="accordion">
+        <div class="d-flex align-items-center px-3 mb-3">
+          <h6 class="h6 align-center mb-0">{{ _('Latest five deals paid me') }}</h6>
+        </div>
+
+        <div class="table-responsive mb-3 border box-shadow rounded">
+          <table class="table mb-0  table-striped table-hover">
+            <thead class="gradient_bg">
+              <tr class="small text-uppercase">
+                <th scope="col" title="UTC Time" style="color:white">{{ _('Seq No') }}</th>
+                <th scope="col" title="Version Transaction ID" style="color:white">{{ _('TX ID') }}</th>
+                <th scope="col" title="Transfer Amount" style="color:white">{{ _('Amount') }}</th>
+                <th scope="col" title="Sender Address" style="color:white">{{ _('Sender') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for ev in acc.events['received'] %}
+              <tr>
+                <td class='text-nowrap'><span>{{ev.event_seq_num}}</span></td>
+                <td><a href='../transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
+                <td class='text-nowrap'>{{ev.money}} <span class='text-muted'>LIB</span></td>
+                <td><a class="text-info" href='/accounts/{{ev.account}}' title='{{ev.account}}'>{{ev.account}}</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <div class="card-body px-0">
+
+        <div class="d-flex align-items-center px-3 mb-3">
+          <h6 class="h6 mb-0">{{ _('Latest five deals paid by me') }}</h6>
+        </div>
+
+        <div class="table-responsive mb-3 border box-shadow rounded">
+          <table class="table mb-0  table-striped table-hover">
+            <thead class="gradient_bg">
+              <tr class="small text-uppercase">
+                <th scope="col" title="UTC Time" style="color:white">{{ _('Seq No') }}</th>
+                <th scope="col" title="Version Transaction ID" style="color:white">{{ _('TX ID') }}</th>
+                <th scope="col" title="Transfer Amount" style="color:white">{{ _('Amount') }}</th>
+                <th scope="col" title="Sender Address" style="color:white">{{ _('Receiver') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for ev in acc.events['sent'] %}
+              <tr>
+                <td class='text-nowrap'><span>{{ev.event_seq_num}}</span></td>
+                <td><a href='../transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
+                <td class='text-nowrap'>{{ev.money}} <span class='text-muted'>LIB</span></td>
+                <td><a class="text-info" href='/accounts/{{ev.account}}' title='{{ev.account}}'>{{ev.account}}</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+
+    <br />
+
+    <div class="panel-group" id="accordion">
       <div class="panel panel-default">
         <div class="panel-heading" data-target="#Collapseone" data-toggle="collapse" data-parent="#accordion">
           <a href="#.">
-          <button type="button" class="btn btn-primary">
-            <span class="glyphicon glyphicon-plus"></span>
-            {{ _('Show Raw Json') }}
-          </button>
+            <button type="button" class="btn btn-primary">
+              <span class="glyphicon glyphicon-plus"></span>
+              {{ _('Show Raw Json') }}
+            </button>
           </a>
         </div>
 
         <div class="panel-collapse collapse in" id="Collapseone">
-        <div class="panel-body">
-        <pre>
+          <div class="panel-body">
+            <pre>
           {{acc.raw_json}}
         </pre>
-        </div>
+          </div>
         </div>
       </div>
-      </div>
+    </div>
 
-</div>
+  </div>
 </section>
 
-<br/><br/>
+<br /><br />
 
 
 <style type="text/css">
-.glyphicon-plus:before{content:"\002b"}
-.glyphicon-plus-sign:before{content:"\e081"}
-.glyphicon-minus-sign:before{content:"\e082"}
-.glyphicon-minus:before{content:"\2212"}
+  .glyphicon-plus:before {
+    content: "\002b"
+  }
+
+  .glyphicon-plus-sign:before {
+    content: "\e081"
+  }
+
+  .glyphicon-minus-sign:before {
+    content: "\e082"
+  }
+
+  .glyphicon-minus:before {
+    content: "\2212"
+  }
 </style>
+
+
+<div class="modal fade" id="qrcodeModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header py-2 pl-2">
+        <h6 class="mb-0">Address QR Code</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-2">
+        <div id="qrcode" class="img-fluid text-center"></div>
+      </div>
+      <div class="modal-footer p-2" style="word-break:break-all">
+        <span class="text-center font-size-1 text-secondary">
+          {{acc.address}}</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
 
 
 {% block js_content %}
 <script>
-$(document).ready(function(){
-$('.collapse').on('shown.bs.collapse', function(){
-$(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
-}).on('hidden.bs.collapse', function(){
-$(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
-});
-});
+  $(document).ready(function () {
+    $('.collapse').on('shown.bs.collapse', function () {
+      $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+    }).on('hidden.bs.collapse', function () {
+      $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+    });
+  });
+</script>
+
+<script src="https://explorer.moveonlibra.com/qrcode.js" crossorigin="anonymous"></script>
+
+<script>
+  var qrc;
+  $('#qrcodeModal').on('shown.bs.modal', function () {
+    if (typeof qrc === "undefined") {
+      qrc = new QRCode("qrcode", {
+        text: "{{acc.address}}", width: 280, height: 280,
+      });
+    }
+  })
 </script>
 {% endblock %}
