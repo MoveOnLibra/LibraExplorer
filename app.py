@@ -137,6 +137,11 @@ def post_mint(address):
     params = {"number_of_micro_libra": 100000000, "receiver_account_address": address}
     return move_on_libra_api(url, params, get_method=False)
 
+def post_mint_mol(address, amount):
+    url = "/v1/transactions/mint_mol"
+    params = {"number_of_micro_libra": amount, "receiver_account_address": address}
+    return move_on_libra_api(url, params, get_method=False)
+
 def get_validators():
     url = "/v1/libra/validators"
     return move_on_libra_api(url)
@@ -219,6 +224,10 @@ def change_locale():
 @app.route("/test")
 def test():
     return render_template('test.html')
+
+@app.route("/faucet")
+def faucet():
+    return render_template('faucet.html')
 
 @app.route("/latest_txs")
 def load_latest_txs():
@@ -328,6 +337,19 @@ def mint(address):
     else:
         post_mint(address)
     return redirect(f"/accounts/{address}")
+
+@app.route("/transactions/mint_mol", methods=['POST'])
+def mint_mol():
+    if is_anonymous_network(request.host):
+        flash(_('Anonymous network can not mint coins.'))
+    else:
+        receiver_address = request.form['receiver_address']
+        transfer_amount = int(request.form['transfer_amount'])
+        if transfer_amount > 10000:
+            transfer_amount = 10000
+        post_mint_mol(receiver_address, transfer_amount)
+        flash(_('Successful mint coins.'))
+    return redirect(f"/accounts/{receiver_address}")
 
 @app.route("/search")
 def search():

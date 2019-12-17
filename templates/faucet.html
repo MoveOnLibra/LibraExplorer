@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<section class="space-bottom-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="d-flex justify-content-center align-items-center">
+                    <h4 class="section-title">{{ _('Libra') }} {{network}} {{ _('Faucet') }}</h4>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert"  id="success-alert">
+                    <small class="text-muted">Note: Testnet Network coins have NO actual monetary value.</small>
+                  </div>
+            </div>
+        </div>
+
+        <form class="col-lg-10" action="/transactions/mint_mol" method="POST">
+            <div class="form-group">
+                <label for="receiver_address">Receiver Libra Address</label>
+                <input id="receiver_address" name="receiver_address" type="text" class="form-control" autofocus="true"
+                    placeholder="Receiver Address in hex64 format">
+            </div>
+            <div class="form-group">
+                <div class="d=flex">
+                    <label for="transfer_amount">Coins (Micro Libra)</label>
+                    <small id="coinHelp" class="form-text text-info text-nowrap">Max support amount is 10000 Micro
+                        Libra.</small>
+                </div>
+                <input id="transfer_amount" name="transfer_amount" type="number" class="form-control" value="100" max="10000">
+                <small class="form-text text-muted">1 Libra == 1000_000 Micro Libra</small>
+            </div>
+            <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+
+
+    </div>
+</section>
+
+<br /><br />
+
+
+
+{% endblock %}
+
+
+{% block js_content %}
+<script>
+    $(document).ready(function () {
+    }
+</script>
+
+{% endblock %}
