@@ -345,8 +345,8 @@ def mint_mol():
     else:
         receiver_address = request.form['receiver_address']
         transfer_amount = int(request.form['transfer_amount'])
-        if transfer_amount > 10000:
-            transfer_amount = 10000
+        if transfer_amount > 1000000:
+            transfer_amount = 1000000
         post_mint_mol(receiver_address, transfer_amount)
         flash(_('Successful mint coins.'))
     return redirect(f"/accounts/{receiver_address}")
