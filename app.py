@@ -134,7 +134,7 @@ def get_account_latest_events(address):
 
 def post_mint(address):
     url = "/v1/transactions/mint"
-    params = {"number_of_micro_libra": 100000000, "receiver_account_address": address}
+    params = {"number_of_micro_libra": 1000000, "receiver_account_address": address}
     return move_on_libra_api(url, params, get_method=False)
 
 def post_mint_mol(address, amount):
