@@ -132,6 +132,11 @@ def get_account_latest_events(address):
     params = {"limit": 5}
     return move_on_libra_api(url, params)
 
+def post_create_account(address):
+    url = "/v1/transactions/create_account"
+    params = {"account_address": address}
+    return move_on_libra_api(url, params, get_method=False)
+
 def post_mint(address):
     url = "/v1/transactions/mint"
     params = {"number_of_micro_libra": 1000000, "receiver_account_address": address}
@@ -329,6 +334,14 @@ def account_json(address):
     acc = get_account(address)
     return jsonify(acc)
 
+@app.route("/transactions/create_account/<string:address>", methods=['POST'])
+def create_account(address):
+    if is_anonymous_network(request.host):
+        flash(_('Anonymous network can not create account.'))
+    else:
+        post_create_account(address)
+        flash(_('Successful create account.'))
+    return redirect(f"/accounts/{address}")
 
 @app.route("/transactions/mint/<string:address>", methods=['POST'])
 def mint(address):
