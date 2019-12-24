@@ -12,7 +12,7 @@
       <div class="col-lg-12">
         <div class="d-flex justify-content-center align-items-center">
           <h4 class="section-title">{{ _('Account Information') }}</h4>
-          <button type="button" id="target" class="btn btn-lg btn-icon" data-toggle="modal"
+          <button type="button" id="qrcode_button" class="btn btn-lg btn-icon" data-toggle="modal"
             data-target="#qrcodeModal" title="View Address QR Code">
             <i class="fa fa-qrcode"></i>
           </button>
@@ -23,8 +23,10 @@
     <table class="table table-striped  border box-shadow rounded" style="table-layout: fixed; width: 100%">
       <tbody>
         <tr>
-          <td style="width: 25%"><strong>{{ _('Address') }}</strong></td>
-          <td style="width: 75%"><span class="text-info"
+          <td style="width: 25%"><strong>{{ _('Address') }}</strong> <button type="button" id="clip_button" class="btn btn-lg btn-icon" data-toggle="tooltip" data-clipboard-target="#address_tag" title="Copy Address">
+            <i class="fa fa-clone"></i>
+          </button></td>
+          <td style="width: 75%"><span class="text-info" id="address_tag"
               style="overflow-wrap: break-word;word-wrap: break-word;">{{acc.address}}</span></td>
         </tr>
         <tr>
@@ -210,6 +212,7 @@
 </script>
 
 <script src="https://explorer.moveonlibra.com/qrcode.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/clipboard@2.0.4/dist/clipboard.min.js"></script>
 
 <script>
   var qrc;
@@ -220,5 +223,16 @@
       });
     }
   })
+  var clipboard = new ClipboardJS('#clip_button');
+  function hidden_clip_hint(){
+    $('#clip_button').tooltip('dispose');
+    $('#clip_button').attr('title', "Copy Address");
+  }
+  clipboard.on('success', function(e) {
+      $('#clip_button').attr('title', "Copied!");
+      $('#clip_button').tooltip('show');
+      e.clearSelection();
+      setTimeout(hidden_clip_hint, 1000);
+  });
 </script>
 {% endblock %}
