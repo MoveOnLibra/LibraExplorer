@@ -242,11 +242,8 @@ def load_latest_txs():
         limit = 100
     start = request.args.get('start', '0')
     start = int(start)
-    if start + limit <=0:
+    if start < 0 or start + limit <=0:
         return render_template_string("")
-    if start < 0:
-        limit = limit + start
-        start = 0
     txs = get_txs(start, limit=limit)
     for tx in txs:
         transaction_format(tx)
