@@ -85,11 +85,17 @@
 <script type="text/javascript">
   latest_start = {{meta.latest_start}};
   function load_latest() {
-    $("#loading").show();
     var limit = 50
-    start = latest_start - limit;
+    $("#loading").show();
+    if(latest_start < limit){
+      start = 0
+      limit2 = latest_start
+    }else{
+      start = latest_start - limit;
+      limit2 = limit
+    }
     jQuery.ajax({
-      url: "/latest_txs?start="+start + "&limit="+ limit
+      url: "/latest_txs?start="+start + "&limit="+ limit2
     })
       .done(function (data) {
         $("#loading").hide();
