@@ -19,8 +19,20 @@ msgid "Address Not Found:"
 msgstr "アドレスが見つかりません:"
 
 #: app.py
+msgid "Anonymous network can not create account."
+msgstr ""
+
+#: app.py
+msgid "Successful create account."
+msgstr ""
+
+#: app.py
 msgid "Anonymous network can not mint coins."
 msgstr "コインを造幣できません。"
+
+#: app.py
+msgid "Successful mint coins."
+msgstr "造幣成功"
 
 #: app.py
 msgid "Can't finish your search rquest"
@@ -179,6 +191,11 @@ msgstr "Seq No"
 msgid "Latest five deals paid by me"
 msgstr "支払た最新の５件"
 
+#: templates/account_show.html templates/faucet.html
+#: templates/transaction_show.html templates/transactions.html
+msgid "Libra"
+msgstr ""
+
 #: templates/account_show.html
 msgid "Balance"
 msgstr "バランス"
@@ -222,6 +239,10 @@ msgstr "ブロックチェーン バリデーター"
 #: templates/accounts.html
 msgid "No."
 msgstr "No."
+
+#: templates/faucet.html templates/layout.html
+msgid "Faucet"
+msgstr "造幣"
 
 #: templates/index.html
 msgid "Port"
@@ -284,6 +305,10 @@ msgid "Accounts"
 msgstr "アカウント"
 
 #: templates/layout.html
+msgid "Wallet"
+msgstr "財布"
+
+#: templates/layout.html
 msgid "Source"
 msgstr "ソース"
 
@@ -331,7 +356,7 @@ msgstr "キャンセル"
 msgid "Developed and hosted by"
 msgstr "によって開発、ホスティングされています。"
 
-#: templates/transaction_show.html
+#: templates/transaction_show.html templates/transactions.html
 msgid "Transaction"
 msgstr "トランザション"
 

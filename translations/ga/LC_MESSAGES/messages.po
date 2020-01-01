@@ -19,7 +19,19 @@ msgid "Address Not Found:"
 msgstr ""
 
 #: app.py
+msgid "Anonymous network can not create account."
+msgstr ""
+
+#: app.py
+msgid "Successful create account."
+msgstr ""
+
+#: app.py
 msgid "Anonymous network can not mint coins."
+msgstr ""
+
+#: app.py
+msgid "Successful mint coins."
 msgstr ""
 
 #: app.py
@@ -179,6 +191,11 @@ msgstr ""
 msgid "Latest five deals paid by me"
 msgstr ""
 
+#: templates/account_show.html templates/faucet.html
+#: templates/transaction_show.html templates/transactions.html
+msgid "Libra"
+msgstr ""
+
 #: templates/account_show.html
 msgid "Balance"
 msgstr ""
@@ -221,6 +238,10 @@ msgstr ""
 
 #: templates/accounts.html
 msgid "No."
+msgstr ""
+
+#: templates/faucet.html templates/layout.html
+msgid "Faucet"
 msgstr ""
 
 #: templates/index.html
@@ -284,6 +305,10 @@ msgid "Accounts"
 msgstr ""
 
 #: templates/layout.html
+msgid "Wallet"
+msgstr ""
+
+#: templates/layout.html
 msgid "Source"
 msgstr ""
 
@@ -331,7 +356,7 @@ msgstr ""
 msgid "Developed and hosted by"
 msgstr ""
 
-#: templates/transaction_show.html
+#: templates/transaction_show.html templates/transactions.html
 msgid "Transaction"
 msgstr ""
 

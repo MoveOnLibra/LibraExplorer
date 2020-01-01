@@ -19,8 +19,20 @@ msgid "Address Not Found:"
 msgstr "地址不存在:"
 
 #: app.py
+msgid "Anonymous network can not create account."
+msgstr ""
+
+#: app.py
+msgid "Successful create account."
+msgstr "賬戶创建成功"
+
+#: app.py
 msgid "Anonymous network can not mint coins."
 msgstr "匿名網絡不支持挖礦"
+
+#: app.py
+msgid "Successful mint coins."
+msgstr "造币成功"
 
 #: app.py
 msgid "Can't finish your search rquest"
@@ -179,6 +191,11 @@ msgstr "序號"
 msgid "Latest five deals paid by me"
 msgstr "最新五筆我支付的交易"
 
+#: templates/account_show.html templates/faucet.html
+#: templates/transaction_show.html templates/transactions.html
+msgid "Libra"
+msgstr ""
+
 #: templates/account_show.html
 msgid "Balance"
 msgstr "余額"
@@ -222,6 +239,10 @@ msgstr "區塊鏈驗證者"
 #: templates/accounts.html
 msgid "No."
 msgstr "No."
+
+#: templates/faucet.html templates/layout.html
+msgid "Faucet"
+msgstr "赐币"
 
 #: templates/index.html
 msgid "Port"
@@ -284,6 +305,10 @@ msgid "Accounts"
 msgstr "賬戶"
 
 #: templates/layout.html
+msgid "Wallet"
+msgstr "钱包"
+
+#: templates/layout.html
 msgid "Source"
 msgstr "源代碼"
 
@@ -331,7 +356,7 @@ msgstr "取消"
 msgid "Developed and hosted by"
 msgstr "版權所有"
 
-#: templates/transaction_show.html
+#: templates/transaction_show.html templates/transactions.html
 msgid "Transaction"
 msgstr "交易"
 
