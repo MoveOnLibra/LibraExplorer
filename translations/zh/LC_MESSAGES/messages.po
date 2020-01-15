@@ -40,7 +40,7 @@ msgstr "不能完成你的搜索请求"
 
 #: view_helper.py
 msgid "BlockMetadata"
-msgstr "块元数据"
+msgstr "区块"
 
 #: view_helper.py
 msgid "Genesis"
