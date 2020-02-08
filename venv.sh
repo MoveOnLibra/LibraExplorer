@@ -1,2 +1,2 @@
-source "/mnt/d/venv_flask/bin/activate"
+source "/mnt/d/PYENV/explorer/bin/activate"
 # run with source ./venv.sh

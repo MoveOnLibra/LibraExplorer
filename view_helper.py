@@ -114,4 +114,6 @@ def get_time_str(unix_timestamp):
 def format_metadata(meta):
     meta['start_time_str'] = get_time_str(meta['start_time'])
     meta['latest_time_str'] = get_time_str(meta['latest_time'])
+    meta['total_transactions_format'] = f"{meta['total_transactions']:,}"
+    
 
