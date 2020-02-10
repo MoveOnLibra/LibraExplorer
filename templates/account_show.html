@@ -78,7 +78,7 @@
             <tbody>
               {% for ev in acc.events['received'] %}
               <tr>
-                <td class='text-nowrap'><span>{{ev.event_seq_num}}</span></td>
+                <td class='text-nowrap'><span>{{ev.sequence_number}}</span></td>
                 <td><a href='../transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
                 <td class='text-nowrap'>{{ev.money}} <span class='text-muted'>LIB</span></td>
                 <td><a class="text-info" href='/accounts/{{ev.account}}' title='{{ev.account}}'>{{ev.account}}</a></td>
@@ -114,7 +114,7 @@
             <tbody>
               {% for ev in acc.events['sent'] %}
               <tr>
-                <td class='text-nowrap'><span>{{ev.event_seq_num}}</span></td>
+                <td class='text-nowrap'><span>{{ev.sequence_number}}</span></td>
                 <td><a href='../transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
                 <td class='text-nowrap'>{{ev.money}} <span class='text-muted'>LIB</span></td>
                 <td><a class="text-info" href='/accounts/{{ev.account}}' title='{{ev.account}}'>{{ev.account}}</a></td>
