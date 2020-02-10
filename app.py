@@ -314,9 +314,9 @@ def account(address):
     try:
         events = get_account_latest_events(address)
         for ev in events['sent']:
-            event_format(ev)
+            event_format(ev, "receiver")
         for ev in events['received']:
-            event_format(ev)
+            event_format(ev, "sender")
         acc['events'] = events
     except Exception:
         #TODO: Request failed DB corrupt: Sequence number not continuous, expected: 0, actual: 1.

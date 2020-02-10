@@ -73,6 +73,7 @@
                 <th scope="col" title="Version Transaction ID" style="color:white">{{ _('TX ID') }}</th>
                 <th scope="col" title="Transfer Amount" style="color:white">{{ _('Amount') }}</th>
                 <th scope="col" title="Sender Address" style="color:white">{{ _('Sender') }}</th>
+                <th scope="col" title="Sender Address" style="color:white">{{ _('Metadata') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -82,6 +83,7 @@
                 <td><a href='../transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
                 <td class='text-nowrap'>{{ev.money}} <span class='text-muted'>LIB</span></td>
                 <td><a class="text-info" href='/accounts/{{ev.account}}' title='{{ev.account}}'>{{ev.account}}</a></td>
+                <td class='text-nowrap'>{{ev.event_data_decode.metadata}}</td>
               </tr>
               {% endfor %}
             </tbody>
@@ -109,6 +111,7 @@
                 <th scope="col" title="Version Transaction ID" style="color:white">{{ _('TX ID') }}</th>
                 <th scope="col" title="Transfer Amount" style="color:white">{{ _('Amount') }}</th>
                 <th scope="col" title="Sender Address" style="color:white">{{ _('Receiver') }}</th>
+                <th scope="col" title="Sender Address" style="color:white">{{ _('Metadata') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -118,6 +121,7 @@
                 <td><a href='../transactions/{{ev.transaction_version}}'>{{ev.transaction_version}}</a></td>
                 <td class='text-nowrap'>{{ev.money}} <span class='text-muted'>LIB</span></td>
                 <td><a class="text-info" href='/accounts/{{ev.account}}' title='{{ev.account}}'>{{ev.account}}</a></td>
+                <td class='text-nowrap'>{{ev.event_data_decode.metadata}}</td>
               </tr>
               {% endfor %}
             </tbody>

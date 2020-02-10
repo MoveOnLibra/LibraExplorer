@@ -5,8 +5,8 @@ from datetime import datetime, timezone
 from flask_babel import _
 import pdb
 
-def event_format(ev):
-    ev['account'] = ev['event_data_decode']['account']
+def event_format(ev, account_field):
+    ev['account'] = ev['event_data_decode'][account_field]
     ev['account_ab'] = get_address_abbrv_name(ev['account'])
     money = ev['event_data_decode']['amount']
     ev['money'] = money / 1000000
