@@ -311,6 +311,7 @@ def account(address):
         flash(_('Address Not Found:') + f" {address}")
         return render_template('account_404.html',address=address)
     raw_json = json.dumps(acc, indent=2)
+    account_format(acc)
     try:
         events = get_account_latest_events(address)
         for ev in events['sent']:

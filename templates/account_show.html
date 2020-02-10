@@ -32,7 +32,7 @@
         <tr>
           <td style="width: 25%"><strong>{{ _('Balance') }}</strong></td>
           <td style="width: 75%"><strong><span
-                class="text-warning">{{acc.decoded_account_resource.balance/1000000}}</span></strong> <span
+                class="text-warning">{{acc.balance}}</span></strong> <span
               class="text-muted">Libra</span></td>
         </tr>
         {% if acc.rotate_key %}
@@ -45,7 +45,7 @@
         {% endif %}
         <tr>
           <td style="width: 25%"><strong>{{ _('Sequence number') }}</strong></td>
-          <td style="width: 75%">{{acc.decoded_account_resource.sequence_number}}</td>
+          <td style="width: 75%">{{acc.sequence_number}}</td>
         </tr>
       </tbody>
     </table>

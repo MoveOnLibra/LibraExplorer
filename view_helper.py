@@ -11,6 +11,14 @@ def event_format(ev, account_field):
     money = ev['event_data_decode']['amount']
     ev['money'] = money / 1000000
 
+def account_format(account):
+    if "decoded_account_resource" in account:
+        account['balance'] = account['decoded_account_resource']['balance']/1000000
+        account['sequence_number'] = account['decoded_account_resource']['sequence_number']
+    else:
+        account['balance'] = 0
+        account['sequence_number'] = 0
+
 
 def transaction_format(tx):
     if 'proposer' in tx:
