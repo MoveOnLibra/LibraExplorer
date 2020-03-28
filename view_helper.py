@@ -91,7 +91,7 @@ def get_address_abbrv_name(address):
     if address == libra.account_config.AccountConfig.association_address():
         return _("Libra Association")
     else:
-        return address[0:8] + "..." + address[60:64]
+        return address
 
 def get_human_time(unix_timestamp):
     if unix_timestamp > 2**63:

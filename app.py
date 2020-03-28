@@ -1,5 +1,6 @@
 from flask import Flask, flash, redirect, render_template, render_template_string, request, session, abort, send_from_directory
 from flask import jsonify
+from libra import AccountConfig
 import werkzeug
 from flask_babel import Babel
 from flask_babel import _
@@ -297,10 +298,10 @@ def transaction_json(id):
 def accounts():
     validators = get_validators()
     return render_template('accounts.html', validators=enumerate(validators),
-        core_code_address='0000000000000000000000000000000000000000000000000000000000000000',
-        association_address='000000000000000000000000000000000000000000000000000000000a550c18',
-        transaction_fee_address='0000000000000000000000000000000000000000000000000000000000000fee',
-        validator_set_address='00000000000000000000000000000000000000000000000000000000000001d8'
+        core_code_address=AccountConfig.core_code_address(),
+        association_address=AccountConfig.association_address(),
+        transaction_fee_address=AccountConfig.transaction_fee_address(),
+        validator_set_address=AccountConfig.validator_set_address()
         )
 
 
