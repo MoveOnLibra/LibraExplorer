@@ -79,8 +79,10 @@ def get_tx_abbreviation_name(payload, version):
     code = hex_to_int_list(payload['Script']['code'])
     if code == bytecodes["mint"]:
         return _("mint")
-    if code == bytecodes["peer_to_peer_transfer"]:
+    if code == bytecodes["peer_to_peer"]:
         return _("p2p")
+    if code == bytecodes["peer_to_peer_with_metadata"]:
+        return _("p2p_m")
     if code == bytecodes["create_account"]:
         return _("new account")
     if code == bytecodes["rotate_authentication_key"]:
