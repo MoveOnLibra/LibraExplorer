@@ -146,7 +146,7 @@ def post_mint(address):
     params = {
         "number_of_micro_libra": 1000000, 
         "receiver_account_address": address,
-        "auth_key_prefix": "",
+        "auth_key_prefix": address,
     }
     return move_on_libra_api(url, params, get_method=False)
 
@@ -155,7 +155,7 @@ def post_mint_mol(address, amount):
     params = {
         "number_of_micro_libra": amount,
         "receiver_account_address": address,
-        "auth_key_prefix": "",
+        "auth_key_prefix": address,
     }
     return move_on_libra_api(url, params, get_method=False)
 
