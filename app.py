@@ -133,19 +133,30 @@ def get_account_latest_events(address):
     params = {"limit": 5}
     return move_on_libra_api(url, params)
 
-def post_create_account(address):
+def post_create_account(auth_key):
     url = "/v1/transactions/create_account"
-    params = {"account_address": address}
-    return move_on_libra_api(url, params, get_method=False)
+    address = auth_key[16:]
+    prefix = auth_key[:16]
+    params = {"account_address": address, "auth_key_prefix": prefix}
+    move_on_libra_api(url, params, get_method=False)
+    return address
 
 def post_mint(address):
     url = "/v1/transactions/mint"
-    params = {"number_of_micro_libra": 1000000, "receiver_account_address": address}
+    params = {
+        "number_of_micro_libra": 1000000, 
+        "receiver_account_address": address,
+        "auth_key_prefix": "",
+    }
     return move_on_libra_api(url, params, get_method=False)
 
 def post_mint_mol(address, amount):
     url = "/v1/transactions/mint_mol"
-    params = {"number_of_micro_libra": amount, "receiver_account_address": address}
+    params = {
+        "number_of_micro_libra": amount,
+        "receiver_account_address": address,
+        "auth_key_prefix": "",
+    }
     return move_on_libra_api(url, params, get_method=False)
 
 def get_validators():
@@ -333,12 +344,12 @@ def account_json(address):
     acc = get_account(address)
     return jsonify(acc)
 
-@app.route("/transactions/create_account/<string:address>", methods=['POST'])
-def create_account(address):
+@app.route("/transactions/create_account/<string:auth_key>", methods=['POST'])
+def create_account(auth_key):
     if is_anonymous_network(request.host):
         flash(_('Anonymous network can not create account.'))
     else:
-        post_create_account(address)
+        address = post_create_account(auth_key)
         flash(_('Successful create account.'))
     return redirect(f"/accounts/{address}")
 
