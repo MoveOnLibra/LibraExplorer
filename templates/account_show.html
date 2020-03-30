@@ -35,14 +35,12 @@
                 class="text-warning">{{acc.balance}}</span></strong> <span
               class="text-muted">Libra</span></td>
         </tr>
-        {% if acc.rotate_key %}
         <tr>
-          <td style="width: 25%"><strong>{{ _('Rotate Key') }}</strong></td>
+          <td style="width: 25%"><strong>{{ _('Auth Key') }}</strong></td>
           <td style="width: 75%"><span
               style="overflow-wrap: break-word;word-wrap: break-word;">{{acc.decoded_account_resource.authentication_key}}</span>
           </td>
         </tr>
-        {% endif %}
         <tr>
           <td style="width: 25%"><strong>{{ _('Sequence number') }}</strong></td>
           <td style="width: 75%">{{acc.sequence_number}}</td>
