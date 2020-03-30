@@ -22,7 +22,7 @@ def test_mol_api():
     assert data['network_name'] == "Libra TESTNET"
     assert data["host"] == "ac.testnet.libra.org"
     assert data["port"] == 8000
-    assert data["core_code_address"] == "0"*64
+    assert data["core_code_address"] == "0"*32
     assert data["start_time"] <= data["latest_time"]
     assert data["total_transactions"] >= 1
 
@@ -44,6 +44,6 @@ def test_mol_api_proxy():
     assert data['network_name'] == "Anonymous network"
     assert data["host"] == "47.254.29.109"
     assert data["port"] == 33333
-    assert data["core_code_address"] == "0"*64
+    assert data["core_code_address"] == "0"*32
     assert data["start_time"] <= data["latest_time"]
     assert data["total_transactions"] >= 1

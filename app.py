@@ -1,6 +1,6 @@
 from flask import Flask, flash, redirect, render_template, render_template_string, request, session, abort, send_from_directory
 from flask import jsonify
-from libra import AccountConfig
+from libra import AccountConfig, Address
 import werkzeug
 from flask_babel import Babel
 from flask_babel import _
@@ -377,9 +377,10 @@ def mint_mol():
 @app.route("/search")
 def search():
     query = request.args.get('q', '')
-    if len(query)==64:
+    HEX_LEN = Address.LENGTH*2
+    if len(query) == HEX_LEN:
         return redirect(f"/accounts/{query}")
-    if len(query)==66:
+    if len(query) == HEX_LEN+2:
         if (query[0]=="'" and query[-1]=="'") or (query[0]=='"' and query[-1]=='"'):
             return redirect(f"/accounts/{query[1:-1]}")
         if query[0:2] == '0x':
