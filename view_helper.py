@@ -21,6 +21,7 @@ def account_format(account):
 
 
 def transaction_format(tx):
+    breakpoint()
     if 'proposer' in tx:
         sender = tx['proposer']
         tx['sender'] = sender
@@ -33,11 +34,19 @@ def transaction_format(tx):
         tx['success'] = (tx['transaction_info']['major_status'] == 4001)
         tx['events_emit'] = 'No Events'
         return
+    if 'write_set' in tx:
+        sender = libra.AccountConfig.core_code_address()
+        tx['sender'] = sender
+        tx['sender_ab'] = get_address_abbrv_name(sender)
+        tx['money'] = "0"
+        tx['no_receiver'] = True
+        tx['human_time'] = ''
+        tx['time'] = ''
+        tx['code_name'] = _('Genesis')
+        tx['success'] = True
+        tx['events_emit'] = f"{len(tx['events'])} Events"
+        return
     payload = tx['raw_txn']['payload']
-    try:
-        payload['Script'] = payload.pop('Program')
-    except KeyError:
-        pass
     sender = tx['raw_txn']['sender']
     tx['sender'] = sender
     tx['sender_ab'] = get_address_abbrv_name(sender)
@@ -125,5 +134,5 @@ def format_metadata(meta):
     meta['start_time_str'] = get_time_str(meta['start_time'])
     meta['latest_time_str'] = get_time_str(meta['latest_time'])
     meta['total_transactions_format'] = f"{meta['total_transactions']:,}"
-    
+
 
