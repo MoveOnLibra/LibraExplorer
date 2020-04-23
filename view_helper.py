@@ -13,15 +13,16 @@ def event_format(ev, account_field):
 
 def account_format(account):
     if "decoded_account_resource" in account:
+        account['authentication_key'] = account['decoded_account_resource']['authentication_key']
         account['balance'] = account['balance']/1000000
         account['sequence_number'] = account['decoded_account_resource']['sequence_number']
     else:
+        account['authentication_key'] = ''
         account['balance'] = 0
         account['sequence_number'] = 0
 
 
 def transaction_format(tx):
-    breakpoint()
     if 'proposer' in tx:
         sender = tx['proposer']
         tx['sender'] = sender

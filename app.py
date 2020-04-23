@@ -144,7 +144,7 @@ def post_create_account(auth_key):
 def post_mint(address):
     url = "/v1/transactions/mint"
     params = {
-        "number_of_micro_libra": 1000000, 
+        "number_of_micro_libra": 1000000,
         "receiver_account_address": address,
         "auth_key_prefix": address,
     }
