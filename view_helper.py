@@ -39,6 +39,8 @@ def transaction_format(tx):
         sender = libra.AccountConfig.core_code_address()
         tx['sender'] = sender
         tx['sender_ab'] = get_address_abbrv_name(sender)
+        if 'version' not in tx:
+            tx['version'] = 0
         tx['money'] = "0"
         tx['no_receiver'] = True
         tx['human_time'] = ''
