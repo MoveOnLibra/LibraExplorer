@@ -1,0 +1,19 @@
+              {% for tx in utxs %}
+              <tr>
+                <td><a href='./transactions/{{tx.id}}'>{{tx.id}}</a></td>
+                <td class='text-nowrap'><span title='{{tx.time}}'>{{tx.human_time}}</span></td>
+                <td class='font-size-1 text-muted'>{{tx.code_name}}</td>
+                <td><a class="{{tx.sender_text_class}}" href='/accounts/{{tx.sender}}'
+                    title='{{tx.sender}}'>{{tx.sender_ab}}</a></td>
+                {% if tx.success %}
+                <td><small><span class='badge badge-success w-80' style="color:white">{{ _('Success') }}</span></small></td>
+                {% else %}
+                <td><small><span title='{{tx.error_message}}' class='badge badge-danger w-80' style="color:white">{{ _('Failed') }}</span></small>
+                </td>
+                {% endif %}
+                <td><a class="{{tx.receiver_text_class}}" href='/accounts/{{tx.receiver}}'
+                    title='{{tx.receiver}}'>{{tx.receiver_ab}}</a></td>
+                <td class='text-nowrap'>{{tx.money}} <span class='text-muted'>LIB</span></td>
+                <td class='text-nowrap'>{{tx.fee/1000000}}<span class='text-muted'>LIB</span></td>
+              </tr>
+              {% endfor %}

@@ -119,6 +119,11 @@ def get_latest_txs(limit=10):
     params = {"limit": limit}
     return move_on_libra_api(url, params)
 
+def get_latest_user_txs(limit=10):
+    url = "/v1/transactions/latest_user"
+    params = {"limit": limit}
+    return move_on_libra_api(url, params)
+
 def get_transaction(id):
     url = "/v1/transactions/"+str(id)
     return move_on_libra_api(url)
@@ -220,10 +225,13 @@ def index():
     latest_txs = get_latest_txs(20)
     for tx in latest_txs:
         transaction_format(tx)
+    latest_user_txs = get_latest_user_txs(20)
+    for tx in latest_user_txs:
+        transaction_format(tx)
     meta = get_metadata()
     format_metadata(meta)
     meta['latest_start'] = latest_txs[-1]['version']
-    return render_template('index.html',txs=latest_txs, meta=meta)
+    return render_template('index.html', utxs=latest_user_txs, txs=latest_txs, meta=meta)
 
 @app.route("/locale")
 def change_locale():

@@ -23,6 +23,14 @@ def account_format(account):
 
 
 def transaction_format(tx):
+    if 'sender' in tx:
+        tx['sender_ab'] = get_address_abbrv_name(tx['sender'])
+        tx['receiver_ab'] = get_address_abbrv_name(tx['receiver'])
+        tx['code_name'] = _(tx['code_name'])
+        tx['human_time'] = get_human_time(tx['time'])
+        tx['time'] = get_time_str(tx['time'])
+        tx['success'] = (tx['major_status'] == 4001)
+        return
     if 'proposer' in tx:
         sender = tx['proposer']
         tx['sender'] = sender

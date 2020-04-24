@@ -43,15 +43,35 @@
 
     <div class="card">
       <div class="card-body px-0">
+        <div class="d-flex align-items-center px-3 mb-3">
+          <h2 class="h6 mb-0">{{ _('Latest User Transactions') }}</h2>
+          <div class="ml-auto">
+            
+          </div>
+        </div>
 
+
+        <div class="table-responsive mb-3 border box-shadow rounded">
+          <table class="table mb-0  table-striped table-hover">
+            {% include '_tx_head.html' %}
+            <tbody id="txs_body">
+              {% include '_user_txs.html'  %}
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card mt-2">
+      <div class="card-body px-0">
 
         <div class="d-flex align-items-center px-3 mb-3">
           <h2 class="h6 mb-0">{{ _('Latest Transactions') }}</h2>
           <div class="ml-auto">
-            <a class="btn btn-outline-info" href="/transactions">{{ _('View All') }}</a>
+            <a class="btn btn-outline-info" href="/transactions?start=1">{{ _('View All') }}</a>
           </div>
         </div>
-
 
         <div class="table-responsive mb-3 border box-shadow rounded">
           <table class="table mb-0  table-striped table-hover">
