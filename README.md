@@ -1,4 +1,4 @@
-# MOL LibraExplorer ![Python package](https://github.com/MoveOnLibra/LibraExplorer/workflows/Python%20application/badge.svg) [![Build Status](https://travis-ci.org/MoveOnLibra/LibraExplorer.svg?branch=master)](https://travis-ci.org/MoveOnLibra/LibraExplorer) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+# MOL LibraExplorer ![Python application](https://github.com/MoveOnLibra/LibraExplorer/workflows/Python%20application/badge.svg) [![Build Status](https://travis-ci.org/MoveOnLibra/LibraExplorer.svg?branch=master)](https://travis-ci.org/MoveOnLibra/LibraExplorer) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 An Explorer for the Libra Blockchain Netwrok powered by `MoveOnLibra` OpenAPI.
 
