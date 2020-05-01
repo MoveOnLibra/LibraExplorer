@@ -1,6 +1,6 @@
-# MOL LibraExplorer  [![Build Status](https://travis-ci.org/MoveOnLibra/LibraExplorer.svg?branch=master)](https://travis-ci.org/MoveOnLibra/LibraExplorer) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+# MOL LibraExplorer ![Python package](https://github.com/MoveOnLibra/LibraExplorer/workflows/Python%20application/badge.svg) [![Build Status](https://travis-ci.org/MoveOnLibra/LibraExplorer.svg?branch=master)](https://travis-ci.org/MoveOnLibra/LibraExplorer) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-An Explorer for the Libra Blockchain Netwrok powered by `MoveOnLibra` OpenAPI. 
+An Explorer for the Libra Blockchain Netwrok powered by `MoveOnLibra` OpenAPI.
 
 ## A Realtime Libra Blockchain Explorer
 There are several Libra explorers there already. Why write another Libra Explorer? Because all other explorers there are not realtime. They pull data from Libra blockchian and save it to their own private database. When you access their explorer website, they search data from private database and return data to you.

@@ -8,7 +8,7 @@ import json
 import os
 import requests
 from view_helper import *
-import pdb
+
 
 def is_development():
     try:

@@ -4,8 +4,6 @@
 #
 #    pip-compile requirements.in
 #
---index-url https://mirrors.aliyun.com/pypi/simple
---trusted-host mirrors.aliyun.com
 
 babel==2.7.0              # via flask-babel
 canoser==0.8.2            # via libra-client, libra-core
