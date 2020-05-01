@@ -30,6 +30,7 @@ def transaction_format(tx):
         tx['human_time'] = get_human_time(tx['time'])
         tx['time'] = get_time_str(tx['time'])
         tx['success'] = (tx['major_status'] == 4001)
+        tx['gas'] = tx['fee']/1000000
         return
     if 'proposer' in tx:
         sender = tx['proposer']
@@ -42,6 +43,7 @@ def transaction_format(tx):
         tx['code_name'] = _('BlockMetadata')
         tx['success'] = (tx['transaction_info']['major_status'] == 4001)
         tx['events_emit'] = 'No Events'
+        tx['gas'] = tx['transaction_info']['gas_used']/1000000
         return
     if 'write_set' in tx:
         sender = libra.AccountConfig.core_code_address()
@@ -56,6 +58,7 @@ def transaction_format(tx):
         tx['code_name'] = _('Genesis')
         tx['success'] = True
         tx['events_emit'] = f"{len(tx['events'])} Events"
+        tx['gas'] = 0
         return
     payload = tx['raw_txn']['payload']
     sender = tx['raw_txn']['sender']
@@ -82,6 +85,7 @@ def transaction_format(tx):
     tx['time'] = get_time_str(tx['raw_txn']['expiration_time'])
     tx['code_name'] = get_tx_abbreviation_name(payload, tx['version'])
     tx['success'] = (tx['transaction_info']['major_status'] == 4001)
+    tx['gas'] = tx['transaction_info']['gas_used']/1000000
     try:
         if len(tx['events']) == 0:
             tx['events_emit'] = 'No Events'
