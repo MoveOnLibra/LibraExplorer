@@ -93,7 +93,7 @@
       limit2 = limit
     }
     jQuery.ajax({
-      url: "/latest_txs?start="+start + "&limit="+ limit2
+      url: "/latest_txs?start="+start + "&limit="+ limit2 + "&is_user={{meta.is_user}}"
     })
       .done(function (data) {
         $("#loading").hide();

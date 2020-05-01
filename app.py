@@ -124,6 +124,11 @@ def get_latest_user_txs(limit=10):
     params = {"limit": limit}
     return move_on_libra_api(url, params)
 
+def get_user_txs(start, limit=20):
+    url = "/v1/transactions/user_txs"
+    params = {"limit": limit, "start_version": start}
+    return move_on_libra_api(url, params)
+
 def get_transaction(id):
     url = "/v1/transactions/"+str(id)
     return move_on_libra_api(url)
@@ -228,10 +233,12 @@ def index():
         latest_txs = latest_user_txs
         total_user_transactions = latest_user_txs[0]["id"]
         latest_start = latest_txs[-1]['id']
+        is_user = 1
     else:
         latest_txs = get_latest_txs(20)
         total_user_transactions = 0
         latest_start = latest_txs[-1]['version']
+        is_user = 0
 
     for tx in latest_txs:
         transaction_format(tx)
@@ -239,6 +246,7 @@ def index():
     meta = get_metadata()
     meta["total_user_transactions"] = total_user_transactions
     meta['latest_start'] = latest_start
+    meta['is_user'] = is_user
     format_metadata(meta)
     return render_template('index.html', txs=latest_txs, meta=meta)
 
@@ -273,7 +281,12 @@ def load_latest_txs():
     start = int(start)
     if start < 0 or start + limit <=0:
         return render_template_string("")
-    txs = get_txs(start, limit=limit)
+
+    is_user = request.args.get('is_user', '')
+    if is_user == '1':
+        txs = get_user_txs(start, limit=limit)
+    else:
+        txs = get_txs(start, limit=limit)
     for tx in txs:
         transaction_format(tx)
     txs.reverse()
