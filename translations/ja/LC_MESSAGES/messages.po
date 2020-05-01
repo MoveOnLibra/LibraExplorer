@@ -39,32 +39,24 @@ msgid "Can't finish your search rquest"
 msgstr "サーチリクエストを完了できません。"
 
 #: view_helper.py
+msgid "code_name"
+msgstr ""
+
+#: view_helper.py
+msgid "block meta"
+msgstr ""
+
+#: view_helper.py
 msgid "BlockMetadata"
+msgstr ""
+
+#: view_helper.py
+msgid "None"
 msgstr ""
 
 #: view_helper.py
 msgid "Genesis"
 msgstr "始まり"
-
-#: view_helper.py
-msgid "mint"
-msgstr "造幣"
-
-#: view_helper.py
-msgid "p2p"
-msgstr "ピアツーピア"
-
-#: view_helper.py
-msgid "new account"
-msgstr "新しいアカウント"
-
-#: view_helper.py
-msgid "rotate key"
-msgstr "キーをローテーションする"
-
-#: view_helper.py
-msgid "script"
-msgstr "スクリプト"
 
 #: templates/accounts.html view_helper.py
 msgid "Libra Association"
@@ -201,12 +193,16 @@ msgid "Balance"
 msgstr "バランス"
 
 #: templates/account_show.html
-msgid "Rotate Key"
-msgstr "キーをローテーションする"
+msgid "Auth Key"
+msgstr ""
 
 #: templates/account_show.html
 msgid "Sequence number"
 msgstr "連番"
+
+#: templates/account_show.html
+msgid "Metadata"
+msgstr ""
 
 #: templates/account_show.html templates/transaction_show.html
 msgid "Show Raw Json"
@@ -267,10 +263,6 @@ msgstr "統計"
 #: templates/index.html
 msgid "TOTAL TRANSACTIONS"
 msgstr "トランザクションの総数"
-
-#: templates/index.html
-msgid "Validator Count"
-msgstr "バリデーター数"
 
 #: templates/index.html
 msgid "Latest Transactions"
@@ -399,4 +391,28 @@ msgstr "最大のガスの額"
 #: templates/transaction_show.html
 msgid "Events Emit"
 msgstr "発生するイベント"
+
+#~ msgid "Rotate Key"
+#~ msgstr "キーをローテーションする"
+
+#~ msgid "Validator Count"
+#~ msgstr "バリデーター数"
+
+#~ msgid "mint"
+#~ msgstr "造幣"
+
+#~ msgid "p2p"
+#~ msgstr "ピアツーピア"
+
+#~ msgid "p2p_m"
+#~ msgstr ""
+
+#~ msgid "new account"
+#~ msgstr "新しいアカウント"
+
+#~ msgid "rotate key"
+#~ msgstr "キーをローテーションする"
+
+#~ msgid "script"
+#~ msgstr "スクリプト"
 

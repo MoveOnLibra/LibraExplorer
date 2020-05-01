@@ -102,22 +102,7 @@ def transaction_format(tx):
 
 
 def get_tx_abbreviation_name(payload, version):
-    if version == 0:
-        return _("Genesis")
-    if list(payload)[0] != "Script":
-        return list(payload)[0]
-    code = hex_to_int_list(payload['Script']['code'])
-    if code == bytecodes["mint"]:
-        return _("mint")
-    if code == bytecodes["peer_to_peer"]:
-        return _("p2p")
-    if code == bytecodes["peer_to_peer_with_metadata"]:
-        return _("p2p_m")
-    if code == bytecodes["create_account"]:
-        return _("new account")
-    if code == bytecodes["rotate_authentication_key"]:
-        return _("rotate key")
-    return _("script")
+    return get_tx_full_name(payload, version)
 
 
 def get_tx_full_name(payload, version):
@@ -132,8 +117,10 @@ def get_tx_full_name(payload, version):
 def get_address_abbrv_name(address):
     if address == libra.account_config.AccountConfig.association_address():
         return _("Libra Association")
+    elif address is None:
+        return _("None")
     else:
-        return address
+        return address[0:8] + "..." + address[-7:-1]
 
 def get_human_time(unix_timestamp):
     if unix_timestamp > 2**63:

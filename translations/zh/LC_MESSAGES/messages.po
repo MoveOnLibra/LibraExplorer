@@ -39,32 +39,24 @@ msgid "Can't finish your search rquest"
 msgstr "不能完成你的搜索请求"
 
 #: view_helper.py
+msgid "code_name"
+msgstr ""
+
+#: view_helper.py
+msgid "block meta"
+msgstr ""
+
+#: view_helper.py
 msgid "BlockMetadata"
 msgstr "区块"
 
 #: view_helper.py
+msgid "None"
+msgstr "无"
+
+#: view_helper.py
 msgid "Genesis"
 msgstr "创世区块"
-
-#: view_helper.py
-msgid "mint"
-msgstr "造币"
-
-#: view_helper.py
-msgid "p2p"
-msgstr "转账"
-
-#: view_helper.py
-msgid "new account"
-msgstr "建新账"
-
-#: view_helper.py
-msgid "rotate key"
-msgstr "变更key"
-
-#: view_helper.py
-msgid "script"
-msgstr "脚本"
 
 #: templates/accounts.html view_helper.py
 msgid "Libra Association"
@@ -201,12 +193,16 @@ msgid "Balance"
 msgstr "余额"
 
 #: templates/account_show.html
-msgid "Rotate Key"
-msgstr "变更Key"
+msgid "Auth Key"
+msgstr ""
 
 #: templates/account_show.html
 msgid "Sequence number"
 msgstr "序列号"
+
+#: templates/account_show.html
+msgid "Metadata"
+msgstr ""
 
 #: templates/account_show.html templates/transaction_show.html
 msgid "Show Raw Json"
@@ -267,10 +263,6 @@ msgstr "统计"
 #: templates/index.html
 msgid "TOTAL TRANSACTIONS"
 msgstr "总交易数"
-
-#: templates/index.html
-msgid "Validator Count"
-msgstr "验证者数"
 
 #: templates/index.html
 msgid "Latest Transactions"
@@ -399,4 +391,28 @@ msgstr "最大Gas数量"
 #: templates/transaction_show.html
 msgid "Events Emit"
 msgstr "发送的事件"
+
+#~ msgid "Rotate Key"
+#~ msgstr "变更Key"
+
+#~ msgid "Validator Count"
+#~ msgstr "验证者数"
+
+#~ msgid "mint"
+#~ msgstr "造币"
+
+#~ msgid "p2p"
+#~ msgstr "转账"
+
+#~ msgid "p2p_m"
+#~ msgstr ""
+
+#~ msgid "new account"
+#~ msgstr "建新账"
+
+#~ msgid "rotate key"
+#~ msgstr "变更key"
+
+#~ msgid "script"
+#~ msgstr "脚本"
 

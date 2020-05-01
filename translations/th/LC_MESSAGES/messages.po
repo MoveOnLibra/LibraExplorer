@@ -39,31 +39,23 @@ msgid "Can't finish your search rquest"
 msgstr ""
 
 #: view_helper.py
+msgid "code_name"
+msgstr ""
+
+#: view_helper.py
+msgid "block meta"
+msgstr ""
+
+#: view_helper.py
 msgid "BlockMetadata"
 msgstr ""
 
 #: view_helper.py
+msgid "None"
+msgstr ""
+
+#: view_helper.py
 msgid "Genesis"
-msgstr ""
-
-#: view_helper.py
-msgid "mint"
-msgstr ""
-
-#: view_helper.py
-msgid "p2p"
-msgstr ""
-
-#: view_helper.py
-msgid "new account"
-msgstr ""
-
-#: view_helper.py
-msgid "rotate key"
-msgstr ""
-
-#: view_helper.py
-msgid "script"
 msgstr ""
 
 #: templates/accounts.html view_helper.py
@@ -201,11 +193,15 @@ msgid "Balance"
 msgstr ""
 
 #: templates/account_show.html
-msgid "Rotate Key"
+msgid "Auth Key"
 msgstr ""
 
 #: templates/account_show.html
 msgid "Sequence number"
+msgstr ""
+
+#: templates/account_show.html
+msgid "Metadata"
 msgstr ""
 
 #: templates/account_show.html templates/transaction_show.html
@@ -266,10 +262,6 @@ msgstr ""
 
 #: templates/index.html
 msgid "TOTAL TRANSACTIONS"
-msgstr ""
-
-#: templates/index.html
-msgid "Validator Count"
 msgstr ""
 
 #: templates/index.html
@@ -399,4 +391,28 @@ msgstr ""
 #: templates/transaction_show.html
 msgid "Events Emit"
 msgstr ""
+
+#~ msgid "Rotate Key"
+#~ msgstr ""
+
+#~ msgid "Validator Count"
+#~ msgstr ""
+
+#~ msgid "mint"
+#~ msgstr ""
+
+#~ msgid "p2p"
+#~ msgstr ""
+
+#~ msgid "p2p_m"
+#~ msgstr ""
+
+#~ msgid "new account"
+#~ msgstr ""
+
+#~ msgid "rotate key"
+#~ msgstr ""
+
+#~ msgid "script"
+#~ msgstr ""
 
