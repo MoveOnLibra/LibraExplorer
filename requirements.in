@@ -1,0 +1,6 @@
+Flask
+Flask-Babel
+requests
+libra-client==0.8.7
+libra-core==0.8.11
+gunicorn
