@@ -5,7 +5,8 @@ FROM python:3.7.5-slim
 
 RUN python3 -m pip install Flask
 RUN python3 -m pip install requests
-RUN python3 -m pip install libra-client==0.8.6
+RUN python3 -m pip install libra-core==0.8.11
+RUN python3 -m pip install libra-client==0.8.7
 RUN python3 -m pip install flask-babel
 RUN python3 -m pip install gunicorn
 

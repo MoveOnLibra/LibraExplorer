@@ -1,6 +1,7 @@
 import libra
 from canoser import hex_to_int_list
-from libra.bytecode import bytecodes
+from libra.transaction_scripts import bytecodes
+from libra.bytecode import get_script_name
 from datetime import datetime, timezone
 from flask_babel import _
 import pdb
@@ -26,7 +27,7 @@ def transaction_format(tx):
     if 'sender' in tx:
         tx['sender_ab'] = get_address_abbrv_name(tx['sender'])
         tx['receiver_ab'] = get_address_abbrv_name(tx['receiver'])
-        tx['code_name'] = _(tx['code_name'])
+        tx['code_name'] = _(tx['code_name'].replace("_", " "))
         tx['human_time'] = get_human_time(tx['time'])
         tx['time'] = get_time_str(tx['time'])
         tx['success'] = (tx['major_status'] == 4001)
@@ -42,7 +43,8 @@ def transaction_format(tx):
         tx['no_receiver'] = True
         tx['human_time'] = get_human_time(tx['timestamp_usecs'] // 1000_000)
         tx['time'] = get_time_str(tx['timestamp_usecs'] // 1000_000)
-        tx['code_name'] = _('BlockMetadata')
+        tx['code_name'] = _('block meta')
+        tx['code_name_full'] = _('BlockMetadata')
         tx['success'] = (tx['transaction_info']['major_status'] == 4001)
         tx['events_emit'] = 'No Events'
         tx['gas'] = tx['transaction_info']['gas_used']/1000000
@@ -55,9 +57,10 @@ def transaction_format(tx):
             tx['version'] = 0
         tx['money'] = "0"
         tx['no_receiver'] = True
-        tx['human_time'] = ''
-        tx['time'] = ''
+        tx['human_time'] = _('None')
+        tx['time'] = _('None')
         tx['code_name'] = _('Genesis')
+        tx['code_name_full'] = _('Genesis')
         tx['success'] = True
         tx['events_emit'] = f"{len(tx['events'])} Events"
         tx['gas'] = 0
@@ -86,6 +89,7 @@ def transaction_format(tx):
     tx['human_time'] = get_human_time(tx['raw_txn']['expiration_time'])
     tx['time'] = get_time_str(tx['raw_txn']['expiration_time'])
     tx['code_name'] = get_tx_abbreviation_name(payload, tx['version'])
+    tx['code_name_full'] = get_tx_full_name(payload, tx['version'])
     tx['success'] = (tx['transaction_info']['major_status'] == 4001)
     tx['gas'] = tx['transaction_info']['gas_used']/1000000
     try:
@@ -114,6 +118,16 @@ def get_tx_abbreviation_name(payload, version):
     if code == bytecodes["rotate_authentication_key"]:
         return _("rotate key")
     return _("script")
+
+
+def get_tx_full_name(payload, version):
+    if version == 0:
+        return _("Genesis")
+    if list(payload)[0] != "Script":
+        return list(payload)[0]
+    code = bytes.fromhex(payload['Script']['code'])
+    return _(get_script_name(code))
+
 
 def get_address_abbrv_name(address):
     if address == libra.account_config.AccountConfig.association_address():

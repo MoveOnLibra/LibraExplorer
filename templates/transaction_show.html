@@ -38,12 +38,6 @@
 
 
 
-
-
-
-
-
-
       <div class="table-responsive mb-3 border box-shadow rounded">
         <table class="table table-striped" style="table-layout: fixed; width: 100%">
           <tbody>
@@ -82,7 +76,7 @@
                 </tr>
                 <tr>
                   <td style="width: 25%"><strong>{{ _('Transaction Type') }}</strong></td>
-                  <td style="width: 75%">{{tx.code_name}}</td>
+                  <td style="width: 75%">{{tx.code_name_full}}</td>
                 </tr>
 {% if 'raw_txn' in tx %}
                 <tr>
@@ -162,7 +156,7 @@ $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClas
   <script
       src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"
       crossorigin="anonymous"></script>
-      
+
 
 <script>
   //moment.locale("cn")
@@ -170,7 +164,7 @@ $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClas
     var time = moment("{{tx.time}}").format('YYYY-MM-DD, HH:mm:ss');
     $('#time').html(time);
   });
-  
+
 </script>
 
 {% endblock %}
