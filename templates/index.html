@@ -32,8 +32,8 @@
         <div class="card-body">
           <h5 class="small text-uppercase font-weight-medium text-secondary mb-0">{{ _('TOTAL TRANSACTIONS') }}</h5>
           <p class="card-text text-warning font-weight-bold">{{meta.total_transactions_format}}</p>
-          <h2 class="small text-uppercase font-weight-medium text-secondary mb-0">{{ _('Validator Count') }}</h2>
-          <p class="card-text text-warning font-weight-bold"><a href="/accounts#validators">{{meta.validators_count}}</a></p>
+          <h2 class="small text-uppercase font-weight-medium text-secondary mb-0">{{ _('TOTAL TRANSACTIONS') }} By User</h2>
+          <p class="card-text text-warning font-weight-bold"><a href="/accounts#validators">{{meta.total_user_transactions_format}}</a></p>
         </div>
       </div>
 
@@ -69,7 +69,7 @@
         <div class="d-flex align-items-center px-3 mb-3">
           <h2 class="h6 mb-0">{{ _('Latest Transactions') }}</h2>
           <div class="ml-auto">
-            <a class="btn btn-outline-info" href="/transactions?start=1">{{ _('View All') }}</a>
+            <a class="btn btn-outline-info" href="/transactions">{{ _('View All') }}</a>
           </div>
         </div>
 

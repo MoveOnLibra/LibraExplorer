@@ -1,6 +1,6 @@
               {% for tx in utxs %}
               <tr>
-                <td><a href='./transactions/{{tx.id}}'>{{tx.id}}</a></td>
+                <td><a href='./transactions/{{tx.version}}'>{{tx.version}}</a></td>
                 <td class='text-nowrap'><span title='{{tx.time}}'>{{tx.human_time}}</span></td>
                 <td class='font-size-1 text-muted'>{{tx.code_name}}</td>
                 <td><a class="{{tx.sender_text_class}}" href='/accounts/{{tx.sender}}'

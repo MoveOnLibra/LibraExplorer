@@ -229,6 +229,11 @@ def index():
     for tx in latest_user_txs:
         transaction_format(tx)
     meta = get_metadata()
+    if latest_user_txs:
+        total_user_transactions = latest_user_txs[0]["id"]
+    else:
+        total_user_transactions = 0
+    meta["total_user_transactions"] = total_user_transactions
     format_metadata(meta)
     meta['latest_start'] = latest_txs[-1]['version']
     return render_template('index.html', utxs=latest_user_txs, txs=latest_txs, meta=meta)
