@@ -233,11 +233,13 @@ def index():
         latest_txs = latest_user_txs
         total_user_transactions = latest_user_txs[0]["id"]
         latest_start = latest_txs[-1]['id']
+        has_more = latest_start > 1 # mysql db's id starts from 1, not 0
         is_user = 1
     else:
         latest_txs = get_latest_txs(20)
         total_user_transactions = 0
         latest_start = latest_txs[-1]['version']
+        has_more = latest_start > 0
         is_user = 0
 
     for tx in latest_txs:
@@ -246,6 +248,7 @@ def index():
     meta = get_metadata()
     meta["total_user_transactions"] = total_user_transactions
     meta['latest_start'] = latest_start
+    meta['has_more'] = has_more
     meta['is_user'] = is_user
     format_metadata(meta)
     return render_template('index.html', txs=latest_txs, meta=meta)

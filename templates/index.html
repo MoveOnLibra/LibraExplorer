@@ -45,7 +45,7 @@
       <div class="card-body px-0">
 
         <div class="d-flex align-items-center px-3 mb-3">
-          <h2 class="h6 mb-0">{{ _('Latest Transactions') }}</h2>
+          <h2 class="h6 mb-0">{{ _('Latest Transactions') }} {% if meta.has_more %}By User{% endif %}</h2>
           <div class="ml-auto">
             <a class="btn btn-outline-info" href="/transactions">{{ _('View All') }}</a>
           </div>
@@ -61,7 +61,7 @@
           </table>
         </div>
 
-{% if meta.latest_start > 0 %}
+{% if meta.has_more %}
         <div class="d-flex align-items-center px-3 mb-3">
           <div class="mx-auto" id="loadMore">
             <a class="btn btn-outline-info" href="#." onclick="load_latest()">{{ _('Load More Transactions') }} ...</a>
