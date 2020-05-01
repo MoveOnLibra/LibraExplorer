@@ -11,8 +11,15 @@
                 <td><small><span title='{{tx.error_message}}' class='badge badge-danger w-80' style="color:white">{{ _('Failed') }}</span></small>
                 </td>
                 {% endif %}
+
+                {% if tx.receiver %}
                 <td><a class="{{tx.receiver_text_class}}" href='/accounts/{{tx.receiver}}'
                     title='{{tx.receiver}}'>{{tx.receiver_ab}}</a></td>
+                {% else %}
+                <td>None</td>
+                {% endif %}
+
+
                 <td class='text-nowrap'>{{tx.money}} <span class='text-muted'>LIB</span></td>
                 <td class='text-nowrap'>{{tx.fee}}<span class='text-muted'>LIB</span></td>
               </tr>

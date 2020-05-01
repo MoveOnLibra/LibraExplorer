@@ -31,6 +31,8 @@ def transaction_format(tx):
         tx['time'] = get_time_str(tx['time'])
         tx['success'] = (tx['major_status'] == 4001)
         tx['gas'] = tx['fee']/1000000
+        if not tx['money']:
+            tx['money'] = 0
         return
     if 'proposer' in tx:
         sender = tx['proposer']
