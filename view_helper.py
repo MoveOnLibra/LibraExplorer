@@ -75,7 +75,7 @@ def transaction_format(tx):
         tx['sender_text_class'] = 'text-primary'
     try:
         receiver = payload['Script']['args'][0]['Address']
-        money = payload['Script']['args'][1]['U64']/1000000
+        money = payload['Script']['args'][2]['U64']/1000000
         tx['money'] = money
         tx['receiver'] = receiver
         tx['receiver_ab'] = get_address_abbrv_name(receiver)
