@@ -25,7 +25,6 @@ def account_format(account):
 
 def transaction_format(tx):
     if 'fee' in tx:
-        breakpoint()
         tx['sender_ab'] = get_address_abbrv_name(tx['sender'])
         tx['receiver_ab'] = get_address_abbrv_name(tx['receiver'])
         tx['code_name'] = _(tx['code_name'].replace("_", " "))
