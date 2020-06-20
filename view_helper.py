@@ -30,7 +30,7 @@ def transaction_format(tx):
         tx['code_name'] = _(tx['code_name'].replace("_", " "))
         tx['human_time'] = get_human_time(tx['time'])
         tx['time'] = get_time_str(tx['time'])
-        tx['success'] = (tx['major_status'] == 4001)
+        tx['success'] = (tx['vm_status'] == 4001)
         tx['gas'] = tx['fee']/1000000
         if not tx['money']:
             tx['money'] = 0
@@ -45,7 +45,7 @@ def transaction_format(tx):
         tx['time'] = get_time_str(tx['timestamp_usecs'] // 1000_000)
         tx['code_name'] = _('block meta')
         tx['code_name_full'] = _('BlockMetadata')
-        tx['success'] = (tx['transaction_info']['major_status'] == 4001)
+        tx['success'] = (tx['transaction_info']['vm_status'] == 4001)
         tx['events_emit'] = 'No Events'
         tx['gas'] = tx['transaction_info']['gas_used']/1000000
         return
@@ -65,8 +65,8 @@ def transaction_format(tx):
         tx['events_emit'] = f"{len(tx['events'])} Events"
         tx['gas'] = 0
         return
-    payload = tx['raw_txn']['payload']
-    sender = tx['raw_txn']['sender']
+    payload = tx['transaction']['payload']
+    sender = tx['transaction']['sender']
     tx['sender'] = sender
     tx['sender_ab'] = get_address_abbrv_name(sender)
     if tx['sender_ab'] == "Libra Association":
@@ -86,11 +86,11 @@ def transaction_format(tx):
     except Exception:
         tx['money'] = "0"
         tx['no_receiver'] = True
-    tx['human_time'] = get_human_time(tx['raw_txn']['expiration_time'])
-    tx['time'] = get_time_str(tx['raw_txn']['expiration_time'])
+    tx['human_time'] = get_human_time(tx['transaction']['expiration_time'])
+    tx['time'] = get_time_str(tx['transaction']['expiration_time'])
     tx['code_name'] = get_tx_abbreviation_name(payload, tx['version'])
     tx['code_name_full'] = get_tx_full_name(payload, tx['version'])
-    tx['success'] = (tx['transaction_info']['major_status'] == 4001)
+    tx['success'] = (tx['transaction_info']['vm_status'] == 4001)
     tx['gas'] = tx['transaction_info']['gas_used']/1000000
     try:
         if len(tx['events']) == 0:

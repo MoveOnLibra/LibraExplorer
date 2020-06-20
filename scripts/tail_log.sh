@@ -1,2 +1,2 @@
-docker logs -f --since 20m  mol_explorer
+docker logs -f --since 2m  mol_explorer
 
