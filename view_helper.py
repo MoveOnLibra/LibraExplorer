@@ -56,6 +56,9 @@ def transaction_format(tx):
     if 'timestamp_usecs' in payload:
         tx['human_time'] = get_human_time(payload['timestamp_usecs']//1000_000)
         tx['time'] = get_time_str(payload['timestamp_usecs']//1000_000)
+    elif 'expiration_time' in payload:
+        tx['human_time'] = get_human_time(payload['expiration_time'])
+        tx['time'] = get_time_str(payload['expiration_time'])
     else:
         tx['human_time'] = _('None')
         tx['time'] = _('None')
