@@ -52,7 +52,7 @@
                 <tr>
                   <td style="width: 25%"><strong>{{ _('Error Code') }} & {{ _('Reason') }}</strong></td>
                   <td style="width: 75%"><span class="align-middle">
-                    <span class='align-middle text-danger'><strong>{{tx.transaction_info.major_status}},  {{tx.error_message}}</strong></span>
+                    <span class='align-middle text-danger'><strong>{{tx.vm_status}},  {{tx.error_message}}</strong></span>
 {% endif %}
                   </td>
                 </tr>
@@ -81,19 +81,19 @@
 {% if 'raw_txn' in tx %}
                 <tr>
                   <td style="width: 25%"><strong>{{ _('Sequence Number') }}</strong></td>
-                  <td style="width: 75%">{{tx.raw_txn.sequence_number}}</td>
+                  <td style="width: 75%">{{tx.sequence_number}}</td>
                 </tr>
                 <tr>
                   <td style="width: 25%"><strong>{{ _('Gas Used') }}</strong></td>
-                  <td style="width: 75%">{{tx.transaction_info.gas_used/1000000}} Libra</td>
+                  <td style="width: 75%">{{tx.gas_used/1000000}} Libra</td>
                 </tr>
                 <tr>
                   <td style="width: 25%"><strong>{{ _('Gas Unit Price') }}</strong></td>
-                  <td style="width: 75%">{{tx.raw_txn.gas_unit_price}}</td>
+                  <td style="width: 75%">{{tx.gas_unit_price}}</td>
                 </tr>
                 <tr>
                   <td style="width: 25%"><strong>{{ _('Max Gas Amount') }}</strong></td>
-                  <td style="width: 75%">{{tx.raw_txn.max_gas_amount}}</td>
+                  <td style="width: 75%">{{tx.max_gas_amount}}</td>
                 </tr>
 {% endif %}
                 <tr>

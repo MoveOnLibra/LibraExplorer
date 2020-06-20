@@ -24,7 +24,7 @@ def account_format(account):
 
 
 def transaction_format(tx):
-    if 'sender' in tx:
+    if 'fee' in tx:
         tx['sender_ab'] = get_address_abbrv_name(tx['sender'])
         tx['receiver_ab'] = get_address_abbrv_name(tx['receiver'])
         tx['code_name'] = _(tx['code_name'].replace("_", " "))
@@ -35,70 +35,42 @@ def transaction_format(tx):
         if not tx['money']:
             tx['money'] = 0
         return
-    if 'proposer' in tx:
-        sender = tx['proposer']
-        tx['sender'] = sender
-        tx['sender_ab'] = get_address_abbrv_name(sender)
-        tx['money'] = "0"
+
+    payload = tx["transaction"]
+    if 'sender' in payload:
+        tx['sender'] = payload['sender']
+        receiver = payload['script']['receiver']
+        tx['money'] = payload['script']['amount'] / 1000_000
+        tx['receiver'] = receiver
+        tx['sender_ab'] = get_address_abbrv_name(payload['sender'])
+        tx['receiver_ab'] = get_address_abbrv_name(receiver)
+    else:
+        tx['sender'] = _('None')
+        tx['receiver'] = _('None')
+        tx['sender_ab'] = _('None')
+        tx['receiver_ab'] = _('None')
         tx['no_receiver'] = True
-        tx['human_time'] = get_human_time(tx['timestamp_usecs'] // 1000_000)
-        tx['time'] = get_time_str(tx['timestamp_usecs'] // 1000_000)
-        tx['code_name'] = _('block meta')
-        tx['code_name_full'] = _('BlockMetadata')
-        tx['success'] = (tx['transaction_info']['vm_status'] == 4001)
-        tx['events_emit'] = 'No Events'
-        tx['gas'] = tx['transaction_info']['gas_used']/1000000
-        return
-    if 'write_set' in tx:
-        sender = libra.AccountConfig.core_code_address()
-        tx['sender'] = sender
-        tx['sender_ab'] = get_address_abbrv_name(sender)
-        if 'version' not in tx:
-            tx['version'] = 0
-        tx['money'] = "0"
-        tx['no_receiver'] = True
+
+    tx['code_name'] = _(payload['type'])
+    tx['code_name_full'] = payload['type']
+    if 'timestamp_usecs' in payload:
+        tx['human_time'] = get_human_time(payload['timestamp_usecs']//1000_000)
+        tx['time'] = get_time_str(payload['timestamp_usecs']//1000_000)
+    else:
         tx['human_time'] = _('None')
         tx['time'] = _('None')
-        tx['code_name'] = _('Genesis')
-        tx['code_name_full'] = _('Genesis')
-        tx['success'] = True
-        tx['events_emit'] = f"{len(tx['events'])} Events"
-        tx['gas'] = 0
-        return
-    payload = tx['transaction']['payload']
-    sender = tx['transaction']['sender']
-    tx['sender'] = sender
-    tx['sender_ab'] = get_address_abbrv_name(sender)
-    if tx['sender_ab'] == "Libra Association":
-        tx['sender_text_class'] = 'text-info'
+    tx['success'] = (tx['vm_status'] == 4001)
+
+    tx['fee'] = tx['gas_used']/1000_000
+
+    if not "money" in tx:
+        tx['money'] = 0
+
+    if len(tx['events']) == 0:
+        tx['events_emit'] = 'No Events'
     else:
-        tx['sender_text_class'] = 'text-primary'
-    try:
-        receiver = payload['Script']['args'][0]['Address']
-        money = payload['Script']['args'][2]['U64']/1000000
-        tx['money'] = money
-        tx['receiver'] = receiver
-        tx['receiver_ab'] = get_address_abbrv_name(receiver)
-        if tx['receiver_ab'] == "Libra Association":
-            tx['receiver_text_class'] = 'text-info'
-        else:
-            tx['receiver_text_class'] = 'text-primary'
-    except Exception:
-        tx['money'] = "0"
-        tx['no_receiver'] = True
-    tx['human_time'] = get_human_time(tx['transaction']['expiration_time'])
-    tx['time'] = get_time_str(tx['transaction']['expiration_time'])
-    tx['code_name'] = get_tx_abbreviation_name(payload, tx['version'])
-    tx['code_name_full'] = get_tx_full_name(payload, tx['version'])
-    tx['success'] = (tx['transaction_info']['vm_status'] == 4001)
-    tx['gas'] = tx['transaction_info']['gas_used']/1000000
-    try:
-        if len(tx['events']) == 0:
-            tx['events_emit'] = 'No Events'
-        else:
-            tx['events_emit'] = f"{len(tx['events'])} Events"
-    except KeyError:
-        pass
+        tx['events_emit'] = f"{len(tx['events'])} Events"
+
 
 
 def get_tx_abbreviation_name(payload, version):
