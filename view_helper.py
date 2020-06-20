@@ -25,6 +25,7 @@ def account_format(account):
 
 def transaction_format(tx):
     if 'fee' in tx:
+        breakpoint()
         tx['sender_ab'] = get_address_abbrv_name(tx['sender'])
         tx['receiver_ab'] = get_address_abbrv_name(tx['receiver'])
         tx['code_name'] = _(tx['code_name'].replace("_", " "))
@@ -39,11 +40,13 @@ def transaction_format(tx):
     payload = tx["transaction"]
     if 'sender' in payload:
         tx['sender'] = payload['sender']
-        receiver = payload['script']['receiver']
-        tx['money'] = payload['script']['amount'] / 1000_000
-        tx['receiver'] = receiver
         tx['sender_ab'] = get_address_abbrv_name(payload['sender'])
-        tx['receiver_ab'] = get_address_abbrv_name(receiver)
+        if 'receiver' in payload['script']:
+            receiver = payload['script']['receiver']
+            tx['receiver'] = receiver
+            tx['receiver_ab'] = get_address_abbrv_name(receiver)
+        if 'amount' in payload['script']:
+            tx['money'] = payload['script']['amount'] / 1000_000
     else:
         tx['sender'] = _('None')
         tx['receiver'] = _('None')
