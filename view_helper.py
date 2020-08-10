@@ -30,7 +30,7 @@ def transaction_format(tx):
         tx['code_name'] = _(tx['code_name'].replace("_", " "))
         tx['human_time'] = get_human_time(tx['time'])
         tx['time'] = get_time_str(tx['time'])
-        tx['success'] = (tx['vm_status'] == 4001)
+        tx['success'] = (tx['vm_status'] == 'executed')
         tx['gas'] = tx['fee']/1000000
         if not tx['money']:
             tx['money'] = 0
@@ -64,7 +64,7 @@ def transaction_format(tx):
     else:
         tx['human_time'] = _('None')
         tx['time'] = _('None')
-    tx['success'] = (tx['vm_status'] == 4001)
+    tx['success'] = (tx['vm_status'] == 'executed')
 
     tx['fee'] = tx['gas_used']/1000_000
 
