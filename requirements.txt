@@ -17,8 +17,8 @@ gunicorn==20.0.4          # via -r requirements.in
 idna==2.8                 # via requests
 itsdangerous==1.1.0       # via flask
 jinja2==2.10.3            # via flask, flask-babel
-libra-client==0.9.3       # via -r requirements.in
-libra-core==0.9.4         # via -r requirements.in, libra-client
+libra-client==0.9.6       # via -r requirements.in
+libra-core==0.9.7         # via -r requirements.in, libra-client
 markupsafe==1.1.1         # via jinja2
 mnemonic==0.19            # via libra-client
 pycparser==2.19           # via cffi

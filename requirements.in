@@ -1,6 +1,6 @@
 Flask
 Flask-Babel
 requests
-libra-client==0.9.3
-libra-core==0.9.4
+libra-client==0.9.6
+libra-core==0.9.7
 gunicorn
